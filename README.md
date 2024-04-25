@@ -1,30 +1,32 @@
-# React + TypeScript + Vite
+# Kianda!
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+PS: This project is in your initial development, so don't have a first version yet.
 
-Currently, two official plugins are available:
+Kianda is a psycologist platform that consist in a website that will share articles and professional information about the psycologist Adelmo Filho. This platform will have an interface (CMS) for the psycologist to get information about yours patients and also these patients about their consults.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<h3>Motivation</h3>
 
-## Expanding the ESLint configuration
+The principal motivation to this project is to put in practice some knowledge frontend techs that I know/want to learn.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Languages
 
-- Configure the top-level `parserOptions` property like this:
+<ul>
+<li><a href="https://developer.mozilla.org/pt-BR/docs/Glossary/W3C">HTML5</a></li>
+<li><a href="https://developer.mozilla.org/pt-BR/docs/Web/CSS">CSS3</a></li>
+<li><a href="https://developer.mozilla.org/pt-BR/docs/Web/JavaScript">JavaScript</a></li>
+<li><a href="https://www.typescriptlang.org/">Typescript</a></li>
+</ul>
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+## Frameworks & Libs
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+<ul>
+<li><a href="https://vitest.dev/">Vite</a></li>
+<li><a href="https://docs.pmnd.rs/zustand/getting-started/introduction">Zustand</a></li>
+<li><a href="https://chakra-ui.com/">Chakra UI</a></li>
+<li><a href="https://tanstack.com/query/v3/">React Query</a></li>
+<li><a href="https://jestjs.io/pt-BR/">Jest</a></li>
+<li><a href="https://testing-library.com/docs/react-testing-library/intro/">React Testing Library</a></li>
+<li><a href="https://github.com/typicode/husky">Husky</a></li>
+<li><a href="https://eslint.org/">Eslint</a></li>
+<li><a href="https://prettier.io/">Prettier</a></li>
+</ul>
