@@ -2,8 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 import { useCookies } from "react-cookie";
 
 import { EditTerapheuticContract } from "./EditTerapheuticContract";
-import { BASE_URL } from "../../../../../helpers/envs";
-import { apiError } from "../../../../../helpers/messages";
+import { BASE_URL } from "../../../../../utils/helpers/envs";
+import { apiError } from "../../../../../utils/helpers/messages";
 import SpinnerLoad from "../../../../SpinnerLoad";
 import useStore from "../../../../../store";
 

@@ -2,11 +2,11 @@ import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 
 import SpinnerLoad from "../../../SpinnerLoad";
-import { apiError } from "../../../../helpers/messages";
+import { apiError } from "../../../../utils/helpers/messages";
 import { Article } from "../../../../utils/types/blog";
 
 import { EditBlogPostForm } from "./EditBlogPostForm";
-import { BASE_URL } from "../../../../helpers/envs";
+import { BASE_URL } from "../../../../utils/helpers/envs";
 import useStore from "../../../../store";
 
 export default function EditBlogPost() {

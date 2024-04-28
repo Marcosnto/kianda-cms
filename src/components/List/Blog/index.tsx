@@ -2,11 +2,11 @@ import { Td, Tr } from "@chakra-ui/react";
 import { useState } from "react";
 
 import SpinnerLoad from "../../SpinnerLoad";
-import { apiError, noDataToShow } from "../../../helpers/messages";
+import { apiError, noDataToShow } from "../../../utils/helpers/messages";
 import {
   blogListOptions,
   blogTableHeaders,
-} from "../../../helpers/tableConfigs";
+} from "../../../utils/helpers/tableConfigs";
 import { Article } from "./blog-list.types";
 import useBlogList from "./blog-list.hook";
 import getStatusBadge from "../../../utils/getStatusBadge";

@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useCookies } from "react-cookie";
 
-import { BASE_URL } from "../../../helpers/envs";
+import { BASE_URL } from "../../helpers/envs";
 import useStore from "../../../store";
 
 const useFetchUser = () => {

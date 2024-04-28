@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { useCookies } from "react-cookie";
 import { SubmitHandler, UseFormReset } from "react-hook-form";
 import { RegisterProps } from "../../../../utils/types/forms";
-import { BASE_URL } from "../../../../helpers/envs";
+import { BASE_URL } from "../../../../utils/helpers/envs";
 
 export default function useRegisterHook({
   reset,

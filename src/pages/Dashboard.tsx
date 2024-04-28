@@ -5,23 +5,25 @@ import DashboardHeader from "../components/DashboardHeader";
 import Menu from "../components/Menu";
 import useStore from "../store";
 import Content from "../components/Content";
+import { useRouter } from "../utils/router/routerFacade";
+import { useEffect } from "react";
 //import useStore from "../store";
 
 export default function Dashboard() {
   const store = useStore();
-  //const router = useRouter();
+  const navigate = useRouter();
   const [cookie, _, removeCookie] = useCookies(["token"]);
 
-  // const isAuth = "token" in cookie;
-  // useEffect(() => {
-  //   if (!isAuth) {
-  //     router.push("/login");
-  //   }
-  //   // if (isAuth) {
-  //   //   removeCookie("token");
-  //   //   router.push("/login");
-  //   // }
-  // }, [isAuth, removeCookie, router]);
+  const isAuth = "token" in cookie;
+  useEffect(() => {
+    if (!isAuth) {
+      navigate("/login");
+    }
+    // if (isAuth) {
+    //   removeCookie("token");
+    //   router.push("/login");
+    // }
+  }, [isAuth, removeCookie]);
 
   return (
     <>

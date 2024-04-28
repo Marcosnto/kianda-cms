@@ -6,7 +6,7 @@ import GeneralInformations from "../GeneralInformations";
 import Partner from "../Partner";
 import SecondEmergencyContact from "../SecondEmergencyContact";
 import { TherapeuticContractProps } from "../../../../../utils/types/forms";
-import { BASE_URL } from "../../../../../helpers/envs";
+import { BASE_URL } from "../../../../../utils/helpers/envs";
 
 export function EditTerapheuticContract({
   data,

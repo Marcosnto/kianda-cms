@@ -8,12 +8,12 @@ import TableList from "../../Table";
 import ComponentTitle from "../../Title";
 import useList from "./user-list.hook";
 import SpinnerLoad from "../../SpinnerLoad";
-import { apiError, noDataToShow } from "../../../helpers/messages";
+import { apiError, noDataToShow } from "../../../utils/helpers/messages";
 import { UserProps } from "../../../utils/types/user";
 import {
   userListOptions,
   userTableHeaders,
-} from "../../../helpers/tableConfigs";
+} from "../../../utils/helpers/tableConfigs";
 
 export default function UsersList() {
   const {

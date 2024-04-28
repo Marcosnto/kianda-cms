@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
-import Error404 from "../pages/Error404";
-import Login from "../pages/Login";
-import Dashboard from "../pages/Dashboard";
+import Error404 from "../../pages/Error404";
+import Login from "../../pages/Login";
+import Dashboard from "../../pages/Dashboard";
 
 const router = createBrowserRouter([
   {

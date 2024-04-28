@@ -4,7 +4,7 @@ import { useCallback } from "react";
 import { useCookies } from "react-cookie";
 
 import useUpdateUserRegister from "./useUpdateUserRegister";
-import { BASE_URL } from "../../../helpers/envs";
+import { BASE_URL } from "../../helpers/envs";
 import { UpdateRegister } from "../../../components/Forms/User/EditRegister/EditRegisterForm.types";
 import useStore from "../../../store";
 import useSendEmailToUser from "../../emails/hooks/useSendEmailToUser";

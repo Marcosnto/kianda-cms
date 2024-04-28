@@ -4,7 +4,7 @@ import { useCookies } from "react-cookie";
 
 import useUsersList from "../../../utils/hooks/user/useUsersList";
 import SpinnerLoad from "../../SpinnerLoad";
-import { apiError } from "../../../helpers/messages";
+import { apiError } from "../../../utils/helpers/messages";
 import { terapheuticContractList } from "../../../utils/types/user";
 import getStatusBadge from "../../../utils/getStatusBadge";
 import ButtonsActions from "../../Forms/components/ActionsButton/ActionsButtons";
@@ -13,7 +13,7 @@ import TableList from "../../Table";
 import {
   terapheuticContractListOptions,
   terapheuticContractTableHeaders,
-} from "../../../helpers/tableConfigs";
+} from "../../../utils/helpers/tableConfigs";
 
 export default function TerapheuticContractsList() {
   const [currentPage, setCurrentPage] = useState<number>(1);
