@@ -1,5 +1,6 @@
 import Dashboard from "@/pages/Dashboard";
 import Login from "@/pages/Login";
+import Register from "@/pages/Register";
 import { TbError404 } from "react-icons/tb";
 import { createBrowserRouter } from "react-router-dom";
 
@@ -11,7 +12,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/register",
-    element: <div>This is the register page</div>,
+    element: <Register />,
   },
   {
     path: "/dashboard",

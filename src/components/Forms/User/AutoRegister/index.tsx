@@ -6,13 +6,12 @@ import {
   FormErrorMessage,
   FormLabel,
   Input,
-  Link,
   Radio,
   RadioGroup,
   Select,
   Stack,
+  Link as ChakraLink,
 } from "@chakra-ui/react";
-import NextLink from "next/link";
 import { useCallback } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import useAutoRegister from "./auto-register.hook";
@@ -22,6 +21,7 @@ import ComponentTitle from "@/components/Title";
 import RequiredInput from "../../components/RequiredInput";
 import { GenericModal } from "@/components/GenericModal";
 import pronounsTypes from "@/utils/mocks/inputOptions/pronounsTypes";
+import { Link } from "@/utils/libs/routerFacade";
 
 function UserAutoRegister() {
   const {
@@ -357,25 +357,25 @@ function UserAutoRegister() {
                   })}
                 >
                   Li e concordo os{" "}
-                  <Link
-                    as={NextLink}
+                  <ChakraLink
+                    as={Link}
                     href={useTermsLink}
                     isExternal
                     colorScheme="green"
                     textDecoration={"underline"}
                   >
                     Termos de uso
-                  </Link>{" "}
+                  </ChakraLink>{" "}
                   e{" "}
-                  <Link
-                    as={NextLink}
+                  <ChakraLink
+                    as={Link}
                     href={privacyPolicyLink}
                     isExternal
                     colorScheme="green"
                     textDecoration={"underline"}
                   >
                     Políticas de Privacidade
-                  </Link>
+                  </ChakraLink>
                 </Checkbox>
                 <FormErrorMessage>
                   {errors.acceptTerm && errors.acceptTerm.message}

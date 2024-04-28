@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useCookies } from "react-cookie";
 
 import { LoginProps, ResponseProps } from "@/pages/Login";
-import { useRouter } from "@/utils/router/routerFacade";
+import { useRouter } from "@/utils/libs/routerFacade";
 import { BASE_URL } from "@/utils/helpers/envs";
 
 export default function useLogin() {

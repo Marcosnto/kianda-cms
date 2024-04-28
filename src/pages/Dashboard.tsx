@@ -6,7 +6,7 @@ import Content from "../components/Content";
 import DashboardHeader from "../components/DashboardHeader";
 import Menu from "../components/Menu";
 import useStore from "../store";
-import { useRouter } from "../utils/router/routerFacade";
+import { useRouter } from "../utils/libs/routerFacade";
 //import useStore from "../store";
 
 export default function Dashboard() {
