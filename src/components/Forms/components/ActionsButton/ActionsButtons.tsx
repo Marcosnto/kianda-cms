@@ -1,8 +1,7 @@
+import useStore from "@/store";
+import { UserProps } from "@/utils/types/user";
 import { IconButton, Stack, Tooltip } from "@chakra-ui/react";
 import { useCallback } from "react";
-
-import useStore from "../../../../store";
-import { UserProps } from "../../../../utils/types/user";
 
 export type ButtonActionsProps = TableOptionsType & {
   user: UserProps;

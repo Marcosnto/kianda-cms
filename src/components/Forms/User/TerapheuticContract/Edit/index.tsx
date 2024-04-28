@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { useCookies } from "react-cookie";
 
-import useStore from "../../../../../store";
-import { BASE_URL } from "../../../../../utils/helpers/envs";
-import { apiError } from "../../../../../utils/helpers/messages";
-import SpinnerLoad from "../../../../SpinnerLoad";
 import { EditTerapheuticContract } from "./EditTerapheuticContract";
+import useStore from "@/store";
+import { BASE_URL } from "@/utils/helpers/envs";
+import SpinnerLoad from "@/components/SpinnerLoad";
+import { apiError } from "@/utils/helpers/messages";
 
 function EditRegister() {
   const { currentSelectedUser } = useStore();

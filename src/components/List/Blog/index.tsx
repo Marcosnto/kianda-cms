@@ -1,19 +1,18 @@
+import SpinnerLoad from "@/components/SpinnerLoad";
 import { Td, Tr } from "@chakra-ui/react";
 import { useState } from "react";
-
-import getStatusBadge from "../../../utils/getStatusBadge";
-import { apiError, noDataToShow } from "../../../utils/helpers/messages";
+import useBlogList from "./blog-list.hook";
+import { apiError, noDataToShow } from "@/utils/helpers/messages";
+import { Article } from "./blog-list.types";
+import getStatusBadge from "@/utils/getStatusBadge";
+import ButtonsActions from "@/components/Forms/components/ActionsButton/ActionsButtons";
 import {
   blogListOptions,
   blogTableHeaders,
-} from "../../../utils/helpers/tableConfigs";
-import FeedbackAPI from "../../FeedbackAPI";
-import ButtonsActions from "../../Forms/components/ActionsButton/ActionsButtons";
-import SpinnerLoad from "../../SpinnerLoad";
-import TableList from "../../Table";
-import ComponentTitle from "../../Title";
-import useBlogList from "./blog-list.hook";
-import { Article } from "./blog-list.types";
+} from "@/utils/helpers/tableConfigs";
+import ComponentTitle from "@/components/Title";
+import TableList from "@/components/Table";
+import FeedbackAPI from "@/components/FeedbackAPI";
 
 export default function PostsList() {
   const [currentPage, setCurrentPage] = useState<number>(0);

@@ -1,19 +1,17 @@
-import { Td, Tr } from "@chakra-ui/react";
-import { useState } from "react";
-import { useCookies } from "react-cookie";
-
-import getStatusBadge from "../../../utils/getStatusBadge";
-import { apiError } from "../../../utils/helpers/messages";
+import ButtonsActions from "@/components/Forms/components/ActionsButton/ActionsButtons";
+import SpinnerLoad from "@/components/SpinnerLoad";
+import TableList from "@/components/Table";
+import ComponentTitle from "@/components/Title";
+import getStatusBadge from "@/utils/getStatusBadge";
+import { apiError } from "@/utils/helpers/messages";
 import {
   terapheuticContractListOptions,
   terapheuticContractTableHeaders,
-} from "../../../utils/helpers/tableConfigs";
-import useUsersList from "../../../utils/hooks/user/useUsersList";
-import { terapheuticContractList } from "../../../utils/types/user";
-import ButtonsActions from "../../Forms/components/ActionsButton/ActionsButtons";
-import SpinnerLoad from "../../SpinnerLoad";
-import TableList from "../../Table";
-import ComponentTitle from "../../Title";
+} from "@/utils/helpers/tableConfigs";
+import useUsersList from "@/utils/hooks/user/useUsersList";
+import { Td, Tr } from "@chakra-ui/react";
+import { useState } from "react";
+import { useCookies } from "react-cookie";
 
 export default function TerapheuticContractsList() {
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -32,7 +30,7 @@ export default function TerapheuticContractsList() {
     return <h1>{apiError}</h1>;
   }
   console.log(users);
-  const tableBody = users.map((user: terapheuticContractList) => (
+  const tableBody = users?.map((user) => (
     <Tr key={user.id}>
       <Td>{user.id}</Td>
       <Td>{user.name}</Td>

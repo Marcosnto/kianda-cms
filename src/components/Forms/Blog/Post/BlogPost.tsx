@@ -1,3 +1,5 @@
+import ComponentTitle from "@/components/Title";
+import { Article } from "@/utils/types/blog";
 import {
   Box,
   Button,
@@ -10,9 +12,6 @@ import {
 } from "@chakra-ui/react";
 import { Dispatch, SetStateAction, useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-
-import { Article } from "../../../../utils/types/blog";
-import ComponentTitle from "../../../Title";
 
 export default function BlogPost({
   post,

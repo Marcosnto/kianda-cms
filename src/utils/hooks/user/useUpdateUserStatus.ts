@@ -3,11 +3,11 @@ import { useMutation } from "@tanstack/react-query";
 import { useCallback } from "react";
 import { useCookies } from "react-cookie";
 
-import { UpdateRegister } from "../../../components/Forms/User/EditRegister/EditRegisterForm.types";
-import useStore from "../../../store";
-import useSendEmailToUser from "../../emails/hooks/useSendEmailToUser";
-import { BASE_URL } from "../../helpers/envs";
 import useUpdateUserRegister from "./useUpdateUserRegister";
+import useStore from "@/store";
+import useSendEmailToUser from "@/utils/emails/hooks/useSendEmailToUser";
+import { UpdateRegister } from "@/components/Forms/User/EditRegister/EditRegisterForm.types";
+import { BASE_URL } from "@/utils/helpers/envs";
 
 const useUpdateUserStatus = () => {
   const [cookies] = useCookies(["token"]);

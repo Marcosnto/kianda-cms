@@ -8,9 +8,9 @@ import {
   Select,
 } from "@chakra-ui/react";
 
-import schoolingTypes from "../../../../utils/mocks/inputOptions/schoolingTypes";
-import { FormReactHooksProps } from "../../../../utils/types/forms";
 import RequiredInput from "../../components/RequiredInput";
+import { FormReactHooksProps } from "@/utils/types/forms";
+import schoolingTypes from "@/utils/mocks/inputOptions/schoolingTypes";
 
 export default function Partner({ errors, register }: FormReactHooksProps) {
   return (

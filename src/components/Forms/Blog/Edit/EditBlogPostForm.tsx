@@ -1,3 +1,5 @@
+import ComponentTitle from "@/components/Title";
+import { Article } from "@/utils/types/blog";
 import {
   Box,
   Button,
@@ -10,9 +12,6 @@ import {
 } from "@chakra-ui/react";
 import { useLayoutEffect } from "react";
 import { SubmitHandler } from "react-hook-form";
-
-import { Article } from "../../../../utils/types/blog";
-import ComponentTitle from "../../../Title";
 import RequiredInput from "../../components/RequiredInput";
 
 export function EditBlogPostForm({
@@ -33,7 +32,7 @@ export function EditBlogPostForm({
       imageSub: data.imageSub,
       status: data.status,
     });
-  }, [data]);
+  }, [data, reset]);
 
   const onSubmit: SubmitHandler<Article> = () => {
     // post(data);

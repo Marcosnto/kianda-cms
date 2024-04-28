@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useCookies } from "react-cookie";
 
-import { LoginProps, ResponseProps } from "../../../pages/Login";
-import { BASE_URL } from "../../helpers/envs";
-import { useRouter } from "../../router/routerFacade";
+import { LoginProps, ResponseProps } from "@/pages/Login";
+import { useRouter } from "@/utils/router/routerFacade";
+import { BASE_URL } from "@/utils/helpers/envs";
 
 export default function useLogin() {
   const navigate = useRouter();

@@ -1,3 +1,10 @@
+import Post from "@/components/Forms/Blog/Post";
+import UserRegister from "@/components/Forms/User/Register";
+import { EditTerapheuticContract } from "@/components/Forms/User/TerapheuticContract/Edit/EditTerapheuticContract";
+import PostsList from "@/components/List/Blog";
+import TerapheuticContractsList from "@/components/List/TerapheuticContract";
+import UsersList from "@/components/List/User";
+import { UserOptionsProps } from "@/components/Menu/menu.hook";
 import { Icon } from "@chakra-ui/react";
 import { IconType } from "react-icons";
 import {
@@ -10,14 +17,6 @@ import {
   IoPeopleOutline,
   IoWalletOutline,
 } from "react-icons/io5";
-
-import Post from "../../components/Forms/Blog/Post";
-import UserRegister from "../../components/Forms/User/Register";
-import { EditTerapheuticContract } from "../../components/Forms/User/TerapheuticContract/Edit/EditTerapheuticContract";
-import PostsList from "../../components/List/Blog";
-import TerapheuticContractsList from "../../components/List/TerapheuticContract";
-import UsersList from "../../components/List/User";
-import { UserOptionsProps } from "../../components/Menu/menu.hook";
 
 function getIcon(iconName: IconType) {
   return <Icon as={iconName} w="5" h="5" />;

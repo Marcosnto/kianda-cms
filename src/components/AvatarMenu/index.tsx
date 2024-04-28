@@ -3,7 +3,7 @@ import { Avatar, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { MouseEventHandler, useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 
-import { ResponseProps } from "../../pages/Login";
+import { ResponseProps } from "@/pages/Login";
 
 type AvatarMenuProps = {
   icon: React.ReactElement;
