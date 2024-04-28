@@ -2,8 +2,8 @@ import { useToast } from "@chakra-ui/react";
 import { useMutation } from "@tanstack/react-query";
 import { useCookies } from "react-cookie";
 
-import { BASE_URL } from "../../helpers/envs";
 import { UpdateRegister } from "../../../components/Forms/User/EditRegister/EditRegisterForm.types";
+import { BASE_URL } from "../../helpers/envs";
 
 const useUpdateUserRegister = () => {
   const [cookies] = useCookies(["token"]);

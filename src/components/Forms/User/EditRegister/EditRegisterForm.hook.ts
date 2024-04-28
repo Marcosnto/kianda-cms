@@ -1,11 +1,10 @@
 import { useCallback, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import { RegisterProps } from "../../../../utils/types/forms";
-
+import useStore from "../../../../store";
 import useFetchUser from "../../../../utils/hooks/user/useFetchUser";
 import useUpdateUserStatus from "../../../../utils/hooks/user/useUpdateUserStatus";
-import useStore from "../../../../store";
+import { RegisterProps } from "../../../../utils/types/forms";
 
 type LoggedUserType = {
   id: number;

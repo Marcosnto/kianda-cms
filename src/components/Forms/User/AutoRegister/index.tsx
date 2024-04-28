@@ -16,13 +16,13 @@ import NextLink from "next/link";
 import { useCallback } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import useAutoRegister from "./auto-register.hook";
+import pronounsTypes from "../../../../utils/mocks/inputOptions/pronounsTypes";
 import { RegisterProps } from "../../../../utils/types/forms";
+import { GenericModal } from "../../../GenericModal";
 import SpinnerLoad from "../../../SpinnerLoad";
 import ComponentTitle from "../../../Title";
 import RequiredInput from "../../components/RequiredInput";
-import pronounsTypes from "../../../../utils/mocks/inputOptions/pronounsTypes";
-import { GenericModal } from "../../../GenericModal";
+import useAutoRegister from "./auto-register.hook";
 
 function UserAutoRegister() {
   const {

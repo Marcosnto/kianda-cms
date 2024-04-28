@@ -1,19 +1,19 @@
 import { Td, Text, Tr } from "@chakra-ui/react";
 
-import FeedbackAPI from "../../FeedbackAPI";
-import ButtonsActions from "../../Forms/components/ActionsButton/ActionsButtons";
-import RegisterStatusOptions from "../../Forms/components/RegisterStatusOptions";
-import { GenericModal } from "../../GenericModal";
-import TableList from "../../Table";
-import ComponentTitle from "../../Title";
-import useList from "./user-list.hook";
-import SpinnerLoad from "../../SpinnerLoad";
 import { apiError, noDataToShow } from "../../../utils/helpers/messages";
-import { UserProps } from "../../../utils/types/user";
 import {
   userListOptions,
   userTableHeaders,
 } from "../../../utils/helpers/tableConfigs";
+import { UserProps } from "../../../utils/types/user";
+import FeedbackAPI from "../../FeedbackAPI";
+import ButtonsActions from "../../Forms/components/ActionsButton/ActionsButtons";
+import RegisterStatusOptions from "../../Forms/components/RegisterStatusOptions";
+import { GenericModal } from "../../GenericModal";
+import SpinnerLoad from "../../SpinnerLoad";
+import TableList from "../../Table";
+import ComponentTitle from "../../Title";
+import useList from "./user-list.hook";
 
 export default function UsersList() {
   const {

@@ -1,4 +1,5 @@
 import { Html } from "@react-email/html";
+
 import { RecipientType } from "../hooks/useSendEmailToUser";
 
 export default function AutoRegisterEmail({

@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { useCookies } from "react-cookie";
 
-import { BASE_URL } from "../../helpers/envs";
 import useStore from "../../../store";
+import { BASE_URL } from "../../helpers/envs";
 
 const useFetchUser = () => {
   const [cookies] = useCookies(["token"]);

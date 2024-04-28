@@ -11,8 +11,8 @@ import {
 import { Dispatch, SetStateAction, useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import ComponentTitle from "../../../Title";
 import { Article } from "../../../../utils/types/blog";
+import ComponentTitle from "../../../Title";
 
 export default function BlogPost({
   post,

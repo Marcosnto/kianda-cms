@@ -1,13 +1,13 @@
 import { useBoolean, useToast } from "@chakra-ui/react";
 import { useMutation } from "@tanstack/react-query";
-
 import { useCallback } from "react";
-import { RegisterProps } from "../../../../utils/types/forms";
+
 import {
   PUBLIC_PRIVACY_POLICY,
   PUBLIC_USE_TERMS,
 } from "../../../../utils/helpers/envs";
 import { useRouter } from "../../../../utils/router/routerFacade";
+import { RegisterProps } from "../../../../utils/types/forms";
 
 export default function useAutoRegister() {
   const [modalStatus, setModalStatus] = useBoolean();

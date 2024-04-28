@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 
-import setNumberOfPages from "../../setNumberOfPages";
 import { BASE_URL } from "../../helpers/envs";
+import setNumberOfPages from "../../setNumberOfPages";
 
 export default function useBlogList(currentPage: number) {
   const [totalPages, setTotalPages] = useState<number>(0);

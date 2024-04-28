@@ -4,10 +4,10 @@ import { useCookies } from "react-cookie";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import useStore from "../../../store";
-import { RegisterProps } from "../../../utils/types/forms";
 import getStatusBadge from "../../../utils/getStatusBadge";
-import useUsersList from "../../../utils/hooks/user/useUsersList";
 import useUpdateUserStatus from "../../../utils/hooks/user/useUpdateUserStatus";
+import useUsersList from "../../../utils/hooks/user/useUsersList";
+import { RegisterProps } from "../../../utils/types/forms";
 
 const useList = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);

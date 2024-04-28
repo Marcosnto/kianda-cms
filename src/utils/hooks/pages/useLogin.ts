@@ -1,6 +1,7 @@
-import { useCookies } from "react-cookie";
-import { LoginProps, ResponseProps } from "../../../pages/Login";
 import { useState } from "react";
+import { useCookies } from "react-cookie";
+
+import { LoginProps, ResponseProps } from "../../../pages/Login";
 import { BASE_URL } from "../../helpers/envs";
 import { useRouter } from "../../router/routerFacade";
 

@@ -11,8 +11,8 @@ import {
 import { useLayoutEffect } from "react";
 import { SubmitHandler } from "react-hook-form";
 
-import ComponentTitle from "../../../Title";
 import { Article } from "../../../../utils/types/blog";
+import ComponentTitle from "../../../Title";
 import RequiredInput from "../../components/RequiredInput";
 
 export function EditBlogPostForm({

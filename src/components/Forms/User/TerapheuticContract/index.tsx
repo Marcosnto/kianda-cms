@@ -1,12 +1,12 @@
 import { Box, Button, Divider, Heading, Stack } from "@chakra-ui/react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
+import { BASE_URL } from "../../../../utils/helpers/envs";
+import { TherapeuticContractProps } from "../../../../utils/types/forms";
 import FirstEmergencyContact from "./FirstEmergencyContact";
 import GeneralInformations from "./GeneralInformations";
 import Partner from "./Partner";
 import SecondEmergencyContact from "./SecondEmergencyContact";
-import { BASE_URL } from "../../../../utils/helpers/envs";
-import { TherapeuticContractProps } from "../../../../utils/types/forms";
 
 export default function TerapheuticContract() {
   const {
@@ -55,7 +55,7 @@ export default function TerapheuticContract() {
   }
 
   const onSubmit: SubmitHandler<TherapeuticContractProps> = (data) => {
-    if (!!errors) {
+    if (errors) {
       post(data);
     }
   };

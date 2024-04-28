@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
-import getMenuOptions from "../../utils/mocks/menuOptionsPermitions";
 import { ResponseProps } from "../../pages/Login";
-import { OptionsProps } from "./MenuOptions";
 import useStore from "../../store";
+import getMenuOptions from "../../utils/mocks/menuOptionsPermitions";
+import { OptionsProps } from "./MenuOptions";
 
 export type UserOptionsProps = {
   type: string;

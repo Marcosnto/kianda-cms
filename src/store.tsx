@@ -1,5 +1,6 @@
 import { Center } from "@chakra-ui/react";
 import { create } from "zustand";
+
 import { UserProps } from "./utils/types/user";
 
 type Store = {

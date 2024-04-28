@@ -1,5 +1,4 @@
 import { Icon } from "@chakra-ui/react";
-// eslint-disable-next-line import/named
 import { IconType } from "react-icons";
 import {
   IoBodyOutline,
@@ -12,13 +11,13 @@ import {
   IoWalletOutline,
 } from "react-icons/io5";
 
-import { UserOptionsProps } from "../../components/Menu/menu.hook";
-import { EditTerapheuticContract } from "../../components/Forms/User/TerapheuticContract/Edit/EditTerapheuticContract";
-import PostsList from "../../components/List/Blog";
 import Post from "../../components/Forms/Blog/Post";
 import UserRegister from "../../components/Forms/User/Register";
-import UsersList from "../../components/List/User";
+import { EditTerapheuticContract } from "../../components/Forms/User/TerapheuticContract/Edit/EditTerapheuticContract";
+import PostsList from "../../components/List/Blog";
 import TerapheuticContractsList from "../../components/List/TerapheuticContract";
+import UsersList from "../../components/List/User";
+import { UserOptionsProps } from "../../components/Menu/menu.hook";
 
 function getIcon(iconName: IconType) {
   return <Icon as={iconName} w="5" h="5" />;

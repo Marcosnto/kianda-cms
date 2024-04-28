@@ -16,7 +16,6 @@ import {
 
 import registerTypes from "../../../../utils/mocks/inputOptions/register-types";
 import { RegisterProps } from "../../../../utils/types/forms";
-
 import RequiredInput from "../RequiredInput";
 
 type RegisterStatusOptionsTypes = {

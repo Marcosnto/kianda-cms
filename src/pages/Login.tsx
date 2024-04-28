@@ -9,12 +9,11 @@ import {
   Heading,
   Input,
 } from "@chakra-ui/react";
-
 import { SubmitHandler, useForm } from "react-hook-form";
-import LogoImage from "../components/LogoImage";
+
 import AlertStatus from "../components/AlertStatus";
 import RequiredInput from "../components/Forms/components/RequiredInput";
-
+import LogoImage from "../components/LogoImage";
 import useLogin from "../utils/hooks/pages/useLogin";
 
 export type ResponseProps = {

@@ -1,8 +1,8 @@
 import { Box, Center } from "@chakra-ui/react";
 import Head from "next/head";
 
-import LogoImage from "../components/LogoImage";
 import UserAutoRegister from "../components/Forms/User/AutoRegister";
+import LogoImage from "../components/LogoImage";
 
 export default function Register() {
   return (

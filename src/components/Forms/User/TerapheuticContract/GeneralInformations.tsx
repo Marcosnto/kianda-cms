@@ -12,11 +12,12 @@ import {
   Select,
   Stack,
 } from "@chakra-ui/react";
+
+import civilStatus from "../../../../utils/mocks/inputOptions/civilStatus";
+import pronounsTypes from "../../../../utils/mocks/inputOptions/pronounsTypes";
+import schoolingTypes from "../../../../utils/mocks/inputOptions/schoolingTypes";
 import { FormReactHooksProps } from "../../../../utils/types/forms";
 import RequiredInput from "../../components/RequiredInput";
-import schoolingTypes from "../../../../utils/mocks/inputOptions/schoolingTypes";
-import pronounsTypes from "../../../../utils/mocks/inputOptions/pronounsTypes";
-import civilStatus from "../../../../utils/mocks/inputOptions/civilStatus";
 
 export default function GeneralInformations({
   errors,
