@@ -5,7 +5,7 @@ import useBlogList from "./blog-list.hook";
 import { apiError, noDataToShow } from "@/utils/helpers/messages";
 import { Article } from "./blog-list.types";
 import getStatusBadge from "@/utils/getStatusBadge";
-import ButtonsActions from "@/components/Forms/components/ActionsButton/ActionsButtons";
+// import ButtonsActions from "@/components/Forms/components/ActionsButton/ActionsButtons";
 import {
   blogListOptions,
   blogTableHeaders,
@@ -36,7 +36,7 @@ export default function PostsList() {
       </Td>
       <Td>{getStatusBadge(post.status)}</Td>
       <Td>
-        <ButtonsActions tableOptions={blogListOptions} id={post.id} />
+        {/* <ButtonsActions tableOptions={blogListOptions} id={post.id} /> */}
       </Td>
     </Tr>
   ));

@@ -47,10 +47,10 @@ export default function UsersList() {
     return <h1>{apiError}</h1>;
   }
 
-  const tableBody = users.map((user: UserProps) => (
+  const tableBody = users?.map((user: UserProps) => (
     <Tr key={user.id}>
       <Td>{user.id}</Td>
-      <Td>{user.name}</Td>
+      <Td>{user.fullName}</Td>
       <Td>{getTableStatusBadge(user.registerStatus || "")}</Td>
       <Td>
         <ButtonsActions
@@ -81,7 +81,8 @@ export default function UsersList() {
     return (
       <div>
         <Text>
-          Gostaria de arquivar o registro de <Text as="b">{user?.name}</Text>?
+          Gostaria de arquivar o registro de{" "}
+          <Text as="b">{user?.fullName}</Text>?
           <br />
           Após isso o cadastro referente será{" "}
           <Text as="b" color="red">
@@ -95,7 +96,7 @@ export default function UsersList() {
 
   return (
     <>
-      {users.length > 0 ? (
+      {users && users.length > 0 ? (
         <>
           <ComponentTitle title="Pacientes" type="h1" />
           <TableList
@@ -107,7 +108,7 @@ export default function UsersList() {
             setCurrentPage={setCurrentPage}
           />
           <GenericModal
-            title={`Status do cadastro - ${currentSelectedUser?.name}`}
+            title={`Status do cadastro - ${currentSelectedUser?.fullName}`}
             isOpen={isOpenUpdateRegisterModal}
             onClose={onCloseUpdateRegisterModal}
             content={<ContentUpdateRegistration />}

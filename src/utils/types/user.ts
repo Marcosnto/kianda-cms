@@ -1,10 +1,16 @@
 export type UserProps = {
   id: number;
-  type?: number;
-  name: string;
-  email: string;
   fullName: string;
+  email: string;
+  borDate?: string | Date;
+  rg?: string;
+  cpf?: string;
+  gender?: string;
+  otherGender?: string;
   registerStatus?: string;
+  disabledPerson?: string;
+  disabledPersonDescription?: string;
+  terapheuticContractComplete?: string;
   role?: string;
 };
 

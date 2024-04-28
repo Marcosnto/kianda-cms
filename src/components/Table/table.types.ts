@@ -18,7 +18,7 @@ export type TableListProps = {
   headers: Array<TableHeadersProps>;
   totalPages: number | undefined;
   currentPage: number;
-  tableBody: JSX.Element;
+  tableBody: JSX.Element[] | undefined;
   tableOptions: TableOptionsType[];
   setCurrentPage: Dispatch<SetStateAction<number>>;
 };

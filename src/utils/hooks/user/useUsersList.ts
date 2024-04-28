@@ -7,7 +7,7 @@ import { useState } from "react";
 export default function useUsersList(currentPage: number, token: string) {
   const [totalPages, setTotalPages] = useState<number>(0);
 
-  const { data, isLoading, error } = useQuery<Partial<UserProps>[]>({
+  const { data, isLoading, error } = useQuery<UserProps[]>({
     queryKey: ["usersList", currentPage],
     queryFn: () =>
       fetch(BASE_URL + `/users?_page=${currentPage}` || "", {
