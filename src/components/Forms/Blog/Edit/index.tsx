@@ -1,11 +1,10 @@
+import SpinnerLoad from "@/components/SpinnerLoad";
+import useStore from "@/store";
+import { BASE_URL } from "@/utils/helpers/envs";
+import { apiError } from "@/utils/helpers/messages";
+import { Article } from "@/utils/types/blog";
 import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
-
-import useStore from "../../../../store";
-import { BASE_URL } from "../../../../utils/helpers/envs";
-import { apiError } from "../../../../utils/helpers/messages";
-import { Article } from "../../../../utils/types/blog";
-import SpinnerLoad from "../../../SpinnerLoad";
 import { EditBlogPostForm } from "./EditBlogPostForm";
 
 export default function EditBlogPost() {

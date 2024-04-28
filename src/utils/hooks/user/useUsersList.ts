@@ -1,13 +1,13 @@
+import { BASE_URL } from "@/utils/helpers/envs";
+import setNumberOfPages from "@/utils/setNumberOfPages";
+import { UserProps } from "@/utils/types/user";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-
-import { BASE_URL } from "../../helpers/envs";
-import setNumberOfPages from "../../setNumberOfPages";
 
 export default function useUsersList(currentPage: number, token: string) {
   const [totalPages, setTotalPages] = useState<number>(0);
 
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, error } = useQuery<Partial<UserProps>[]>({
     queryKey: ["usersList", currentPage],
     queryFn: () =>
       fetch(BASE_URL + `/users?_page=${currentPage}` || "", {

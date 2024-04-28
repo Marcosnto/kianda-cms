@@ -15,7 +15,7 @@ export type EditRegisterFormTypes = {
   register: UseFormRegister<RegisterProps>;
   onSubmit: SubmitHandler<RegisterProps>;
   handleSubmit: UseFormHandleSubmit<RegisterProps, undefined>;
-  control: Control<RegisterProps, any>;
+  control: Control<Partial<RegisterProps>, any>;
   errors: FieldErrors<RegisterProps>;
   isSubmitting: boolean;
   sendEmail: boolean;

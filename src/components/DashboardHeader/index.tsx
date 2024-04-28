@@ -1,9 +1,8 @@
+import useStore from "@/store";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { Box, Heading, IconButton, useDisclosure } from "@chakra-ui/react";
-
-import useStore from "../../store";
-import AvatarMenu from "../AvatarMenu";
 import DrawerMenu from "../DrawerMenu";
+import AvatarMenu from "../AvatarMenu";
 
 export default function DashboardHeader() {
   const { isOpen, onOpen, onClose } = useDisclosure();

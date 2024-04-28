@@ -1,9 +1,9 @@
 import { useToast } from "@chakra-ui/react";
 import { useState } from "react";
 
-import { BASE_URL } from "../../../../utils/helpers/envs";
-import { Article } from "../../../../utils/types/blog";
 import BlogPost from "./BlogPost";
+import { Article } from "@/utils/types/blog";
+import { BASE_URL } from "@/utils/helpers/envs";
 
 export default function Post() {
   const toast = useToast();

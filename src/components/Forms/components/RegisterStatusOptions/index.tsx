@@ -1,3 +1,4 @@
+import { RegisterProps } from "@/utils/types/forms";
 import {
   FormControl,
   FormErrorMessage,
@@ -13,10 +14,8 @@ import {
   FieldErrors,
   UseFormRegister,
 } from "react-hook-form";
-
-import registerTypes from "../../../../utils/mocks/inputOptions/register-types";
-import { RegisterProps } from "../../../../utils/types/forms";
 import RequiredInput from "../RequiredInput";
+import registerTypes from "@/utils/mocks/inputOptions/register-types";
 
 type RegisterStatusOptionsTypes = {
   errors: FieldErrors<RegisterProps>;

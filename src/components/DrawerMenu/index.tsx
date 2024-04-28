@@ -7,8 +7,7 @@ import {
   DrawerOverlay,
   IconButton,
 } from "@chakra-ui/react";
-
-//import Menu from "../Menu";
+import Menu from "../Menu";
 
 export type DrawnerMenu = {
   onClose: () => void;
@@ -36,9 +35,9 @@ export default function DrawerMenu({ onClose, isOpen }: DrawnerMenu) {
             background="none"
           />
         </DrawerHeader>
-        {/* <DrawerBody>
+        <DrawerBody>
           <Menu onClose={onClose} />
-        </DrawerBody> */}
+        </DrawerBody>
       </DrawerContent>
     </Drawer>
   );

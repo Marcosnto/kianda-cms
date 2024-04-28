@@ -10,11 +10,11 @@ import {
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 
-import registerTypes from "../../../../utils/mocks/inputOptions/register-types";
-import { RegisterProps } from "../../../../utils/types/forms";
-import ComponentTitle from "../../../Title";
-import RequiredInput from "../../components/RequiredInput";
 import useRegisterHook from "./register.hook";
+import { RegisterProps } from "@/utils/types/forms";
+import ComponentTitle from "@/components/Title";
+import RequiredInput from "../../components/RequiredInput";
+import registerTypes from "@/utils/mocks/inputOptions/register-types";
 
 function UserRegister() {
   const {
