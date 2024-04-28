@@ -8,6 +8,7 @@ import Menu from "../components/Menu";
 
 import { useRouter } from "../utils/libs/routerFacade";
 import { Outlet } from "react-router-dom";
+import { REACT_APP_VERSION } from "@/utils/helpers/envs";
 
 export default function Dashboard() {
   const navigate = useRouter();
@@ -82,7 +83,7 @@ export default function Dashboard() {
           color="#FFF"
           textAlign="center"
         >
-          {/* <div>Versão: {packageJson.version}</div> */}
+          <div>Versão: {REACT_APP_VERSION}</div>
         </GridItem>
       </Grid>
     </>
