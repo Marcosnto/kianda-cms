@@ -1,6 +1,16 @@
 module.exports = {
   root: true,
-  env: { browser: true, es2020: true },
+  env: { browser: true, es6: true, es2021: true, node: true },
+  settings: {
+    react: {
+      version: "detect",
+    },
+    "import/resolver": {
+      node: {
+        extensions: [".js", ".jsx", ".ts", ".tsx"],
+      },
+    },
+  },
   extends: [
     "eslint:recommended",
     "plugin:import/errors",
@@ -15,6 +25,14 @@ module.exports = {
   ],
   ignorePatterns: ["dist", ".eslintrc.cjs"],
   parser: "@typescript-eslint/parser",
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: "module",
+    ecmaFeatures: {
+      jsx: true,
+    },
+    project: ["./tsconfig.json", "./tsconfig.node.json"],
+  },
   plugins: [
     "react-refresh",
     "react",
@@ -23,6 +41,7 @@ module.exports = {
     "jsx-a11y",
     "@typescript-eslint",
     "react-hooks",
+    "'import-resolver-alias",
   ],
   rules: {
     "react-refresh/only-export-components": [
