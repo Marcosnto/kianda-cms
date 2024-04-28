@@ -13,9 +13,9 @@ import {
 import { SubmitHandler, useForm } from "react-hook-form";
 import LogoImage from "../components/LogoImage";
 import AlertStatus from "../components/AlertStatus";
-import RequiredInput from "../components/RequiredInput/RequiredInput";
+import RequiredInput from "../components/Forms/components/RequiredInput";
 
-import useLogin from "../hooks/useLogin";
+import useLogin from "../utils/hooks/pages/useLogin";
 
 export type ResponseProps = {
   id: number;

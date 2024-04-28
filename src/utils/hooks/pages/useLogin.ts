@@ -1,7 +1,8 @@
 import { useCookies } from "react-cookie";
-import { LoginProps, ResponseProps } from "../pages/Login";
+import { LoginProps, ResponseProps } from "../../../pages/Login";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "../../../helpers/envs";
 
 export default function useLogin() {
   const navigate = useNavigate();
@@ -15,9 +16,6 @@ export default function useLogin() {
     "role",
   ]);
 
-  const BASE_URL = import.meta.env.VITE_PUBLIC_JWT_URL;
-
-  console.log(BASE_URL);
   function login(data: LoginProps) {
     fetch(BASE_URL || "", {
       method: "POST",
