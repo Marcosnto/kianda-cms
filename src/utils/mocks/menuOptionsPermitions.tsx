@@ -1,9 +1,3 @@
-import Post from "@/components/Forms/Blog/Post";
-import UserRegister from "@/components/Forms/User/Register";
-import { EditTerapheuticContract } from "@/components/Forms/User/TerapheuticContract/Edit/EditTerapheuticContract";
-import PostsList from "@/components/List/Blog";
-import TerapheuticContractsList from "@/components/List/TerapheuticContract";
-import UsersList from "@/components/List/User";
 import { UserOptionsProps } from "@/components/Menu/menu.hook";
 import { Icon } from "@chakra-ui/react";
 import { IconType } from "react-icons";
@@ -40,19 +34,19 @@ export const admin: UserOptionsProps = {
       key: "user-admin-01",
       icon: getIcon(IoBodyOutline),
       displayName: "Cadastrar Paciente",
-      render: <UserRegister />,
+      path: "psi/user-register",
     },
     {
       key: "user-admin-02",
       icon: getIcon(IoPeopleOutline),
       displayName: "Listar Pacientes",
-      render: <UsersList />,
+      path: "psi/patients",
     },
     {
       key: "user-admin-03",
       icon: getIcon(IoBookOutline),
       displayName: "Contratos Terapêuticos",
-      render: <TerapheuticContractsList />,
+      path: "psi/terapheutic-contracts",
     },
   ],
   blog: [
@@ -60,13 +54,13 @@ export const admin: UserOptionsProps = {
       key: "blog-admin-01",
       icon: getIcon(IoDocumentTextOutline),
       displayName: "Escrever Artigo",
-      render: <Post />,
+      path: "blog/create-article",
     },
     {
       key: "blog-admin-02",
       icon: getIcon(IoFolderOutline),
       displayName: "Listar Artigos",
-      render: <PostsList />,
+      path: "blog/articles",
     },
   ],
 };
@@ -78,25 +72,25 @@ export const patient: UserOptionsProps = {
       key: "user-patitent-01",
       icon: getIcon(IoCreateOutline),
       displayName: "Dados Pessoais",
-      render: <h1>Dados pessoais</h1>,
+      path: "",
     },
     {
       key: "user-patitent-02",
       icon: getIcon(IoBodyOutline),
       displayName: "Contrato Terapêutico",
-      render: <EditTerapheuticContract />,
+      path: "",
     },
     {
       key: "user-patitent-03",
       icon: getIcon(IoCalendarNumberOutline),
       displayName: "Consultas",
-      render: <h1>Consultas</h1>,
+      path: "",
     },
     {
       key: "user-patitent-04",
       icon: getIcon(IoWalletOutline),
       displayName: "Recibos",
-      render: <h1>Recibos</h1>,
+      path: "",
     },
   ],
 };

@@ -5,12 +5,11 @@ import { useCookies } from "react-cookie";
 import Content from "../components/Content";
 import DashboardHeader from "../components/DashboardHeader";
 import Menu from "../components/Menu";
-import useStore from "../store";
+
 import { useRouter } from "../utils/libs/routerFacade";
-//import useStore from "../store";
+import { Outlet } from "react-router-dom";
 
 export default function Dashboard() {
-  const store = useStore();
   const navigate = useRouter();
   const [cookie, _, removeCookie] = useCookies(["token"]);
 
@@ -72,7 +71,9 @@ export default function Dashboard() {
         </GridItem>
 
         <GridItem area={"content"}>
-          <Content>{store.currentComponent}</Content>
+          <Content>
+            <Outlet />
+          </Content>
         </GridItem>
 
         <GridItem

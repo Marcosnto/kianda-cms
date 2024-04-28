@@ -26,8 +26,7 @@ export default function Menu({ onClose }: MenuProps) {
         <MenuOptions
           key={option.key}
           icon={option.icon}
-          render={option.render}
-          setCurrentComponent={setComponent}
+          path={option.path}
           onClose={onClose}
           displayName={option.displayName}
         />
@@ -45,8 +44,7 @@ export default function Menu({ onClose }: MenuProps) {
         <MenuOptions
           key={option.key}
           icon={option.icon}
-          render={option.render}
-          setCurrentComponent={setComponent}
+          path={option.path}
           onClose={onClose}
           displayName={option.displayName}
         />

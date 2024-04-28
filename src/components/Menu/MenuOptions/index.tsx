@@ -1,24 +1,24 @@
+import { useRouter } from "@/utils/libs/routerFacade";
 import { Box } from "@chakra-ui/react";
 
 export type OptionsProps = {
   key: string;
   icon: JSX.Element;
   displayName: string;
-  render?: JSX.Element;
+  path: string;
 };
 
 export interface MenuOptionsProps extends OptionsProps {
-  setCurrentComponent: (component: JSX.Element) => void;
   onClose?: () => void;
 }
 
 export default function MenuOptions({
   icon,
   displayName,
-  render,
-  setCurrentComponent,
+  path,
   onClose,
 }: MenuOptionsProps) {
+  const navigate = useRouter();
   return (
     <Box
       _hover={{ bg: "green.600", rounded: "8px", color: "white" }}
@@ -31,7 +31,7 @@ export default function MenuOptions({
       mr="4"
       mt="2"
       onClick={() => {
-        setCurrentComponent(render || <></>);
+        navigate(path);
         onClose && onClose();
       }}
     >
