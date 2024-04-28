@@ -1,4 +1,4 @@
-export const BASE_URL: string = import.meta.env.VITE_PUBLIC_JWT_URL;
+export const BASE_URL: string = import.meta.env.VITE_BASE_URL;
 export const PUBLIC_JWT_URL: string = import.meta.env.VITE_PUBLIC_JWT_URL;
 export const PUBLIC_PRIVACY_POLICY: string = import.meta.env
   .VITE_PUBLIC_PRIVACY_POLICY;
