@@ -24,12 +24,9 @@ export default function MenuOptions({
       _hover={{ bg: "green.600", rounded: "8px", color: "white" }}
       as="button"
       display="flex"
-      gap="11px"
+      gap="3"
       alignItems="center"
-      p="3"
-      ml="4"
-      mr="4"
-      mt="2"
+      p="1.5"
       onClick={() => {
         navigate(path);
         onClose && onClose();

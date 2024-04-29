@@ -31,32 +31,32 @@ export default function Dashboard() {
         h="100vh"
         templateAreas={[
           `
-        "header header"
-        "content content"
-        "content content"
-        "footer footer"
+        "header header header"
+        "content content content"
+        "content content content"
+        "footer footer footer"
       `,
           `
-        "header header"
-        "content content"
-        "content content"
-        "footer footer"
+        "header header header"
+        "content content content"
+        "content content content"
+        "footer footer footer"
       `,
           `
-        "header header"
-        "sidenav content"
-        "sidenav content"
-        "footer footer"
+        "header header header"
+        "sidenav content content"
+        "sidenav content content"
+        "footer footer footer"
       `,
         ]}
-        gridTemplateRows={"4.3rem auto auto 2rem"}
+        gridTemplateRows={"4rem auto auto 2rem"}
         gridTemplateColumns={[
           "none",
           "none",
-          "1.3fr 3fr",
-          "1fr 3fr",
-          "0.8fr 3fr",
-          "0.6fr 3fr",
+          "1fr 2fr",
+          "0.7fr 2fr",
+          "0.5fr 2fr",
+          "0.5fr 2fr",
         ]}
       >
         <GridItem area={"header"} background={"green.900"} color="#FFF">
@@ -64,7 +64,7 @@ export default function Dashboard() {
         </GridItem>
 
         <GridItem
-          display={["none", "none", "block"]}
+          display={["none", "none", "flex"]}
           area={"sidenav"}
           boxShadow="md"
         >

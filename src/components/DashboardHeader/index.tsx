@@ -23,8 +23,10 @@ export default function DashboardHeader() {
         icon={<HamburgerIcon />}
         variant="outline"
         onClick={() => onOpen()}
-        display={["unset", "unset", "none"]}
+        display={["flex", "flex", "none"]}
         _hover={{ bg: "green.700" }}
+        color="white"
+        fontSize="1.5rem"
       />
       <Heading as="h1" size="md" noOfLines={1}>
         Kianda
