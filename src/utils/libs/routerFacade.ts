@@ -1,3 +1,8 @@
-import { useNavigate, Link, useRouteError } from "react-router-dom";
+import {
+  useNavigate,
+  Link,
+  useRouteError,
+  useLocation,
+} from "react-router-dom";
 
-export { useNavigate as useRouter, useRouteError, Link };
+export { useNavigate as useRouter, useRouteError, Link, useLocation };
