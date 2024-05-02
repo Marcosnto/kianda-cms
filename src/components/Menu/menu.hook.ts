@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
 import { ResponseProps } from "../../pages/Login";
-import useStore from "../../store";
 import getMenuOptions from "../../utils/mocks/menuOptionsPermitions";
 import { OptionsProps } from "./MenuOptions";
+import { useLocation } from "@/utils/libs/routerFacade";
 
 export type UserOptionsProps = {
   type: string;
@@ -12,7 +12,7 @@ export type UserOptionsProps = {
 };
 
 const useMenu = () => {
-  const { setComponent } = useStore();
+  const { pathname } = useLocation();
   const [menuOptions, setOptions] = useState<UserOptionsProps>({
     type: "",
     users: [],
@@ -29,7 +29,7 @@ const useMenu = () => {
 
   return {
     menuOptions,
-    setComponent,
+    pathName: pathname,
   };
 };
 

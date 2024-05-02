@@ -1,5 +1,6 @@
 import { useRouter } from "@/utils/libs/routerFacade";
 import { Box } from "@chakra-ui/react";
+import useMenu from "../menu.hook";
 
 export type OptionsProps = {
   key: string;
@@ -19,14 +20,21 @@ export default function MenuOptions({
   onClose,
 }: MenuOptionsProps) {
   const navigate = useRouter();
+  const { pathName } = useMenu();
+  const isActive = `/dashboard/${path}` === pathName;
   return (
     <Box
-      _hover={{ bg: "green.600", rounded: "8px", color: "white" }}
+      bg={isActive ? "#eeeee4" : "white"}
+      _hover={{
+        bg: `${isActive ? "#eeeee4" : "green.600"}`,
+        rounded: "2px",
+        color: `${isActive ? "green.700" : "white"}`,
+      }}
       as="button"
       display="flex"
       gap="3"
       alignItems="center"
-      p="1.5"
+      p="0.5rem 1rem 0.5rem 1rem "
       onClick={() => {
         navigate(path);
         onClose && onClose();

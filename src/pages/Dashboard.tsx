@@ -53,10 +53,10 @@ export default function Dashboard() {
         gridTemplateColumns={[
           "none",
           "none",
-          "1fr 2fr",
-          "0.7fr 2fr",
-          "0.5fr 2fr",
-          "0.5fr 2fr",
+          "27ch 2fr",
+          "27ch 2fr",
+          "27ch 2fr",
+          "27ch 2fr",
         ]}
       >
         <GridItem area={"header"} background={"green.900"} color="#FFF">

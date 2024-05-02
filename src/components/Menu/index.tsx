@@ -8,16 +8,23 @@ export type MenuProps = {
 };
 
 export default function Menu({ onClose }: MenuProps) {
-  const { menuOptions, setComponent } = useMenu();
-
+  const { menuOptions } = useMenu();
+  //maybe send the user to login page
   if (menuOptions.type == "") {
     return <></>;
   }
 
   return (
-    <Flex flexDir="column" pt="4">
+    <Flex
+      flexDir="column"
+      pt="5"
+      pl="5"
+      gap="1rem"
+      flexBasis="26ch"
+      flexShrink="0"
+    >
       {menuOptions.type ? (
-        <Heading as="h3" size="sm" noOfLines={1} ml="3" mt="8">
+        <Heading as="h3" size="sm" noOfLines={1}>
           {menuOptions.type === "admin" ? "Pacientes" : "Menu"}
         </Heading>
       ) : null}
