@@ -3,7 +3,7 @@ import { useCookies } from "react-cookie";
 
 import { LoginProps, ResponseProps } from "@/pages/Login";
 import { useRouter } from "@/utils/libs/routerFacade";
-import { BASE_URL } from "@/utils/helpers/envs";
+import { JWT_AUTH } from "@/utils/helpers/envs";
 
 export default function useLogin() {
   const navigate = useRouter();
@@ -18,7 +18,7 @@ export default function useLogin() {
   ]);
 
   function login(data: LoginProps) {
-    fetch(BASE_URL || "", {
+    fetch(JWT_AUTH || "", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

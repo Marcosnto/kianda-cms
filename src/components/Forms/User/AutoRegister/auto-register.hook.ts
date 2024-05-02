@@ -1,8 +1,4 @@
-import {
-  BASE_URL,
-  PUBLIC_PRIVACY_POLICY,
-  PUBLIC_USE_TERMS,
-} from "@/utils/helpers/envs";
+import { BASE_URL, PRIVACY_POLICY, USE_TERMS } from "@/utils/helpers/envs";
 import { useRouter } from "@/utils/libs/routerFacade";
 import { RegisterProps } from "@/utils/types/forms";
 import { useBoolean, useToast } from "@chakra-ui/react";
@@ -13,8 +9,8 @@ export default function useAutoRegister() {
   const [modalStatus, setModalStatus] = useBoolean();
   const toast = useToast();
   const navigate = useRouter();
-  const privacyPolicyLink = PUBLIC_PRIVACY_POLICY;
-  const useTermsLink = PUBLIC_USE_TERMS;
+  const privacyPolicyLink = PRIVACY_POLICY;
+  const useTermsLink = USE_TERMS;
 
   const { mutate: sendEmailPost, isPending: isSendingEmail } = useMutation({
     mutationFn: (data: Partial<RegisterProps>) =>
