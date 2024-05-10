@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { EditRegisterForm } from "./EditRegisterForm";
 import useEditRegisterForm from "./EditRegisterForm.hook";
 import SpinnerLoad from "@/components/SpinnerLoad";
-import { apiError } from "@/utils/helpers/messages";
+import { apiError } from "@/helpers/messages";
 
 function EditRegister() {
   const {

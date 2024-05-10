@@ -3,9 +3,9 @@ import { useCookies } from "react-cookie";
 
 import { EditTerapheuticContract } from "./EditTerapheuticContract";
 import useStore from "@/store";
-import { BASE_URL } from "@/utils/helpers/envs";
+import { BASE_URL } from "@/helpers/envs";
 import SpinnerLoad from "@/components/SpinnerLoad";
-import { apiError } from "@/utils/helpers/messages";
+import { apiError } from "@/helpers/messages";
 
 function EditRegister() {
   const { currentSelectedUser } = useStore();

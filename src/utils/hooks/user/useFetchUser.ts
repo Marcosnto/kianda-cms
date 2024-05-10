@@ -1,5 +1,5 @@
 import useStore from "@/store";
-import { BASE_URL } from "@/utils/helpers/envs";
+import { BASE_URL } from "@/helpers/envs";
 import { useQuery } from "@tanstack/react-query";
 import { useCookies } from "react-cookie";
 

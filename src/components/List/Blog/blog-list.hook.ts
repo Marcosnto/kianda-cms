@@ -1,4 +1,4 @@
-import { BASE_URL } from "@/utils/helpers/envs";
+import { BASE_URL } from "@/helpers/envs";
 import setNumberOfPages from "@/utils/setNumberOfPages";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";

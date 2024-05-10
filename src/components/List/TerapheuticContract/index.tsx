@@ -3,11 +3,11 @@ import SpinnerLoad from "@/components/SpinnerLoad";
 import TableList from "@/components/Table";
 import ComponentTitle from "@/components/Title";
 import getStatusBadge from "@/utils/getStatusBadge";
-import { apiError } from "@/utils/helpers/messages";
+import { apiError } from "@/helpers/messages";
 import {
   terapheuticContractListOptions,
   terapheuticContractTableHeaders,
-} from "@/utils/helpers/tableConfigs";
+} from "@/helpers/tableConfigs";
 import useUsersList from "@/utils/hooks/user/useUsersList";
 import { Td, Tr } from "@chakra-ui/react";
 import { useState } from "react";

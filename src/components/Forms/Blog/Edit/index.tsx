@@ -1,7 +1,7 @@
 import SpinnerLoad from "@/components/SpinnerLoad";
 import useStore from "@/store";
-import { BASE_URL } from "@/utils/helpers/envs";
-import { apiError } from "@/utils/helpers/messages";
+import { BASE_URL } from "@/helpers/envs";
+import { apiError } from "@/helpers/messages";
 import { Article } from "@/utils/types/blog";
 import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";

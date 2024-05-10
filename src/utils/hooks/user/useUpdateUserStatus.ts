@@ -5,9 +5,9 @@ import { useCookies } from "react-cookie";
 
 import useUpdateUserRegister from "./useUpdateUserRegister";
 import useStore from "@/store";
-import useSendEmailToUser from "@/utils/emails/hooks/useSendEmailToUser";
+import useSendEmailToUser from "@/emails/hooks/useSendEmailToUser";
 import { UpdateRegister } from "@/components/Forms/User/EditRegister/EditRegisterForm.types";
-import { BASE_URL } from "@/utils/helpers/envs";
+import { BASE_URL } from "@/helpers/envs";
 
 const useUpdateUserStatus = () => {
   const [cookies] = useCookies(["token"]);

@@ -1,6 +1,5 @@
 import { Grid, GridItem } from "@chakra-ui/react";
 import { useEffect } from "react";
-import { useCookies } from "react-cookie";
 
 import Content from "../components/Content";
 import DashboardHeader from "../components/DashboardHeader";
@@ -8,13 +7,12 @@ import Menu from "../components/Menu";
 
 import { useRouter } from "../utils/libs/routerFacade";
 import { Outlet } from "react-router-dom";
-import { REACT_APP_VERSION } from "@/utils/helpers/envs";
+import { REACT_APP_VERSION } from "@/helpers/envs";
 
 export default function Dashboard() {
   const navigate = useRouter();
-  const [cookie, _, removeCookie] = useCookies(["token"]);
 
-  const isAuth = "token" in cookie;
+  const isAuth = localStorage.getItem("token");
   useEffect(() => {
     if (!isAuth) {
       navigate("/login");
@@ -23,7 +21,7 @@ export default function Dashboard() {
     //   removeCookie("token");
     //   router.push("/login");
     // }
-  }, [isAuth, removeCookie]);
+  }, [isAuth]);
 
   return (
     <>

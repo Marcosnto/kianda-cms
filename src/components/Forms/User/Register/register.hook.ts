@@ -1,4 +1,4 @@
-import { BASE_URL } from "@/utils/helpers/envs";
+import { BASE_URL } from "@/helpers/envs";
 import { RegisterProps } from "@/utils/types/forms";
 import { useToast } from "@chakra-ui/react";
 import { useCallback } from "react";

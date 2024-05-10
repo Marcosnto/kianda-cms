@@ -1,4 +1,4 @@
-import { BASE_URL, PRIVACY_POLICY, USE_TERMS } from "@/utils/helpers/envs";
+import { BASE_URL, PRIVACY_POLICY, USE_TERMS } from "@/helpers/envs";
 import { useRouter } from "@/utils/libs/routerFacade";
 import { RegisterProps } from "@/utils/types/forms";
 import { useBoolean, useToast } from "@chakra-ui/react";

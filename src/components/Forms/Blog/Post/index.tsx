@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import BlogPost from "./BlogPost";
 import { Article } from "@/utils/types/blog";
-import { BASE_URL } from "@/utils/helpers/envs";
+import { BASE_URL } from "@/helpers/envs";
 
 export default function Post() {
   const toast = useToast();

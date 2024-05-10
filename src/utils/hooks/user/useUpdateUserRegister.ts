@@ -1,5 +1,5 @@
 import { UpdateRegister } from "@/components/Forms/User/EditRegister/EditRegisterForm.types";
-import { BASE_URL } from "@/utils/helpers/envs";
+import { BASE_URL } from "@/helpers/envs";
 import { useToast } from "@chakra-ui/react";
 import { useMutation } from "@tanstack/react-query";
 import { useCookies } from "react-cookie";
