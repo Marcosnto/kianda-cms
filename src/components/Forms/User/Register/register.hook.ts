@@ -2,7 +2,6 @@ import { BASE_URL } from "@/helpers/envs";
 import { RegisterProps } from "@/utils/types/forms";
 import { useToast } from "@chakra-ui/react";
 import { useCallback } from "react";
-import { useCookies } from "react-cookie";
 import { SubmitHandler, UseFormReset } from "react-hook-form";
 
 export default function useRegisterHook({
@@ -12,15 +11,15 @@ export default function useRegisterHook({
   reset: UseFormReset<RegisterProps>;
   isValid: boolean;
 }) {
-  const [cookies] = useCookies(["token"]);
   const toast = useToast();
+  const token = localStorage.getItem("token");
 
   const post = useCallback(
     (data: RegisterProps) => {
       fetch(BASE_URL + "/user" || "", {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${cookies.token}`,
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
@@ -70,7 +69,7 @@ export default function useRegisterHook({
         }
       });
     },
-    [cookies.token, reset, toast],
+    [reset, toast],
   );
 
   const onSubmit: SubmitHandler<RegisterProps> = useCallback(

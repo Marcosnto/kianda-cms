@@ -11,16 +11,10 @@ import {
 import useUsersList from "@/utils/hooks/user/useUsersList";
 import { Td, Tr } from "@chakra-ui/react";
 import { useState } from "react";
-import { useCookies } from "react-cookie";
 
 export default function TerapheuticContractsList() {
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [cookie] = useCookies(["token"]);
-  const token = cookie.token;
-  const { users, error, isLoading, totalPages } = useUsersList(
-    currentPage,
-    token,
-  );
+  const { users, error, isLoading, totalPages } = useUsersList(currentPage);
 
   if (isLoading) {
     return <SpinnerLoad />;

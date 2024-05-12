@@ -1,7 +1,6 @@
 import { useToast } from "@chakra-ui/react";
 import { useMutation } from "@tanstack/react-query";
 import { useCallback } from "react";
-import { useCookies } from "react-cookie";
 
 import useUpdateUserRegister from "./useUpdateUserRegister";
 import useStore from "@/store";
@@ -10,7 +9,7 @@ import { UpdateRegister } from "@/components/Forms/User/EditRegister/EditRegiste
 import { BASE_URL } from "@/helpers/envs";
 
 const useUpdateUserStatus = () => {
-  const [cookies] = useCookies(["token"]);
+  const token = localStorage.getItem("token");
   const toast = useToast();
   const { currentSelectedUser } = useStore();
   const { sendEmailPost, isSendingEmail } = useSendEmailToUser({
@@ -44,7 +43,7 @@ const useUpdateUserStatus = () => {
         fetch(BASE_URL + "/user/update-status" || "", {
           method: "PUT",
           headers: {
-            Authorization: `Bearer ${cookies.token}`,
+            Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
           body: JSON.stringify({

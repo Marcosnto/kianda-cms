@@ -4,8 +4,9 @@ import { UserProps } from "@/utils/types/user";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 
-export default function useUsersList(currentPage: number, token: string) {
+export default function useUsersList(currentPage: number) {
   const [totalPages, setTotalPages] = useState<number>(0);
+  const token = localStorage.getItem("token");
 
   const { data, isLoading, error } = useQuery<UserProps[]>({
     queryKey: ["usersList", currentPage],

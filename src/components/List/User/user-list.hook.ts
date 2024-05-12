@@ -5,15 +5,12 @@ import useUsersList from "@/utils/hooks/user/useUsersList";
 import { RegisterProps } from "@/utils/types/forms";
 import { useDisclosure } from "@chakra-ui/react";
 import { useCallback, useState } from "react";
-import { useCookies } from "react-cookie";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 const useList = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const { currentSelectedUser } = useStore();
 
-  const [cookie] = useCookies(["token"]);
-  const token = cookie.token;
   const {
     isOpen: isOpenUpdateRegisterModal,
     onOpen: onOpenUpdateRegisterModal,
@@ -25,10 +22,7 @@ const useList = () => {
     onClose: onCloseDeleteModal,
   } = useDisclosure();
 
-  const { users, error, isLoading, totalPages } = useUsersList(
-    currentPage,
-    token,
-  );
+  const { users, error, isLoading, totalPages } = useUsersList(currentPage);
 
   const { updateUserStatusMutation, isUpdateUserPeding, isSendingEmail } =
     useUpdateUserStatus();

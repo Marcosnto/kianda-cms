@@ -1,10 +1,9 @@
 import useStore from "@/store";
 import { BASE_URL } from "@/helpers/envs";
 import { useQuery } from "@tanstack/react-query";
-import { useCookies } from "react-cookie";
 
 const useFetchUser = () => {
-  const [cookies] = useCookies(["token"]);
+  const token = localStorage.getItem("token");
   const { currentSelectedUser } = useStore();
   const currentSelectedID = currentSelectedUser?.id;
 
@@ -14,7 +13,7 @@ const useFetchUser = () => {
       fetch(BASE_URL + `/user/${currentSelectedID}` || "", {
         method: "GET",
         headers: {
-          Authorization: `Bearer ${cookies.token}`,
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       }).then((res) => {

@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import { useCookies } from "react-cookie";
 
 import { EditTerapheuticContract } from "./EditTerapheuticContract";
 import useStore from "@/store";
@@ -11,7 +10,7 @@ function EditRegister() {
   const { currentSelectedUser } = useStore();
   const currentSelectedID = currentSelectedUser?.id;
 
-  const [cookies] = useCookies(["token"]);
+  const token = localStorage.getItem("token");
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["editUser"],
@@ -19,7 +18,7 @@ function EditRegister() {
       fetch(BASE_URL + `/user/${currentSelectedID}` || "", {
         method: "GET",
         headers: {
-          Authorization: `Bearer ${cookies.token}`,
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       }).then((res) => {
