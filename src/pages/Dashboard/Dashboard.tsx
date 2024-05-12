@@ -1,27 +1,24 @@
 import { Grid, GridItem } from "@chakra-ui/react";
-import { useEffect } from "react";
 
-import Content from "../components/Content";
-import DashboardHeader from "../components/DashboardHeader";
-import Menu from "../components/Menu";
+import Content from "../../components/Content";
+import DashboardHeader from "../../components/DashboardHeader";
+import Menu from "../../components/Menu";
 
-import { useRouter } from "../utils/libs/routerFacade";
 import { Outlet } from "react-router-dom";
 import { REACT_APP_VERSION } from "@/helpers/envs";
+import useDashboard from "./dashboard.hook";
+import { useEffect } from "react";
 
 export default function Dashboard() {
-  const navigate = useRouter();
+  const { navigate, hasToken, isAuth, isLoading } = useDashboard();
 
-  const isAuth = localStorage.getItem("token");
-  useEffect(() => {
-    if (!isAuth) {
-      navigate("/login");
-    }
-    // if (isAuth) {
-    //   removeCookie("token");
-    //   router.push("/login");
-    // }
-  }, [isAuth]);
+  // useEffect(() => {
+  //   if (!hasToken || isAuth !== 200) {
+  //     navigate("/");
+  //   }
+  // }, []);
+
+  if (isLoading) return;
 
   return (
     <>

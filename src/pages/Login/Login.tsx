@@ -11,31 +11,17 @@ import {
 } from "@chakra-ui/react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import AlertStatus from "../components/AlertStatus";
-import RequiredInput from "../components/Forms/components/RequiredInput";
-import LogoImage from "../components/LogoImage";
-import useLogin from "../utils/hooks/pages/useLogin";
-
-export type ResponseProps = {
-  id: number;
-  token: string;
-  user_email: string;
-  user_nicename: string;
-  user_display_name: string;
-  role: string;
-  registerStatus: string;
-};
-
-export type LoginProps = {
-  email: string;
-  password: string;
-};
+import AlertStatus from "../../components/AlertStatus";
+import RequiredInput from "../../components/Forms/components/RequiredInput";
+import LogoImage from "../../components/LogoImage";
+import useLogin from "./login.hook";
+import { LoginProps } from "./types";
 
 export default function Login() {
   const {
     apiError,
     authError,
-    isAuth,
+    // isAuth,
     registerStatus,
     navigate,
     setApiError,
@@ -106,7 +92,7 @@ export default function Login() {
                 <Input
                   id="email"
                   type="text"
-                  disabled={isAuth}
+                  // disabled={isAuth}
                   {...register("email", {
                     required: "Esse Campo é obrigatório",
                   })}
@@ -126,7 +112,7 @@ export default function Login() {
                 <Input
                   id="password"
                   type="password"
-                  disabled={isAuth}
+                  // disabled={isAuth}
                   {...register("password", {
                     required: "Esse Campo é obrigatório",
                   })}
@@ -143,7 +129,7 @@ export default function Login() {
                 colorScheme="green"
                 variant="solid"
                 type="submit"
-                isLoading={isSubmitting || isAuth}
+                isLoading={isSubmitting}
                 width="100%"
               >
                 Entrar

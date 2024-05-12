@@ -1,5 +1,5 @@
-import Dashboard from "@/pages/Dashboard";
-import Login from "@/pages/Login";
+import Dashboard from "@/pages/Dashboard/Dashboard";
+import Login from "@/pages/Login/Login";
 import Register from "@/pages/Register";
 import { TbError404 } from "react-icons/tb";
 import { createBrowserRouter } from "react-router-dom";

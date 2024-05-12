@@ -1,14 +1,13 @@
 import { useState } from "react";
 
-import { LoginProps, ResponseProps } from "@/pages/Login";
 import { useRouter } from "@/utils/libs/routerFacade";
-import { JWT_AUTH } from "@/helpers/envs";
+import { JWT_AUTH, JWT_VALIDATE } from "@/helpers/envs";
+import { LoginProps, ResponseProps } from "./types";
 
 export default function useLogin() {
   const navigate = useRouter();
   const [apiError, setApiError] = useState(false);
   const [authError, setAuthError] = useState(false);
-  const [isAuth, setIsAuth] = useState(false);
   const [registerStatus, setRegisterStatus] = useState("");
 
   function login(data: LoginProps) {
@@ -44,42 +43,24 @@ export default function useLogin() {
       });
   }
 
-  function validateToken(token: string) {
-    fetch(JWT_AUTH || "", {
+  function validateToken() {
+    fetch(JWT_VALIDATE || "", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
-    })
-      .then((response) => {
-        if (response.ok) {
-          response.json().then((response: ResponseProps) => {
-            if (response.registerStatus === "1") {
-              const user = {
-                id: response.id,
-                role: response.role,
-                name: response.user_display_name,
-              };
-              localStorage.setItem("user", JSON.stringify(user));
-              localStorage.setItem("token", response.token);
-              setTimeout(() => navigate("/dashboard"), 100);
-            }
-            setRegisterStatus(response.registerStatus);
-          });
-          setAuthError(false);
-        } else {
-          setAuthError(true);
-        }
-      })
-      .catch(() => {
-        setApiError(true);
-      });
+    }).then((response) => {
+      if (response.ok) {
+        return response.ok;
+      }
+    });
   }
 
   return {
     apiError,
     authError,
-    isAuth,
+    validateToken,
     registerStatus,
     navigate,
     setApiError,
