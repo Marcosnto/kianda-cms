@@ -1,8 +1,8 @@
 import { ResponseProps } from "@/pages/Login/types";
+import { useRouter } from "@/utils/libs/routerFacade";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { Avatar, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { MouseEventHandler, useEffect, useState } from "react";
-import { useCookies } from "react-cookie";
 
 type AvatarMenuProps = {
   icon: React.ReactElement;
@@ -12,7 +12,7 @@ type AvatarMenuProps = {
 
 export default function AvatarMenu() {
   const [currentUser, setCurrentUser] = useState({ user_display_name: "" });
-  const [, , removeCookie] = useCookies(["token"]);
+  const navigate = useRouter();
 
   useEffect(() => {
     const currentUser: ResponseProps = JSON.parse(
@@ -36,8 +36,9 @@ export default function AvatarMenu() {
   }
 
   function logout() {
-    removeCookie("token");
+    localStorage.removeItem("token");
     localStorage.removeItem("user");
+    navigate("/");
   }
 
   return (
@@ -55,6 +56,7 @@ export default function AvatarMenu() {
           variant="outline"
         />
         <MenuList sx={{ color: "black", padding: "2" }}>
+          {/* TODO: Página de perfil para info e redefinir senha  */}
           {/* {MenuItemComponent({ icon: <AddIcon />, content: "Ver Perfil" })}
           {MenuItemComponent({
             icon: <LockIcon />,
