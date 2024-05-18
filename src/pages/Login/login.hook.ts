@@ -1,14 +1,16 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 import { useRouter } from "@/utils/libs/routerFacade";
 import { JWT_AUTH, JWT_VALIDATE } from "@/helpers/envs";
 import { LoginProps, ResponseProps } from "./types";
+import { AuthContext } from "@/contexts/auth";
 
 export default function useLogin() {
   const navigate = useRouter();
   const [apiError, setApiError] = useState(false);
   const [authError, setAuthError] = useState(false);
   const [registerStatus, setRegisterStatus] = useState("");
+  const { signin } = useContext(AuthContext);
 
   function login(data: LoginProps) {
     fetch(JWT_AUTH || "", {
@@ -28,7 +30,7 @@ export default function useLogin() {
                 name: response.user_display_name,
               };
               localStorage.setItem("user", JSON.stringify(user));
-              localStorage.setItem("token", response.token);
+              signin(response.token);
               setTimeout(() => navigate("/dashboard"), 100);
             }
             setRegisterStatus(response.registerStatus);

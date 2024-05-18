@@ -6,20 +6,8 @@ import Menu from "../../components/Menu";
 
 import { Outlet } from "react-router-dom";
 import { REACT_APP_VERSION } from "@/helpers/envs";
-import useDashboard from "./dashboard.hook";
-import { useEffect } from "react";
 
 export default function Dashboard() {
-  const { navigate, hasToken, isAuth, isLoading } = useDashboard();
-
-  // useEffect(() => {
-  //   if (!hasToken || isAuth !== 200) {
-  //     navigate("/");
-  //   }
-  // }, []);
-
-  if (isLoading) return;
-
   return (
     <>
       <Grid

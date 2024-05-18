@@ -18,15 +18,8 @@ import useLogin from "./login.hook";
 import { LoginProps } from "./types";
 
 export default function Login() {
-  const {
-    apiError,
-    authError,
-    // isAuth,
-    registerStatus,
-    navigate,
-    setApiError,
-    login,
-  } = useLogin();
+  const { apiError, authError, registerStatus, navigate, setApiError, login } =
+    useLogin();
 
   const {
     register,
