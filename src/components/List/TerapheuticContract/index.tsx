@@ -8,7 +8,7 @@ import {
   terapheuticContractListOptions,
   terapheuticContractTableHeaders,
 } from "@/helpers/tableConfigs";
-import useUsersList from "@/utils/hooks/user/useUsersList";
+import useUsersList from "@/hooks/user/useUsersList";
 import { Td, Tr } from "@chakra-ui/react";
 import { useState } from "react";
 

@@ -1,7 +1,7 @@
 import useStore from "@/store";
 import getStatusBadge from "@/utils/getStatusBadge";
-import useUpdateUserStatus from "@/utils/hooks/user/useUpdateUserStatus";
-import useUsersList from "@/utils/hooks/user/useUsersList";
+import useUpdateUserStatus from "@/hooks/user/useUpdateUserStatus";
+import useUsersList from "@/hooks/user/useUsersList";
 import { RegisterProps } from "@/utils/types/forms";
 import { useDisclosure } from "@chakra-ui/react";
 import { useCallback, useState } from "react";
