@@ -1,5 +1,5 @@
 import { JWT_VALIDATE } from "@/helpers/envs";
-import { useToast } from "@chakra-ui/react";
+import { Spinner, useToast } from "@chakra-ui/react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { createContext, useCallback, useEffect, useState } from "react";
 
@@ -20,7 +20,7 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
     return !!storageAccessToken;
   });
 
-  const { data, isLoading, isError, isSuccess } = useQuery({
+  const { isLoading, isError, isSuccess } = useQuery({
     queryKey: ["auth"],
     queryFn: () =>
       fetch(JWT_VALIDATE || "", {
@@ -67,7 +67,7 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
     <AuthContext.Provider
       value={{ isAuth: signedIn && isSuccess, signin, signout }}
     >
-      {children}
+      {isLoading ? <Spinner /> : children}
     </AuthContext.Provider>
   );
 }
