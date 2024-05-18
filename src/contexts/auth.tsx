@@ -29,6 +29,12 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
+      }).then((response) => {
+        if (!response.ok) {
+          throw new Error("Invalid token");
+        }
+
+        return response.json();
       }),
     enabled: signedIn,
     staleTime: Infinity,
@@ -63,6 +69,7 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isError]);
 
+  //TODO: LOGIN LOADING PAGE
   return (
     <AuthContext.Provider
       value={{ isAuth: signedIn && isSuccess, signin, signout }}

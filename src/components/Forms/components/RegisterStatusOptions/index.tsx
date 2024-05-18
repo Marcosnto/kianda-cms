@@ -38,7 +38,6 @@ export default function RegisterStatusOptions({
   canChangeRole = false,
   disabledRoleChange = false,
 }: RegisterStatusOptionsTypes) {
-  console.log({ currentValues });
   return (
     <Stack spacing={5} direction="column">
       <FormControl isInvalid={isRequired ? !!errors.registerStatus : false}>
