@@ -16,6 +16,7 @@ const useList = () => {
     onOpen: onOpenUpdateRegisterModal,
     onClose: onCloseUpdateRegisterModal,
   } = useDisclosure();
+
   const {
     isOpen: isOpenDeleteModal,
     onOpen: onOpenDeleteModal,

@@ -11,6 +11,8 @@ import PostsList from "../components/List/Blog";
 
 import PageError404 from "../pages/Error404";
 import { AuthGuard } from "./AuthGuard";
+import EditRegister from "@/components/Forms/User/EditRegister";
+import EditBlogPost from "@/components/Forms/Blog/Edit";
 
 // import { EditTerapheuticContract } from "@/components/Forms/User/TerapheuticContract/Edit/EditTerapheuticContract";
 
@@ -21,14 +23,14 @@ const router = createBrowserRouter([
     errorElement: <PageError404 />,
   },
   {
-    path: "/register",
+    path: "register",
     element: <Register />,
   },
   {
     element: <AuthGuard isPrivate={true} />,
     children: [
       {
-        path: "/dashboard",
+        path: "dashboard",
         element: <Dashboard />,
         children: [
           {
@@ -41,11 +43,10 @@ const router = createBrowserRouter([
               {
                 path: "patients",
                 element: <UsersList />,
-                children: [
-                  {
-                    path: "",
-                  },
-                ],
+              },
+              {
+                path: "patient/:userID",
+                element: <EditRegister />,
               },
               {
                 path: "terapheutic-contracts",
@@ -63,6 +64,10 @@ const router = createBrowserRouter([
               {
                 path: "articles",
                 element: <PostsList />,
+              },
+              {
+                path: "article/:postID",
+                element: <EditBlogPost />,
               },
             ],
           },

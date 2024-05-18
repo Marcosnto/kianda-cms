@@ -1,4 +1,5 @@
 import useStore from "@/store";
+import { useRouter } from "@/utils/libs/routerFacade";
 import { UserProps } from "@/utils/types/user";
 import { IconButton, Stack, Tooltip } from "@chakra-ui/react";
 import { useCallback } from "react";
@@ -9,11 +10,18 @@ export type ButtonActionsProps = TableOptionsType & {
 
 export type TableOptionsType = {
   key: string;
+  from: string;
   ariaLabel: string;
   toolTipMessage: string;
   icon: React.ReactElement;
-  component: JSX.Element;
+  route: ((params: string | number) => string) | string;
   isModal: boolean;
+};
+
+type IconButtonFunctionType = {
+  route: ((params: string | number) => string) | string;
+  user: UserProps;
+  from: string;
 };
 
 export default function ButtonsActions({
@@ -26,6 +34,7 @@ export default function ButtonsActions({
   tableOptions: TableOptionsType[];
 }) {
   const { setComponent, setCurrentSelectedUser } = useStore();
+  const navigate = useRouter();
 
   const setModalFunction = useCallback(
     (key: string, user: UserProps) => {
@@ -35,13 +44,29 @@ export default function ButtonsActions({
     [setCurrentSelectedUser, modalsOptions],
   );
 
+  const setIconButtonFunction = useCallback((props: IconButtonFunctionType) => {
+    const { user, route, from } = props;
+
+    if (from == "user") {
+      setCurrentSelectedUser(user);
+      const routePath = typeof route == "function" ? route(user.id) : route;
+
+      navigate(`../${routePath}`, { relative: "path" });
+    }
+
+    if (from == "blog") {
+      //TODO
+    }
+  }, []);
+
   const getIconButton = useCallback(
     ({
       key,
+      from,
+      route,
       ariaLabel,
       toolTipMessage,
       icon,
-      component,
       isModal,
       user,
     }: ButtonActionsProps) => {
@@ -62,7 +87,7 @@ export default function ButtonsActions({
             onClick={() =>
               isModal
                 ? setModalFunction(key, user)
-                : setComponent(component, user)
+                : setIconButtonFunction({ route, user, from })
             }
             border="solid 1px #35481E"
             _hover={{ bg: "green.600", rounded: "8px", color: "white" }}
@@ -81,8 +106,9 @@ export default function ButtonsActions({
           ariaLabel: icon.ariaLabel,
           toolTipMessage: icon.toolTipMessage,
           icon: icon.icon,
-          component: icon.component,
+          route: icon.route,
           isModal: icon.isModal,
+          from: icon.from,
           user,
         }),
       )}

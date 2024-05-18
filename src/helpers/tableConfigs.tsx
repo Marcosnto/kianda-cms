@@ -6,51 +6,51 @@ import {
 } from "react-icons/io5";
 
 import EditBlogPost from "../components/Forms/Blog/Edit";
-import EditRegister from "../components/Forms/User/EditRegister";
 import { EditTerapheuticContract } from "../components/Forms/User/TerapheuticContract/Edit/EditTerapheuticContract";
 
 export const userListOptions = [
   {
     key: "register-details",
+    from: "user",
     ariaLabel: "Visualizar cadastro",
     toolTipMessage: "Visualizar cadastro",
     icon: <IoEyeOutline />,
-    component: <EditRegister />,
+    route: (userID: string | number) => `patient/${userID}`,
     isModal: false,
   },
   {
     key: "update-register-status",
+    from: "user",
     ariaLabel: "Alterar situação cadastral",
     toolTipMessage: "Alterar situação cadastral",
     icon: <IoLockOpenOutline />,
-    component: <></>,
     isModal: true,
   },
   {
     key: "suspend-register",
+    from: "user",
     ariaLabel: "Suspender cadastro",
     toolTipMessage: "Suspender cadastro",
     icon: <IoTrashBinOutline />,
-    component: <></>,
     isModal: true,
   },
 ];
 
 export const blogListOptions = [
   {
-    key: "edit-article",
-    ariaLabel: "Editar Artigo",
-    toolTipMessage: "Editar Artigo",
-    icon: <IoCreateOutline />,
-    component: <EditBlogPost />,
-    isModal: false,
-  },
-  {
     key: "create-article",
+    from: "blog",
     ariaLabel: "Criar Artigo",
     toolTipMessage: "Criar Artigo",
     icon: <IoCreateOutline />,
-    component: <></>,
+    isModal: false,
+  },
+  {
+    key: "edit-article",
+    from: "blog",
+    ariaLabel: "Editar Artigo",
+    toolTipMessage: "Editar Artigo",
+    icon: <IoCreateOutline />,
     isModal: false,
   },
 ];
@@ -58,6 +58,7 @@ export const blogListOptions = [
 export const terapheuticContractListOptions = [
   {
     key: "consult-contract",
+    from: "terapheuticContract",
     ariaLabel: "Consultar contrato",
     toolTipMessage: "Consultar contrato",
     icon: <IoEyeOutline />,
