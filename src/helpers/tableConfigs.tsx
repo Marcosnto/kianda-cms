@@ -36,6 +36,19 @@ export const userListOptions = [
   },
 ];
 
+export const terapheuticContractListOptions = [
+  {
+    key: "consult-contract",
+    from: "terapheuticContract",
+    ariaLabel: "Consultar contrato",
+    toolTipMessage: "Consultar contrato",
+    icon: <IoEyeOutline />,
+    route: (contractID: string | number) =>
+      `terapheutic-contracts/${contractID}`,
+    isModal: false,
+  },
+];
+
 export const blogListOptions = [
   {
     key: "create-article",
@@ -51,18 +64,6 @@ export const blogListOptions = [
     ariaLabel: "Editar Artigo",
     toolTipMessage: "Editar Artigo",
     icon: <IoCreateOutline />,
-    isModal: false,
-  },
-];
-
-export const terapheuticContractListOptions = [
-  {
-    key: "consult-contract",
-    from: "terapheuticContract",
-    ariaLabel: "Consultar contrato",
-    toolTipMessage: "Consultar contrato",
-    icon: <IoEyeOutline />,
-    component: <EditTerapheuticContract />,
     isModal: false,
   },
 ];

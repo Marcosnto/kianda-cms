@@ -2,10 +2,11 @@ import { Dispatch, SetStateAction } from "react";
 
 export type TableOptionsType = {
   key: string;
+  from: string;
   ariaLabel: string;
   toolTipMessage: string;
   icon: React.ReactElement;
-  component: JSX.Element;
+  route: ((params: string | number) => string) | string;
   isModal: boolean;
 };
 

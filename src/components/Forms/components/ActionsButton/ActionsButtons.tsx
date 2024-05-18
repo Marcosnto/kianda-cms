@@ -1,3 +1,4 @@
+import { TableOptionsType } from "@/components/Table/table.types";
 import useStore from "@/store";
 import { useRouter } from "@/utils/libs/routerFacade";
 import { UserProps } from "@/utils/types/user";
@@ -6,16 +7,6 @@ import { useCallback } from "react";
 
 export type ButtonActionsProps = TableOptionsType & {
   user: UserProps;
-};
-
-export type TableOptionsType = {
-  key: string;
-  from: string;
-  ariaLabel: string;
-  toolTipMessage: string;
-  icon: React.ReactElement;
-  route: ((params: string | number) => string) | string;
-  isModal: boolean;
 };
 
 type IconButtonFunctionType = {
@@ -44,18 +35,30 @@ export default function ButtonsActions({
     [setCurrentSelectedUser, modalsOptions],
   );
 
-  const setIconButtonFunction = useCallback((props: IconButtonFunctionType) => {
+  const setIconRedirect = useCallback((props: IconButtonFunctionType) => {
     const { user, route, from } = props;
 
-    if (from == "user") {
-      setCurrentSelectedUser(user);
-      const routePath = typeof route == "function" ? route(user.id) : route;
-
-      navigate(`../${routePath}`, { relative: "path" });
+    function getRoutePath(id: string | number) {
+      return typeof route == "function" ? route(id) : route;
     }
 
-    if (from == "blog") {
-      //TODO
+    switch (from) {
+      case "user":
+        setCurrentSelectedUser(user);
+        const routeUserPath = getRoutePath(user.id);
+        navigate(`../${routeUserPath}`, { relative: "path" });
+        break;
+
+      case "terapheuticContract":
+        const routeContractPath = getRoutePath(user.id);
+        navigate(`../${routeContractPath}`, { relative: "path" });
+        break;
+
+      case "blog":
+        break;
+
+      default:
+        break;
     }
   }, []);
 
@@ -87,7 +90,7 @@ export default function ButtonsActions({
             onClick={() =>
               isModal
                 ? setModalFunction(key, user)
-                : setIconButtonFunction({ route, user, from })
+                : setIconRedirect({ route, user, from })
             }
             border="solid 1px #35481E"
             _hover={{ bg: "green.600", rounded: "8px", color: "white" }}

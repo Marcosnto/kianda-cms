@@ -3,6 +3,7 @@ import {
   Link,
   useRouteError,
   useLocation,
+  useParams,
   Navigate,
   Outlet,
 } from "react-router-dom";
@@ -12,6 +13,7 @@ export {
   useRouteError,
   Link,
   useLocation,
+  useParams,
   Navigate,
   Outlet,
 };
