@@ -396,7 +396,7 @@ function UserAutoRegister() {
                 colorScheme="green"
                 variant="outline"
                 width="100%"
-                onClick={() => navigate("/login")}
+                onClick={() => navigate("/")}
               >
                 Cancelar
               </Button>
