@@ -18,13 +18,18 @@ import EditBlogPost from "@/components/Forms/Blog/Edit";
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <Login />,
-    errorElement: <PageError404 />,
-  },
-  {
-    path: "register",
-    element: <Register />,
+    element: <AuthGuard isPrivate={false} />,
+    children: [
+      {
+        path: "/",
+        element: <Login />,
+        errorElement: <PageError404 />,
+      },
+      {
+        path: "register",
+        element: <Register />,
+      },
+    ],
   },
   {
     element: <AuthGuard isPrivate={true} />,

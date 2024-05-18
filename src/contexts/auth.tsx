@@ -1,5 +1,5 @@
 import { JWT_VALIDATE } from "@/helpers/envs";
-import { useToast } from "@chakra-ui/react";
+import { Spinner, useToast } from "@chakra-ui/react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { createContext, useCallback, useEffect, useState } from "react";
 
@@ -67,7 +67,7 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
     <AuthContext.Provider
       value={{ isAuth: signedIn && isSuccess, signin, signout }}
     >
-      {children}
+      {isLoading ? <Spinner /> : children}
     </AuthContext.Provider>
   );
 }
