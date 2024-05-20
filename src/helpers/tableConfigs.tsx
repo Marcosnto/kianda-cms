@@ -5,9 +5,6 @@ import {
   IoTrashBinOutline,
 } from "react-icons/io5";
 
-import EditBlogPost from "../components/Forms/Blog/Edit";
-import { EditTerapheuticContract } from "../components/Forms/User/TerapheuticContract/Edit/EditTerapheuticContract";
-
 export const userListOptions = [
   {
     key: "register-details",
