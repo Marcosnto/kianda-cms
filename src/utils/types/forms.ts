@@ -1,4 +1,9 @@
-import { FieldErrors, UseFormRegister, UseFormWatch } from "react-hook-form";
+import {
+  Control,
+  FieldErrors,
+  UseFormRegister,
+  UseFormWatch,
+} from "react-hook-form";
 
 export type RegisterProps = {
   fullName: string;
@@ -21,7 +26,7 @@ export type SpouseProps = {
   fullName?: string;
   bornDate?: string;
   schooling?: string;
-  contact?: string;
+  contactNumber?: string;
   profession?: string;
   email?: string;
 };
@@ -29,11 +34,12 @@ export type SpouseProps = {
 export type EmergencyContactProps = {
   fullName: string;
   address: string;
-  contact: string;
+  contactNumber: string;
   email: string;
 };
 
 export type TherapeuticContractProps = {
+  id: string;
   fullName: string;
   bornDate: Date;
   rg: string;
@@ -51,7 +57,7 @@ export type TherapeuticContractProps = {
   profession?: string;
   pronouns: string;
   address: string;
-  contact: string;
+  contactNumber: string;
   email: string;
   childrens: string;
   childrenQuantity: number;
@@ -65,4 +71,5 @@ export type FormReactHooksProps = {
   errors: FieldErrors<TherapeuticContractProps>;
   register: UseFormRegister<TherapeuticContractProps>;
   watch: UseFormWatch<TherapeuticContractProps>;
+  control?: Control<TherapeuticContractProps>;
 };

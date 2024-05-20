@@ -58,21 +58,21 @@ export default function FirstEmergencyContact({
         </FormErrorMessage>
       </FormControl>
 
-      <FormControl isInvalid={!!errors.firstEmergencyContact?.contact}>
-        <FormLabel htmlFor="firstEmergencyContactContact">
+      <FormControl isInvalid={!!errors.firstEmergencyContact?.contactNumber}>
+        <FormLabel htmlFor="firstEmergencyContactContactNumber">
           Telefone de contato <RequiredInput />
         </FormLabel>
-        <NumberInput>
-          <NumberInputField
-            id="firstEmergencyContactContact"
-            {...register("firstEmergencyContact.contact", {
-              required: "Esse Campo é obrigatório",
-            })}
-          />
-        </NumberInput>
+        <Input
+          id="firstEmergencyContactContactNumber"
+          type="number"
+          {...register("firstEmergencyContact.contactNumber", {
+            required: "Esse Campo é obrigatório",
+          })}
+        />
+
         <FormErrorMessage>
-          {errors.firstEmergencyContact?.contact &&
-            errors.firstEmergencyContact?.contact.message}
+          {errors.firstEmergencyContact?.contactNumber &&
+            errors.firstEmergencyContact?.contactNumber.message}
         </FormErrorMessage>
       </FormControl>
 

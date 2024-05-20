@@ -83,17 +83,17 @@ export default function Partner({ errors, register }: FormReactHooksProps) {
         </FormErrorMessage>
       </FormControl>
 
-      <FormControl isInvalid={!!errors.spouse?.contact}>
-        <FormLabel htmlFor="spouseContact">Telefone de contato</FormLabel>
+      <FormControl isInvalid={!!errors.spouse?.contactNumber}>
+        <FormLabel htmlFor="spouseContactNumber">Telefone de contato</FormLabel>
         <Input
-          id="spouseContact"
+          id="spouseContactNumber"
           type="number"
-          {...register("spouse.contact", {
+          {...register("spouse.contactNumber", {
             required: "Esse Campo é obrigatório",
           })}
         />
         <FormErrorMessage>
-          {errors.spouse?.contact && errors.spouse?.contact.message}
+          {errors.spouse?.contactNumber && errors.spouse?.contactNumber.message}
         </FormErrorMessage>
       </FormControl>
 

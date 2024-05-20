@@ -17,11 +17,13 @@ import { FormReactHooksProps } from "@/utils/types/forms";
 import schoolingTypes from "@/utils/mocks/inputOptions/schoolingTypes";
 import pronounsTypes from "@/utils/mocks/inputOptions/pronounsTypes";
 import civilStatus from "@/utils/mocks/inputOptions/civilStatus";
+import { Controller } from "react-hook-form";
 
 export default function GeneralInformations({
   errors,
   register,
   watch,
+  control,
 }: FormReactHooksProps) {
   const watched = watch([
     "gender",
@@ -62,13 +64,13 @@ export default function GeneralInformations({
           </FormLabel>
           <Input
             id="bornDate"
-            type="text"
+            type="date"
             {...register("bornDate", {
               required: "Esse Campo é obrigatório",
-              pattern: {
-                value: /(^\d{2})\/(1[0-2]|0[1-9])\/(\d{4})$/,
-                message: "Data deve respeitar o formato: dd/mm/aaaa",
-              },
+              // pattern: {
+              //   value: /(^\d{2})\/(1[0-2]|0[1-9])\/(\d{4})$/,
+              //   message: "Data deve respeitar o formato: dd/mm/aaaa",
+              // },
             })}
             focusBorderColor="green.800"
           />
@@ -106,6 +108,7 @@ export default function GeneralInformations({
           <Input
             id="cpf"
             type="number"
+            min="11"
             {...register("cpf", {
               required: "Esse Campo é obrigatório",
               pattern: {
@@ -143,25 +146,24 @@ export default function GeneralInformations({
           </FormErrorMessage>
         </FormControl>
 
-        <FormControl isInvalid={!!errors.contact}>
-          <FormLabel htmlFor="contact">
+        <FormControl isInvalid={!!errors.contactNumber}>
+          <FormLabel htmlFor="contactNumber">
             Telefone (com DDD) <RequiredInput />
           </FormLabel>
-          <NumberInput>
-            <NumberInputField
-              id="contact"
-              {...register("contact", {
-                required: "Esse Campo é obrigatório",
-                pattern: {
-                  value: /^\(?\d{2}\)?\d{1}\d{4}\d{4}$/,
-                  message: "Telefone no formato incorreto",
-                },
-              })}
-            />
-          </NumberInput>
+          <Input
+            id="contactNumber"
+            type="number"
+            {...register("contactNumber", {
+              required: "Esse Campo é obrigatório",
+              pattern: {
+                value: /^\(?\d{2}\)?\d{1}\d{4}\d{4}$/,
+                message: "Telefone no formato incorreto",
+              },
+            })}
+          />
 
           <FormErrorMessage>
-            {errors.contact && errors.contact.message}
+            {errors.contactNumber && errors.contactNumber.message}
           </FormErrorMessage>
         </FormControl>
       </Stack>
@@ -291,34 +293,20 @@ export default function GeneralInformations({
           <FormLabel htmlFor="gender">
             Gênero <RequiredInput />
           </FormLabel>
-          <RadioGroup id="gender" colorScheme="green">
-            <Stack direction="row">
-              <Radio
-                value="1"
-                {...register("gender", {
-                  required: "Esse Campo é obrigatório",
-                })}
-              >
-                Cis
-              </Radio>
-              <Radio
-                value="2"
-                {...register("gender", {
-                  required: "Esse Campo é obrigatório",
-                })}
-              >
-                Trans
-              </Radio>
-              <Radio
-                value="3"
-                {...register("gender", {
-                  required: "Esse Campo é obrigatório",
-                })}
-              >
-                Outro
-              </Radio>
-            </Stack>
-          </RadioGroup>
+
+          <Controller
+            render={({ field }) => (
+              <RadioGroup colorScheme="green" {...field}>
+                <Stack direction="row">
+                  <Radio value="1">Cis</Radio>
+                  <Radio value="2">Trans</Radio>
+                  <Radio value="3">Outro</Radio>
+                </Stack>
+              </RadioGroup>
+            )}
+            control={control}
+            name="gender"
+          />
 
           <FormErrorMessage>
             {errors.gender && errors.gender.message}
@@ -375,26 +363,19 @@ export default function GeneralInformations({
           <FormLabel htmlFor="childrens">
             Filho/a/e(s) <RequiredInput />
           </FormLabel>
-          <RadioGroup id="childrens" colorScheme="green">
-            <Stack direction="row">
-              <Radio
-                value="true"
-                {...register("childrens", {
-                  required: "Esse Campo é obrigatório",
-                })}
-              >
-                Sim
-              </Radio>
-              <Radio
-                value="false"
-                {...register("childrens", {
-                  required: "Esse Campo é obrigatório",
-                })}
-              >
-                Não
-              </Radio>
-            </Stack>
-          </RadioGroup>
+
+          <Controller
+            render={({ field }) => (
+              <RadioGroup colorScheme="green" {...field}>
+                <Stack direction="row">
+                  <Radio value="true">Sim</Radio>
+                  <Radio value="false">Não</Radio>
+                </Stack>
+              </RadioGroup>
+            )}
+            control={control}
+            name="childrens"
+          />
 
           <FormErrorMessage>
             {errors.childrens && errors.childrens.message}
@@ -444,26 +425,19 @@ export default function GeneralInformations({
           <FormLabel htmlFor="disabledPerson">
             É uma pessoa com deficiência? <RequiredInput />
           </FormLabel>
-          <RadioGroup id="disabledPerson" colorScheme="green">
-            <Stack direction="row">
-              <Radio
-                value="true"
-                {...register("disabledPerson", {
-                  required: "Esse Campo é obrigatório",
-                })}
-              >
-                Sim
-              </Radio>
-              <Radio
-                value="false"
-                {...register("disabledPerson", {
-                  required: "Esse Campo é obrigatório",
-                })}
-              >
-                Não
-              </Radio>
-            </Stack>
-          </RadioGroup>
+
+          <Controller
+            render={({ field }) => (
+              <RadioGroup colorScheme="green" {...field}>
+                <Stack direction="row">
+                  <Radio value="true">Sim</Radio>
+                  <Radio value="false">Não</Radio>
+                </Stack>
+              </RadioGroup>
+            )}
+            control={control}
+            name="disabledPerson"
+          />
 
           <FormErrorMessage>
             {errors.disabledPerson && errors.disabledPerson.message}
@@ -501,26 +475,19 @@ export default function GeneralInformations({
               Precisa de adequações quanto a infraestrutura online?{" "}
               <RequiredInput />
             </FormLabel>
-            <RadioGroup id="needSuitability" colorScheme="green">
-              <Stack direction="row">
-                <Radio
-                  value="true"
-                  {...register("needSuitability", {
-                    required: "Esse Campo é obrigatório",
-                  })}
-                >
-                  Sim
-                </Radio>
-                <Radio
-                  value="false"
-                  {...register("needSuitability", {
-                    required: "Esse Campo é obrigatório",
-                  })}
-                >
-                  Não
-                </Radio>
-              </Stack>
-            </RadioGroup>
+
+            <Controller
+              render={({ field }) => (
+                <RadioGroup colorScheme="green" {...field}>
+                  <Stack direction="row">
+                    <Radio value="true">Sim</Radio>
+                    <Radio value="false">Não</Radio>
+                  </Stack>
+                </RadioGroup>
+              )}
+              control={control}
+              name="needSuitability"
+            />
 
             <FormErrorMessage>
               {errors.needSuitability && errors.needSuitability.message}

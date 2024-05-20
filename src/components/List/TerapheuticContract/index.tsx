@@ -23,7 +23,7 @@ export default function TerapheuticContractsList() {
   if (error) {
     return <h1>{apiError}</h1>;
   }
-
+  console.log(users);
   const tableBody = users?.map((user) => (
     <Tr key={user.id}>
       <Td>{user.id}</Td>
@@ -31,7 +31,7 @@ export default function TerapheuticContractsList() {
       <Td>
         {user.terapheuticContractComplete &&
           getStatusBadge(
-            +user.terapheuticContractComplete === 0 ? "complete" : "incomplete",
+            +user.terapheuticContractComplete === 0 ? "incomplete" : "complete",
           )}
       </Td>
       <Td>

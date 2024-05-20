@@ -13,9 +13,7 @@ import PageError404 from "../pages/Error404";
 import { AuthGuard } from "./AuthGuard";
 import EditRegister from "@/components/Forms/User/EditRegister";
 import EditBlogPost from "@/components/Forms/Blog/Edit";
-import { EditTerapheuticContract } from "@/components/Forms/User/TerapheuticContract/Edit/EditTerapheuticContract";
-
-// import { EditTerapheuticContract } from "@/components/Forms/User/TerapheuticContract/Edit/EditTerapheuticContract";
+import TerapheuticContract from "@/components/Forms/User/TerapheuticContract";
 
 const router = createBrowserRouter([
   {
@@ -60,7 +58,7 @@ const router = createBrowserRouter([
               },
               {
                 path: "terapheutic-contracts/:contractID",
-                element: <EditTerapheuticContract />,
+                element: <TerapheuticContract />,
               },
             ],
           },
