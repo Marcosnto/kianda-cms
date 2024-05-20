@@ -1,9 +1,12 @@
 import { useToast } from "@chakra-ui/react";
 import { useMutation } from "@tanstack/react-query";
+import { EmailParams, MailerSend, Recipient, Sender } from "mailersend";
+import { getEmailTemplate } from "../getEmailTemplate";
+import { MAILERSEND_API_KEY } from "@/helpers/envs";
 
 export type RecipientType = {
-  email: string;
-  name: string;
+  email: string | undefined;
+  name: string | undefined;
 };
 
 export type BodyType = {
@@ -12,8 +15,37 @@ export type BodyType = {
   recepients: RecipientType[];
   template: string;
   subject: string;
-  text: string;
+  text?: string;
 };
+
+const mailerSend = new MailerSend({
+  apiKey: MAILERSEND_API_KEY || "",
+});
+
+export function sendEmail({
+  senderEmail,
+  senderName,
+  recepients,
+  template,
+  subject,
+  text,
+}: BodyType) {
+  const sentFrom = new Sender(senderEmail, senderName);
+
+  const recipients = recepients.map(
+    (recepient) => new Recipient(recepient.email || "", recepient.name),
+  );
+
+  const emailHtml = getEmailTemplate(template, recepients, text);
+
+  const emailParams = new EmailParams()
+    .setFrom(sentFrom)
+    .setTo(recipients)
+    .setSubject(subject)
+    .setHtml(emailHtml);
+
+  return mailerSend.email.send(emailParams);
+}
 
 const useSendEmailToUser = (props: { toastMessage: string }) => {
   const toast = useToast();
@@ -24,37 +56,31 @@ const useSendEmailToUser = (props: { toastMessage: string }) => {
       senderName,
       recepients,
       subject,
+      template,
       text,
     }: BodyType) =>
-      fetch("/api/send-email", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          senderEmail,
-          senderName,
-          recepients,
-          subject,
-          text,
-        }),
+      sendEmail({
+        senderEmail,
+        senderName,
+        recepients,
+        template,
+        subject,
+        text,
       }),
-    onSuccess: (response) => {
-      if (response.ok) {
-        toast({
-          title: props.toastMessage,
-          position: "top",
-          status: "success",
-          isClosable: true,
-        });
-      } else {
-        toast({
-          title: `Ocorreu um erro ao enviar o email`,
-          position: "top",
-          status: "error",
-          isClosable: true,
-        });
-      }
+    onSuccess: () =>
+      toast({
+        title: props.toastMessage,
+        position: "top",
+        status: "success",
+        isClosable: true,
+      }),
+    onError: () => {
+      toast({
+        title: `Ocorreu um erro ao enviar o email!`,
+        position: "top",
+        status: "error",
+        isClosable: true,
+      });
     },
   });
 

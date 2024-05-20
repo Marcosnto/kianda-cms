@@ -1,3 +1,4 @@
+import { sendEmail } from "@/emails/hooks/useSendEmailToUser";
 import { BASE_URL, PRIVACY_POLICY, USE_TERMS } from "@/helpers/envs";
 import { useRouter } from "@/utils/libs/routerFacade";
 import { RegisterProps } from "@/utils/types/forms";
@@ -14,30 +15,23 @@ export default function useAutoRegister() {
 
   const { mutate: sendEmailPost, isPending: isSendingEmail } = useMutation({
     mutationFn: (data: Partial<RegisterProps>) =>
-      fetch("/api/send-email", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          senderEmail: "teste@kiandadiversidade.com",
-          senderName: "Kianda",
-          recepients: [{ email: data.email, name: data.fullName }],
-          template: "auto-register",
-          subject: "Cadastro realizado com sucesso!",
-        }),
+      sendEmail({
+        senderEmail: "teste@kiandadiversidade.com",
+        senderName: "Kianda",
+        recepients: [{ email: data.email, name: data.fullName }],
+        template: "auto-register",
+        subject: "Cadastro realizado com sucesso!",
       }),
-    onSuccess: (response) => {
-      if (response.ok) {
-        setModalStatus.on();
-      } else {
-        toast({
-          title: `Ocorreu um erro ao enviar o email!`,
-          position: "top",
-          status: "error",
-          isClosable: true,
-        });
-      }
+    onSuccess: () => {
+      setModalStatus.on();
+    },
+    onError: () => {
+      toast({
+        title: `Ocorreu um erro ao enviar o email!`,
+        position: "top",
+        status: "error",
+        isClosable: true,
+      });
     },
   });
 
