@@ -13,7 +13,7 @@ import {
   Link as ChakraLink,
 } from "@chakra-ui/react";
 import { useCallback } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import useAutoRegister from "./auto-register.hook";
 import { RegisterProps } from "@/utils/types/forms";
 import SpinnerLoad from "@/components/SpinnerLoad";
@@ -33,11 +33,13 @@ function UserAutoRegister() {
     onModalClose,
     navigate,
   } = useAutoRegister();
+
   const {
     register,
     getValues,
     handleSubmit,
     watch,
+    control,
     formState: { errors, isSubmitting, isValid },
   } = useForm<RegisterProps>();
 
@@ -219,34 +221,20 @@ function UserAutoRegister() {
                   <FormLabel htmlFor="gender">
                     Gênero <RequiredInput />
                   </FormLabel>
-                  <RadioGroup id="gender" colorScheme="green">
-                    <Stack direction="row">
-                      <Radio
-                        value="1"
-                        {...register("gender", {
-                          required: "Esse Campo é obrigatório",
-                        })}
-                      >
-                        Cis
-                      </Radio>
-                      <Radio
-                        value="2"
-                        {...register("gender", {
-                          required: "Esse Campo é obrigatório",
-                        })}
-                      >
-                        Trans
-                      </Radio>
-                      <Radio
-                        value="3"
-                        {...register("gender", {
-                          required: "Esse Campo é obrigatório",
-                        })}
-                      >
-                        Outro
-                      </Radio>
-                    </Stack>
-                  </RadioGroup>
+
+                  <Controller
+                    render={({ field }) => (
+                      <RadioGroup colorScheme="green" {...field}>
+                        <Stack direction="row">
+                          <Radio value="1">Cis</Radio>
+                          <Radio value="2">Trans</Radio>
+                          <Radio value="3">Outro</Radio>
+                        </Stack>
+                      </RadioGroup>
+                    )}
+                    control={control}
+                    name="gender"
+                  />
 
                   <FormErrorMessage>
                     {errors.gender && errors.gender.message}
@@ -302,26 +290,19 @@ function UserAutoRegister() {
                 <FormLabel htmlFor="disabledPerson">
                   É uma pessoa com deficiência? <RequiredInput />
                 </FormLabel>
-                <RadioGroup id="disabledPerson" colorScheme="green">
-                  <Stack direction="row">
-                    <Radio
-                      value="true"
-                      {...register("disabledPerson", {
-                        required: "Esse Campo é obrigatório",
-                      })}
-                    >
-                      Sim
-                    </Radio>
-                    <Radio
-                      value="false"
-                      {...register("disabledPerson", {
-                        required: "Esse Campo é obrigatório",
-                      })}
-                    >
-                      Não
-                    </Radio>
-                  </Stack>
-                </RadioGroup>
+
+                <Controller
+                  render={({ field }) => (
+                    <RadioGroup colorScheme="green" {...field}>
+                      <Stack direction="row">
+                        <Radio value="true">Sim</Radio>
+                        <Radio value="false">Não</Radio>
+                      </Stack>
+                    </RadioGroup>
+                  )}
+                  control={control}
+                  name="disabledPerson"
+                />
 
                 <FormErrorMessage>
                   {errors.disabledPerson && errors.disabledPerson.message}
