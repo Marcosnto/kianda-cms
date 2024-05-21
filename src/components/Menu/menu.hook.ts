@@ -19,13 +19,13 @@ const useMenu = () => {
     blog: undefined,
   });
 
-  useEffect(() => {
-    const userData: ResponseProps =
-      typeof window !== "undefined"
-        ? JSON.parse(localStorage?.getItem("user") || "")
-        : "";
-    setOptions(getMenuOptions(userData.role));
-  }, []);
+  // useEffect(() => {
+  //   const userData: ResponseProps =
+  //     typeof window !== "undefined"
+  //       ? JSON.parse(localStorage?.getItem("user") || "")
+  //       : "";
+  //   setOptions(getMenuOptions(userData.role));
+  // }, []);
 
   return {
     menuOptions,

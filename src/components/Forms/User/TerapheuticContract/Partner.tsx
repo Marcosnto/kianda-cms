@@ -53,7 +53,7 @@ export default function Partner({ errors, register }: FormReactHooksProps) {
         <FormLabel htmlFor="spouseSchooling">Escolaridade</FormLabel>
         <Select
           id="spouseSchooling"
-          placeholder="Select option"
+          placeholder="Selecione uma opção"
           {...register("spouse.schooling", {
             required: "Esse Campo é obrigatório",
           })}

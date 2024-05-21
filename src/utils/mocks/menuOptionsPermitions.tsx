@@ -1,5 +1,6 @@
 import { UserOptionsProps } from "@/components/Menu/menu.hook";
 import { Icon } from "@chakra-ui/react";
+import { useCallback } from "react";
 import { IconType } from "react-icons";
 import {
   IoBodyOutline,
@@ -15,6 +16,13 @@ import {
 function getIcon(iconName: IconType) {
   return <Icon as={iconName} w="5" h="5" />;
 }
+
+const getID = useCallback(() => {
+  const user = localStorage.getItem("user");
+  const { id } = user ? JSON.parse(user) : "";
+
+  return id;
+}, []);
 
 export default function getMenuOptions(role: string | undefined) {
   switch (role) {
@@ -78,7 +86,7 @@ export const patient: UserOptionsProps = {
       key: "user-patitent-02",
       icon: getIcon(IoBodyOutline),
       displayName: "Contrato Terapêutico",
-      path: "",
+      path: `psi/terapheutic-contracts/${getID()}`,
     },
     {
       key: "user-patitent-03",

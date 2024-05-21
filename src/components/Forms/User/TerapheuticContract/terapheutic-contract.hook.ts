@@ -5,8 +5,10 @@ import { BASE_URL } from "@/helpers/envs";
 import { useParams } from "@/utils/libs/routerFacade";
 import { TherapeuticContractProps } from "@/utils/types/forms";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useToast } from "@chakra-ui/react";
 
 export default function useTerapheuticContractForm() {
+  const toast = useToast();
   const token = localStorage.getItem("token");
   const { contractID } = useParams();
 
@@ -84,7 +86,21 @@ export default function useTerapheuticContractForm() {
         terapheuticContractComplete: 1,
       }),
     }).then((response) => {
-      response.json().then((response) => console.log(response));
+      if (response.ok) {
+        toast({
+          title: `Dados atualizados com sucesso!`,
+          position: "top",
+          status: "success",
+          isClosable: true,
+        });
+      } else {
+        toast({
+          title: `Ocorreu um erro ao atualizar os dados`,
+          position: "top",
+          status: "error",
+          isClosable: true,
+        });
+      }
     });
   }
 
