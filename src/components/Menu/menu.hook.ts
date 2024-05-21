@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import getMenuOptions from "../../utils/mocks/menuOptionsPermitions";
+import getMenuOptions from "../../helpers/menuOptionsPermitions";
 import { OptionsProps } from "./MenuOptions";
 import { useLocation } from "@/utils/libs/routerFacade";
 

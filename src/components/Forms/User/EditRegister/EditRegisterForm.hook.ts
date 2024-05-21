@@ -5,7 +5,7 @@ import { RegisterProps } from "@/utils/types/forms";
 import { useCallback, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-type LoggedUserType = {
+export type LoggedUserType = {
   id: number;
   role: string;
   name: string;
@@ -36,12 +36,12 @@ export default function useEditRegisterForm() {
     getValues,
     control,
     formState: { errors: formErros, isSubmitting: formSubmitting, isValid },
-  } = useForm<RegisterProps>();
+  } = useForm<Partial<RegisterProps>>();
 
   const currentValues = getValues();
 
-  const onSubmit: SubmitHandler<RegisterProps> = useCallback(
-    (data: RegisterProps) => {
+  const onSubmit: SubmitHandler<Partial<RegisterProps>> = useCallback(
+    (data: Partial<RegisterProps>) => {
       if (isValid) {
         updateUserStatusMutation({
           id: currentSelectedUser?.id,

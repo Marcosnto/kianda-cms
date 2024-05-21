@@ -11,9 +11,10 @@ import PostsList from "../components/List/Blog";
 
 import PageError404 from "../pages/Error404";
 import { AuthGuard } from "./AuthGuard";
-import EditRegister from "@/components/Forms/User/EditRegister";
+import EditRegister from "@/components/Forms/User/EditRegister/Admin";
 import EditBlogPost from "@/components/Forms/Blog/Edit";
 import TerapheuticContract from "@/components/Forms/User/TerapheuticContract";
+import UserEditRegister from "@/components/Forms/User/EditRegister/Patient";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
               {
                 path: "patient/:userID",
                 element: <EditRegister />,
+              },
+              {
+                path: "edit-register",
+                element: <UserEditRegister />,
               },
               {
                 path: "terapheutic-contracts",

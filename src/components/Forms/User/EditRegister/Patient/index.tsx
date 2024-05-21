@@ -1,15 +1,14 @@
 import { useEffect } from "react";
 
-import { EditRegisterForm } from "./EditRegisterForm";
-import useEditRegisterForm from "./EditRegisterForm.hook";
+import useEditRegisterForm from "../EditRegisterForm.hook";
 import SpinnerLoad from "@/components/SpinnerLoad";
 import { apiError } from "@/helpers/messages";
+import { UserEditRegisterForm } from "./UserEditRegisterForm";
 
-function EditRegister() {
+function UserEditRegister() {
   const {
     data,
     isLoading,
-    isSendingEmail,
     isUpdateUserPeding,
     error,
     formErros,
@@ -18,13 +17,9 @@ function EditRegister() {
     register,
     currentValues,
     control,
-    sendEmail,
     reset,
     handleSubmit,
-    setSendEmail,
     updateUserRegisterLoading,
-    disabledRoleChange,
-    canChangeRole,
   } = useEditRegisterForm();
 
   useEffect(() => {
@@ -52,26 +47,18 @@ function EditRegister() {
   }
 
   return (
-    <EditRegisterForm
+    <UserEditRegisterForm
       control={control}
-      userName={data.fullName}
       errors={formErros}
       isSubmitting={
-        isSendingEmail ||
-        isUpdateUserPeding ||
-        formSubmitting ||
-        updateUserRegisterLoading
+        isUpdateUserPeding || formSubmitting || updateUserRegisterLoading
       }
       currentValues={currentValues}
       onSubmit={onSubmit}
       register={register}
       handleSubmit={handleSubmit}
-      sendEmail={sendEmail}
-      setSendEmail={setSendEmail}
-      disabledRoleChange={disabledRoleChange}
-      canChangeRole={canChangeRole}
     />
   );
 }
 
-export default EditRegister;
+export default UserEditRegister;

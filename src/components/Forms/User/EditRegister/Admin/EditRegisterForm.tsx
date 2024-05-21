@@ -9,10 +9,10 @@ import {
 } from "@chakra-ui/react";
 import { Checkbox } from "@chakra-ui/react";
 
-import { EditRegisterFormTypes } from "./EditRegisterForm.types";
+import { EditRegisterFormTypes } from "../EditRegisterForm.types";
 import ComponentTitle from "@/components/Title";
-import RegisterStatusOptions from "../../components/RegisterStatusOptions";
-import RequiredInput from "../../components/RequiredInput";
+import RegisterStatusOptions from "../../../components/RegisterStatusOptions";
+import RequiredInput from "../../../components/RequiredInput";
 import { useRouter } from "@/utils/libs/routerFacade";
 
 export function EditRegisterForm({

@@ -79,7 +79,7 @@ export const patient: UserOptionsProps = {
       key: "user-patitent-01",
       icon: getIcon(IoCreateOutline),
       displayName: "Dados Pessoais",
-      path: "",
+      path: "psi/edit-register",
     },
     {
       key: "user-patitent-02",

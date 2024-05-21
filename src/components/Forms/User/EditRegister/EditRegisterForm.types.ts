@@ -10,18 +10,18 @@ import {
 import { RegisterProps } from "../../../../utils/types/forms";
 
 export type EditRegisterFormTypes = {
-  userName: string;
+  userName?: string;
   currentValues: Partial<RegisterProps>;
-  register: UseFormRegister<RegisterProps>;
-  onSubmit: SubmitHandler<RegisterProps>;
-  handleSubmit: UseFormHandleSubmit<RegisterProps, undefined>;
+  register: UseFormRegister<Partial<RegisterProps>>;
+  onSubmit: SubmitHandler<Partial<RegisterProps>>;
+  handleSubmit: UseFormHandleSubmit<Partial<RegisterProps>>;
   control: Control<Partial<RegisterProps>, any>;
   errors: FieldErrors<RegisterProps>;
   isSubmitting: boolean;
-  sendEmail: boolean;
-  setSendEmail: Dispatch<SetStateAction<boolean>>;
-  disabledRoleChange: boolean;
-  canChangeRole: boolean;
+  sendEmail?: boolean;
+  setSendEmail?: Dispatch<SetStateAction<boolean>>;
+  disabledRoleChange?: boolean;
+  canChangeRole?: boolean;
 };
 
 export type UpdateRegister = Partial<RegisterProps> & {

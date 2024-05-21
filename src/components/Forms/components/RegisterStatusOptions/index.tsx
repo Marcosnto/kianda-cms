@@ -19,7 +19,7 @@ import registerTypes from "@/utils/mocks/inputOptions/register-types";
 
 type RegisterStatusOptionsTypes = {
   errors: FieldErrors<RegisterProps>;
-  register?: UseFormRegister<RegisterProps>;
+  register?: UseFormRegister<Partial<RegisterProps>>;
   currentValues?: Partial<RegisterProps>;
   control?: Control<Partial<RegisterProps>, any>;
   hasLabel?: boolean;
