@@ -1,6 +1,5 @@
 import { UserOptionsProps } from "@/components/Menu/menu.hook";
 import { Icon } from "@chakra-ui/react";
-import { useCallback } from "react";
 import { IconType } from "react-icons";
 import {
   IoBodyOutline,
@@ -17,12 +16,12 @@ function getIcon(iconName: IconType) {
   return <Icon as={iconName} w="5" h="5" />;
 }
 
-const getID = useCallback(() => {
+function getID() {
   const user = localStorage.getItem("user");
   const { id } = user ? JSON.parse(user) : "";
 
   return id;
-}, []);
+}
 
 export default function getMenuOptions(role: string | undefined) {
   switch (role) {

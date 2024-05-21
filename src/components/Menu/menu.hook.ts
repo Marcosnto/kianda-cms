@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import getMenuOptions from "../../utils/mocks/menuOptionsPermitions";
 import { OptionsProps } from "./MenuOptions";
 import { useLocation } from "@/utils/libs/routerFacade";
-import { ResponseProps } from "@/pages/Login/types";
 
 export type UserOptionsProps = {
   type: string;
@@ -13,19 +12,17 @@ export type UserOptionsProps = {
 
 const useMenu = () => {
   const { pathname } = useLocation();
+  const user = localStorage?.getItem("user");
   const [menuOptions, setOptions] = useState<UserOptionsProps>({
     type: "",
     users: [],
     blog: undefined,
   });
-
-  // useEffect(() => {
-  //   const userData: ResponseProps =
-  //     typeof window !== "undefined"
-  //       ? JSON.parse(localStorage?.getItem("user") || "")
-  //       : "";
-  //   setOptions(getMenuOptions(userData.role));
-  // }, []);
+  //TODO: Improve this way to get the options
+  if (window && user && menuOptions.users?.length == 0) {
+    const userData = JSON.parse(user);
+    setOptions(getMenuOptions(userData.role));
+  }
 
   return {
     menuOptions,

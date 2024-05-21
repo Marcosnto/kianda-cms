@@ -9,10 +9,6 @@ export type MenuProps = {
 
 export default function Menu({ onClose }: MenuProps) {
   const { menuOptions } = useMenu();
-  //maybe send the user to login page
-  if (menuOptions.type == "") {
-    return <></>;
-  }
 
   return (
     <Flex
