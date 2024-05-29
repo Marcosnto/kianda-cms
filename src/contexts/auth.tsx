@@ -5,8 +5,8 @@ import { createContext, useCallback, useEffect, useState } from "react";
 
 type AuthContextTypes = {
   isAuth?: boolean;
-  signin: (accessToken: string) => void;
-  signout: () => void;
+  signin?: (accessToken: string) => void;
+  signout?: () => void;
 };
 
 const AuthContext = createContext<AuthContextTypes>({});

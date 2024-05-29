@@ -1,8 +1,7 @@
 import { useRouteError } from "@/utils/libs/routerFacade";
 
 export default function PageError404() {
-  const error = useRouteError();
-  console.error(error);
+  const error = useRouteError() as Record<string, string>;
 
   return (
     <div

@@ -48,7 +48,7 @@ export function EditRegisterForm({
 
           <Checkbox
             isChecked={sendEmail}
-            onChange={(e) => setSendEmail(e.target.checked)}
+            // onChange={(e) => setSendEmail!(e.target.checked)}
             colorScheme="green"
           >
             Enviar email

@@ -1,4 +1,4 @@
-import { Divider, Flex, Heading } from "@chakra-ui/react";
+import { Flex, Heading } from "@chakra-ui/react";
 
 import useMenu from "./menu.hook";
 import MenuOptions from "./MenuOptions";

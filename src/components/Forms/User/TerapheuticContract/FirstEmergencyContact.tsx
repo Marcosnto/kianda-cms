@@ -6,8 +6,6 @@ import {
   FormLabel,
   Heading,
   Input,
-  NumberInput,
-  NumberInputField,
 } from "@chakra-ui/react";
 import RequiredInput from "../../components/RequiredInput";
 
