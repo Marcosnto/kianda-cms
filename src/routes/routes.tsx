@@ -15,6 +15,7 @@ import EditRegister from "@/components/Forms/User/EditRegister/Admin";
 import EditBlogPost from "@/components/Forms/Blog/Edit";
 import TerapheuticContract from "@/components/Forms/User/TerapheuticContract";
 import UserEditRegister from "@/components/Forms/User/EditRegister/Patient";
+import Schedule from "@/components/Schedule";
 
 const router = createBrowserRouter([
   {
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
               {
                 path: "terapheutic-contracts/:contractID",
                 element: <TerapheuticContract />,
+              },
+              {
+                path: "schedule",
+                element: <Schedule />,
               },
             ],
           },
