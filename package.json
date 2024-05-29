@@ -29,6 +29,7 @@
     "@syncfusion/ej2-react-schedule": "^25.2.6",
     "@tanstack/react-query": "^5.32.0",
     "@tanstack/react-query-devtools": "^5.37.1",
+    "axios": "^1.7.2",
     "framer-motion": "^11.1.7",
     "mailersend": "^2.2.0",
     "react": "^18.2.0",
