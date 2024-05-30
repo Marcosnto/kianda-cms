@@ -24,6 +24,7 @@ import "@syncfusion/ej2-popups/styles/material.css";
 import "@syncfusion/ej2-splitbuttons/styles/material.css";
 import "@syncfusion/ej2-react-schedule/styles/material.css";
 import { useRef } from "react";
+import useSchedule from "./schedule.hook";
 
 registerLicense(
   "Ngo9BigBOggjHTQxAR8/V1NBaF5cXmZCf1FpRmJGdld5fUVHYVZUTXxaS00DNHVRdkdnWXpceHZURWZcUUN1W0M=",
@@ -33,17 +34,8 @@ L10n.load({
   "pt-BR": locale,
 });
 
-const data: object[] = [
-  {
-    Id: 1,
-    Subject: "Meeting - 1",
-    StartTime: new Date(2024, 4, 15, 10, 0),
-    EndTime: new Date(2024, 4, 16, 12, 30),
-    IsAllDay: false,
-  },
-];
-
 export default function Schedule() {
+  const { data, handleCompleteAction } = useSchedule();
   const scheduleObj = useRef(null);
   const eventSettings = { dataSource: data };
 
@@ -51,9 +43,9 @@ export default function Schedule() {
     <ScheduleComponent
       height="80vh"
       eventSettings={eventSettings}
-      selectedDate={new Date(2024, 4, 15)}
+      selectedDate={new Date(2018, 1, 15)}
       ref={scheduleObj}
-      actionComplete={(e) => console.log(e)}
+      actionComplete={handleCompleteAction}
       // locale="pt-BR"
     >
       <ViewsDirective>
