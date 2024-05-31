@@ -54,7 +54,7 @@ function EditRegister() {
   return (
     <EditRegisterForm
       control={control}
-      userName={data.fullName}
+      userName={data?.fullName}
       errors={formErros}
       isSubmitting={
         isSendingEmail ||

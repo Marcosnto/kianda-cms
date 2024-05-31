@@ -30,7 +30,7 @@ export default function useLogin() {
                 name: response.user_display_name,
               };
               localStorage.setItem("user", JSON.stringify(user));
-              signin(response.token);
+              signin?.(response.token);
               setTimeout(() => navigate("/dashboard"), 100);
             }
             setRegisterStatus(response.registerStatus);

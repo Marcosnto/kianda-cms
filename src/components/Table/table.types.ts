@@ -6,7 +6,7 @@ export type TableOptionsType = {
   ariaLabel: string;
   toolTipMessage: string;
   icon: React.ReactElement;
-  route: ((params: string | number) => string) | string;
+  route?: ((params: string | number) => string) | string;
   isModal: boolean;
 };
 

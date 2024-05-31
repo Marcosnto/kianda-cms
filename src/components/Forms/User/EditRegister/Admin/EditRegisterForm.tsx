@@ -27,7 +27,7 @@ export function EditRegisterForm({
   register,
   onSubmit,
   handleSubmit,
-  setSendEmail,
+  //setSendEmail,
 }: EditRegisterFormTypes) {
   const navigate = useRouter();
   return (

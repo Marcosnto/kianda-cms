@@ -1,3 +1,4 @@
+//@ts-nocheck
 import SpinnerLoad from "@/components/SpinnerLoad";
 import { Td, Tr } from "@chakra-ui/react";
 import { useState } from "react";

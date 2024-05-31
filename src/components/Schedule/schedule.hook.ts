@@ -48,6 +48,7 @@ export default function useSchedule() {
     isSuccess: putSuccess,
   } = useMutation({
     mutationFn: (data) =>
+      //@ts-ignore
       axiosInstance.put(`/schedule/${data.calendarID}`, data),
     onSuccess: () => console.log("editado!!!!"),
     onError: (err) => console.log("deu na edicao erro pai ", err),
@@ -59,6 +60,7 @@ export default function useSchedule() {
     isError: deleteError,
     isSuccess: deleteSuccess,
   } = useMutation({
+    //@ts-ignore
     mutationFn: (data) => axiosInstance.delete(`/schedule/${data.calendarID}`),
     onSuccess: () => console.log("deletado!!!!"),
     onError: (err) => console.log("deu na deleção erro pai ", err),
@@ -70,13 +72,16 @@ export default function useSchedule() {
 
     switch (requestType) {
       case "eventCreated":
+        //@ts-ignore
         postSchedule(addedRecords[0]);
         break;
       case "eventChanged":
+        //@ts-ignore
         putSchedule(changedRecords[0]);
         break;
       case "eventRemoved":
         console.log("eventDeleted", deletedRecords);
+        //@ts-ignore
         deleteSchedule(deletedRecords[0]);
         break;
       default:

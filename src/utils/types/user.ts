@@ -2,7 +2,7 @@ export type UserProps = {
   id: number;
   fullName: string;
   email: string;
-  borDate?: string | Date;
+  bornDate?: string | Date;
   rg?: string;
   cpf?: string;
   gender?: string;
