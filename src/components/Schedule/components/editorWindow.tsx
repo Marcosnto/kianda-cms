@@ -55,6 +55,7 @@ const editorWindowTemplate = (props: any) => {
               data-name="StartTime"
               value={new Date(props.startTime || props.StartTime)}
               className="e-field"
+              locale="pt"
             ></DateTimePickerComponent>
           </td>
         </tr>
@@ -67,6 +68,7 @@ const editorWindowTemplate = (props: any) => {
               data-name="EndTime"
               value={new Date(props.endTime || props.EndTime)}
               className="e-field"
+              locale="pt"
             ></DateTimePickerComponent>
           </td>
         </tr>
@@ -78,6 +80,7 @@ const editorWindowTemplate = (props: any) => {
               ref={recurrObject}
               data-name="RecurrenceEditor"
               id="RecurrenceEditor"
+              locale="pt"
             />
           </td>
         </tr>

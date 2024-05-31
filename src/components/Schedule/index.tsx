@@ -1,3 +1,5 @@
+import { useRef } from "react";
+
 import {
   ScheduleComponent,
   Day,
@@ -9,31 +11,10 @@ import {
   ViewDirective,
 } from "@syncfusion/ej2-react-schedule";
 
-import { registerLicense, L10n } from "@syncfusion/ej2-base";
-import * as locale from "@syncfusion/ej2-locale/src/pt-BR.json";
-
-import "@syncfusion/ej2-base/styles/material.css";
-import "@syncfusion/ej2-buttons/styles/material.css";
-import "@syncfusion/ej2-calendars/styles/material.css";
-import "@syncfusion/ej2-dropdowns/styles/material.css";
-import "@syncfusion/ej2-inputs/styles/material.css";
-import "@syncfusion/ej2-lists/styles/material.css";
-import "@syncfusion/ej2-navigations/styles/material.css";
-import "@syncfusion/ej2-popups/styles/material.css";
-import "@syncfusion/ej2-splitbuttons/styles/material.css";
-import "@syncfusion/ej2-react-schedule/styles/material.css";
-import { useRef } from "react";
 import useSchedule from "./schedule.hook";
+import withSyncFusionConfig from "./withScheduleConfig";
 
-registerLicense(
-  "Ngo9BigBOggjHTQxAR8/V1NBaF5cXmZCf1FpRmJGdld5fUVHYVZUTXxaS00DNHVRdkdnWXpceHZURWZcUUN1W0M=",
-);
-
-L10n.load({
-  "pt-BR": locale,
-});
-
-export default function Schedule(this: any) {
+function Schedule(this: any) {
   const scheduleObj = useRef(null);
 
   const { data, handleCompleteAction, editorWindowComponent, onPopupClose } =
@@ -60,7 +41,7 @@ export default function Schedule(this: any) {
       popupClose={onPopupClose}
       // workHours={workHours}
       // workDays={[1, 2, 3, 4, 5]}
-      // locale="pt-BR"
+      locale="pt"
     >
       <ViewsDirective>
         <ViewDirective option="Day" />
@@ -72,3 +53,5 @@ export default function Schedule(this: any) {
     </ScheduleComponent>
   );
 }
+
+export default withSyncFusionConfig(Schedule);

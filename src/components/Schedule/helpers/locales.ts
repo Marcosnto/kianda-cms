@@ -1,5 +1,5 @@
-export const localesPtBR = {
-  "pt-BR": {
+export const localesPt = {
+  pt: {
     schedule: {
       day: "Dia",
       week: "Semana",
@@ -110,6 +110,10 @@ export const localesPtBR = {
       summaryWeek: "semana(s)",
       summaryMonth: "mês(es)",
       summaryYear: "ano(s)",
+    },
+    datetimepicker: {
+      placeholder: "Escolha uma data",
+      today: "Hoje",
     },
   },
 };

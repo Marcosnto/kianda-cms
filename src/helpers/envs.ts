@@ -6,3 +6,5 @@ export const USE_TERMS: string = import.meta.env.VITE_USE_TERMS;
 export const REACT_APP_VERSION: string = import.meta.env.VITE_REACT_APP_VERSION;
 export const MAILERSEND_API_KEY: string = import.meta.env
   .VITE_MAILERSEND_API_KEY;
+export const SYNCFUSION_API_KEY: string = import.meta.env
+  .VITE_SYNCFUSION_API_KEY;
