@@ -3,14 +3,14 @@ import { useState } from "react";
 
 import BlogPost from "./BlogPost";
 import { Article } from "@/utils/types/blog";
-import { BASE_URL } from "@/helpers/envs";
+import { BASE_API_URL } from "@/helpers/envs";
 
 export default function Post() {
   const toast = useToast();
   const [resetForm, setResetForm] = useState(false);
 
   function post(data: Article) {
-    fetch(BASE_URL + "/article" || "", {
+    fetch(BASE_API_URL + "/article" || "", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

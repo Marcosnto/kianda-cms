@@ -1,8 +1,8 @@
-import { BASE_URL } from "@/helpers/envs";
+import { BASE_API_URL } from "@/helpers/envs";
 import axios from "axios";
 
 export const axiosInstance = axios.create({
-  baseURL: BASE_URL,
+  baseURL: BASE_API_URL,
   headers: { "Content-Type": "application/json" },
 });
 

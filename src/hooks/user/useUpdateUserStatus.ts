@@ -6,7 +6,7 @@ import useUpdateUserRegister from "./useUpdateUserRegister";
 import useStore from "@/store";
 import useSendEmailToUser from "@/emails/hooks/useSendEmailToUser";
 import { UpdateRegister } from "@/components/Forms/User/EditRegister/EditRegisterForm.types";
-import { BASE_URL } from "@/helpers/envs";
+import { BASE_API_URL } from "@/helpers/envs";
 
 const useUpdateUserStatus = () => {
   const token = localStorage.getItem("token");
@@ -40,7 +40,7 @@ const useUpdateUserStatus = () => {
   const { mutate: updateUserStatusMutation, isPending: isUpdateUserPeding } =
     useMutation({
       mutationFn: ({ id, fullName, email, registerStatus }: UpdateRegister) =>
-        fetch(BASE_URL + "/user/update-status" || "", {
+        fetch(BASE_API_URL + "/user/update-status" || "", {
           method: "PUT",
           headers: {
             Authorization: `Bearer ${token}`,

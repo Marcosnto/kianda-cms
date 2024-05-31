@@ -1,5 +1,5 @@
 import { sendEmail } from "@/emails/hooks/useSendEmailToUser";
-import { BASE_URL, PRIVACY_POLICY, USE_TERMS } from "@/helpers/envs";
+import { BASE_API_URL, PRIVACY_POLICY, USE_TERMS } from "@/helpers/envs";
 import { useRouter } from "@/utils/libs/routerFacade";
 import { RegisterProps } from "@/utils/types/forms";
 import { useBoolean, useToast } from "@chakra-ui/react";
@@ -37,7 +37,7 @@ export default function useAutoRegister() {
 
   const post = useCallback(
     (data: RegisterProps) => {
-      fetch(BASE_URL + "/user-register" || "", {
+      fetch(BASE_API_URL + "/user-register" || "", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

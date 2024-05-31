@@ -1,4 +1,5 @@
 export const BASE_URL: string = import.meta.env.VITE_BASE_URL;
+export const BASE_API_URL: string = import.meta.env.VITE_BASE_API_URL;
 export const JWT_AUTH: string = import.meta.env.VITE_JWT_AUTH;
 export const JWT_VALIDATE: string = import.meta.env.VITE_JWT_VALIDATE;
 export const PRIVACY_POLICY: string = import.meta.env.VITE_PRIVACY_POLICY;

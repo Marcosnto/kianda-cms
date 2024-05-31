@@ -1,6 +1,6 @@
 import SpinnerLoad from "@/components/SpinnerLoad";
 import useStore from "@/store";
-import { BASE_URL } from "@/helpers/envs";
+import { BASE_API_URL } from "@/helpers/envs";
 import { apiError } from "@/helpers/messages";
 import { Article } from "@/utils/types/blog";
 import { useQuery } from "@tanstack/react-query";
@@ -34,7 +34,7 @@ export default function EditBlogPost() {
   const { data, isLoading, error } = useQuery({
     queryKey: ["editPost"],
     queryFn: () =>
-      fetch(BASE_URL + `/article/${currentSelectedID}` || "", {
+      fetch(BASE_API_URL + `/article/${currentSelectedID}` || "", {
         method: "GET",
       }).then((res) => {
         if (res.ok) {

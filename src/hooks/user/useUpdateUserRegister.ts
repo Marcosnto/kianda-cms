@@ -1,5 +1,5 @@
 import { UpdateRegister } from "@/components/Forms/User/EditRegister/EditRegisterForm.types";
-import { BASE_URL } from "@/helpers/envs";
+import { BASE_API_URL } from "@/helpers/envs";
 import { useToast } from "@chakra-ui/react";
 import { useMutation } from "@tanstack/react-query";
 
@@ -12,7 +12,7 @@ const useUpdateUserRegister = () => {
     isPending: updateUserRegisterLoading,
   } = useMutation({
     mutationFn: ({ id, ...props }: UpdateRegister) =>
-      fetch(BASE_URL + `/user/update/${id}` || "", {
+      fetch(BASE_API_URL + `/user/update/${id}` || "", {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${token}`,

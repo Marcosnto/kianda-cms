@@ -1,4 +1,4 @@
-import { BASE_URL } from "@/helpers/envs";
+import { BASE_API_URL } from "@/helpers/envs";
 import { RegisterProps } from "@/utils/types/forms";
 import { useToast } from "@chakra-ui/react";
 import { useCallback } from "react";
@@ -16,7 +16,7 @@ export default function useRegisterHook({
 
   const post = useCallback(
     (data: RegisterProps) => {
-      fetch(BASE_URL + "/user" || "", {
+      fetch(BASE_API_URL + "/user" || "", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,

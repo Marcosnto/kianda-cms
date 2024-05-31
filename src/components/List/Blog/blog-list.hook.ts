@@ -1,4 +1,4 @@
-import { BASE_URL } from "@/helpers/envs";
+import { BASE_API_URL } from "@/helpers/envs";
 import setNumberOfPages from "@/utils/setNumberOfPages";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
@@ -9,7 +9,7 @@ export default function useBlogList(currentPage: number) {
   const { data, isLoading, error } = useQuery({
     queryKey: ["blogList", currentPage],
     queryFn: () =>
-      fetch(BASE_URL + `/articles?_page=${currentPage}` || "", {
+      fetch(BASE_API_URL + `/articles?_page=${currentPage}` || "", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

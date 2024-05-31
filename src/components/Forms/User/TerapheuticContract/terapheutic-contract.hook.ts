@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { BASE_URL } from "@/helpers/envs";
+import { BASE_API_URL } from "@/helpers/envs";
 
 import { useParams } from "@/utils/libs/routerFacade";
 import { TherapeuticContractProps } from "@/utils/types/forms";
@@ -19,7 +19,7 @@ export default function useTerapheuticContractForm() {
   } = useQuery({
     queryKey: ["editTerapheuticContract"],
     queryFn: () =>
-      fetch(BASE_URL + `/contract/${contractID}` || "", {
+      fetch(BASE_API_URL + `/contract/${contractID}` || "", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -51,7 +51,7 @@ export default function useTerapheuticContractForm() {
   let hasErros = Object.keys(formErros).length > 0;
 
   function post(newData: TherapeuticContractProps) {
-    fetch(BASE_URL + "/terapheutic-contract" || "", {
+    fetch(BASE_API_URL + "/terapheutic-contract" || "", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
