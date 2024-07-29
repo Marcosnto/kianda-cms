@@ -24,7 +24,6 @@ export default function ButtonsActions({
   modalsOptions?: { [key: string]: (...arg0: string[]) => void } | undefined;
   tableOptions: TableOptionsType[];
 }) {
-  console.log(tableOptions);
   const { setComponent, setCurrentSelectedUser } = useStore();
   const navigate = useRouter();
 

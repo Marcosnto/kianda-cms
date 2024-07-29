@@ -13,7 +13,7 @@ export default function useUsersList(currentPage: number) {
       axiosInstance
         .get(`/users?_page=${currentPage}`)
         .then(({ data, headers }) => {
-          const totalItens = headers["X-Total-Count"];
+          const totalItens = headers["x-total-count"];
           setTotalPages(setNumberOfPages(totalItens) || 0);
           return data;
         })
