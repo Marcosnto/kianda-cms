@@ -1,4 +1,4 @@
-import { Flex, Heading } from "@chakra-ui/react";
+import { Divider, Flex, Heading } from "@chakra-ui/react";
 
 import useMenu from "./menu.hook";
 import MenuOptions from "./MenuOptions";
@@ -35,7 +35,7 @@ export default function Menu({ onClose }: MenuProps) {
         />
       ))}
 
-      {/* {menuOptions.blog ? (
+      {menuOptions.blog ? (
         <>
           <Divider mt="8" />
           <Heading as="h3" size="sm" noOfLines={1} ml="3" mt="8">
@@ -51,7 +51,7 @@ export default function Menu({ onClose }: MenuProps) {
           onClose={onClose}
           displayName={option.displayName}
         />
-      ))} */}
+      ))}
     </Flex>
   );
 }

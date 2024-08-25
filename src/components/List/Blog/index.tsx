@@ -44,14 +44,14 @@ export default function PostsList() {
       {blogPosts.length > 0 ? (
         <>
           <ComponentTitle title="Artigos" type="h1" size="lg" />
-          {/* <TableList
+          <TableList
             headers={blogTableHeaders}
             totalPages={totalPages}
             currentPage={currentPage}
             tableBody={tableBody}
             tableOptions={blogListOptions}
             setCurrentPage={setCurrentPage}
-          /> */}
+          />
         </>
       ) : (
         <FeedbackAPI message={noDataToShow} />
