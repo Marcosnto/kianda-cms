@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { Dispatch, SetStateAction, useEffect } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import RichTextEditor from "../../components/RichTextEditor";
+import RichTextInput from "../../components/RichTextInput";
 
 export default function BlogPost({
   post,
@@ -40,6 +40,12 @@ export default function BlogPost({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [resetForm]);
+
+  const test = watch("content");
+
+  useEffect(() => {
+    console.log(test);
+  }, [test]);
 
   return (
     <>
@@ -176,7 +182,11 @@ export default function BlogPost({
               control={control}
               name="content"
               render={({ field: { onChange, onBlur, value } }) => (
-                <RichTextEditor change={onChange} blur={onBlur} value={value} />
+                <RichTextInput
+                  onChange={onChange}
+                  onBlur={onBlur}
+                  value={value}
+                />
               )}
             />
 
