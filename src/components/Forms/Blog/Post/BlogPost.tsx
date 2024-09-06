@@ -8,10 +8,10 @@ import {
   FormLabel,
   Input,
   Stack,
-  Textarea,
 } from "@chakra-ui/react";
 import { Dispatch, SetStateAction, useEffect } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import RichTextEditor from "../../components/RichTextEditor";
 
 export default function BlogPost({
   post,
@@ -26,6 +26,8 @@ export default function BlogPost({
     register,
     handleSubmit,
     reset,
+    control,
+    watch,
     formState: { errors },
   } = useForm<Article>();
 
@@ -142,7 +144,10 @@ export default function BlogPost({
               {...register("imageDescription")}
               focusBorderColor="green.800"
             />
-
+            <p>
+              Essa descrição é utilizada para leitores de telas (pessoas com
+              baixa/nenhuma visão)
+            </p>
             <FormErrorMessage>
               {errors.imageDescription && errors.imageDescription.message}
             </FormErrorMessage>
@@ -157,6 +162,7 @@ export default function BlogPost({
               {...register("imageSub")}
               focusBorderColor="green.800"
             />
+            <p>Será exibida abaixo da imagem</p>
 
             <FormErrorMessage>
               {errors.imageSub && errors.imageSub.message}
@@ -166,13 +172,12 @@ export default function BlogPost({
           <FormControl isInvalid={!!errors.content} isRequired>
             <FormLabel htmlFor="content">Conteúdo</FormLabel>
 
-            <Textarea
-              id="content"
-              size="lg"
-              {...register("content", {
-                required: "Esse Campo é obrigatório",
-              })}
-              focusBorderColor="green.800"
+            <Controller
+              control={control}
+              name="content"
+              render={({ field: { onChange, onBlur, value } }) => (
+                <RichTextEditor change={onChange} blur={onBlur} value={value} />
+              )}
             />
 
             <FormErrorMessage>

@@ -5,8 +5,40 @@ import BlogPost from "./BlogPost";
 import { Article } from "@/utils/types/blog";
 import { BASE_API_URL } from "@/helpers/envs";
 
+function getImagesFromContent(
+  content: string,
+  formData: FormData,
+  promises: Promise<void>[],
+) {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(content, "text/html");
+
+  // Obter todas as imagens no conteúdo
+  const images = doc.querySelectorAll("img");
+
+  images.forEach((img, index) => {
+    const src = img.getAttribute("src");
+
+    if (src?.startsWith("blob:")) {
+      const blobFile = fetch(src)
+        .then((response) => response.blob())
+        .then((blob) => {
+          console.log(blob);
+          const file = new File([blob], img.alt, { type: blob.type });
+          formData.append(`text_image_${index}`, file);
+        })
+        .catch((error) => {
+          console.error("Erro ao buscar blob:", error);
+        });
+
+      promises.push(blobFile);
+    }
+  });
+}
+
 export default function Post() {
   const toast = useToast();
+  const promises: Promise<void>[] = [];
   const [resetForm, setResetForm] = useState(false);
 
   function post(data: Article) {
@@ -15,61 +47,31 @@ export default function Post() {
     formData.append("postInfo", JSON.stringify(data));
     formData.append("image", data.image[0]);
 
-    fetch(BASE_API_URL + "/article" || "", {
-      method: "POST",
-      body: formData,
-    }).then((response) => {
-      if (response.ok) {
-        toast({
-          title: `Artigo publicado com sucesso!`,
-          position: "top",
-          status: "success",
-          isClosable: true,
-        });
-        setResetForm(true);
-      } else {
-        toast({
-          title: `Ocorreu um erro no servidor`,
-          position: "top",
-          status: "error",
-          isClosable: true,
-        });
-      }
-    });
+    getImagesFromContent(data.content, formData, promises);
 
-    // fetch(BASE_API_URL + "/article" || "", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     title: data.title,
-    //     author: data.author,
-    //     description: data.description,
-    //     content: data.content,
-    //     slug: data.slug,
-    //     files: data.image[0],
-    //     imageDescription: data.imageDescription,
-    //     imageSub: data.imageSub,
-    //   }),
-    // }).then((response) => {
-    //   if (response.ok) {
-    //     toast({
-    //       title: `Artigo publicado com sucesso!`,
-    //       position: "top",
-    //       status: "success",
-    //       isClosable: true,
-    //     });
-    //     setResetForm(true);
-    //   } else {
-    //     toast({
-    //       title: `Ocorreu um erro no servidor`,
-    //       position: "top",
-    //       status: "error",
-    //       isClosable: true,
-    //     });
-    //   }
-    // });
+    Promise.all(promises).then(() => {
+      fetch(BASE_API_URL + "/article" || "", {
+        method: "POST",
+        body: formData,
+      }).then((response) => {
+        if (response.ok) {
+          toast({
+            title: `Artigo publicado com sucesso!`,
+            position: "top",
+            status: "success",
+            isClosable: true,
+          });
+          setResetForm(true);
+        } else {
+          toast({
+            title: `Ocorreu um erro no servidor`,
+            position: "top",
+            status: "error",
+            isClosable: true,
+          });
+        }
+      });
+    });
   }
 
   return (
