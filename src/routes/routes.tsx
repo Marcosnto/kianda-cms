@@ -84,7 +84,7 @@ const router = createBrowserRouter([
                 element: <PostsList />,
               },
               {
-                path: "article/:postID",
+                path: "article/:articleID",
                 element: <EditBlogPost />,
               },
             ],

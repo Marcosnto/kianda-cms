@@ -1,5 +1,4 @@
 import ComponentTitle from "@/components/Title";
-import { Article } from "@/utils/types/blog";
 import {
   Box,
   Button,
@@ -8,36 +7,19 @@ import {
   FormLabel,
   Input,
   Stack,
-  Textarea,
 } from "@chakra-ui/react";
-import { useLayoutEffect } from "react";
-import { SubmitHandler } from "react-hook-form";
+import { Controller } from "react-hook-form";
 import RequiredInput from "../../components/RequiredInput";
+import RichTextInput from "../../components/RichTextInput";
 
 export function EditBlogPostForm({
   data,
   register,
   handleSubmit,
-  reset,
   errors,
+  control,
+  onSubmit,
 }: any) {
-  useLayoutEffect(() => {
-    reset({
-      title: data.title,
-      author: data.author,
-      content: data.content,
-      description: data.description,
-      image: data.image,
-      imageDescription: data.imageDescription,
-      imageSub: data.imageSub,
-      status: data.status,
-    });
-  }, [data, reset]);
-
-  const onSubmit: SubmitHandler<Article> = () => {
-    // post(data);
-  };
-
   return (
     <>
       <form typeof="form" onSubmit={handleSubmit(onSubmit)}>
@@ -155,18 +137,19 @@ export function EditBlogPostForm({
             </FormErrorMessage>
           </FormControl>
 
-          <FormControl isInvalid={!!errors.content}>
-            <FormLabel htmlFor="content">
-              Conteúdo <RequiredInput />
-            </FormLabel>
+          <FormControl isInvalid={!!errors.content} isRequired>
+            <FormLabel htmlFor="content">Conteúdo</FormLabel>
 
-            <Textarea
-              id="content"
-              size="lg"
-              {...register("content", {
-                required: "Esse Campo é obrigatório",
-              })}
-              focusBorderColor="green.800"
+            <Controller
+              control={control}
+              name="content"
+              render={({ field: { onChange, onBlur, value } }) => (
+                <RichTextInput
+                  onChange={onChange}
+                  onBlur={onBlur}
+                  value={value}
+                />
+              )}
             />
 
             <FormErrorMessage>

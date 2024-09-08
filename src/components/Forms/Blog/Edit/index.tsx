@@ -1,22 +1,21 @@
 import SpinnerLoad from "@/components/SpinnerLoad";
-import useStore from "@/store";
 import { BASE_API_URL } from "@/helpers/envs";
 import { apiError } from "@/helpers/messages";
 import { Article } from "@/utils/types/blog";
 import { useQuery } from "@tanstack/react-query";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { EditBlogPostForm } from "./EditBlogPostForm";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function EditBlogPost() {
-  const { currentSelectedUser } = useStore();
-
-  //TODO: this is wrong, create a store to handle with the blog components
-  const currentSelectedID = currentSelectedUser?.id;
+  let { articleID } = useParams();
 
   const {
     register,
     handleSubmit,
     reset,
+    control,
     formState: { errors },
   } = useForm<Article>({
     defaultValues: {
@@ -31,10 +30,14 @@ export default function EditBlogPost() {
     },
   });
 
+  const onSubmit: SubmitHandler<Article> = () => {
+    console.log("edit data", data);
+  };
+
   const { data, isLoading, error } = useQuery({
     queryKey: ["editPost"],
     queryFn: () =>
-      fetch(BASE_API_URL + `/article/${currentSelectedID}` || "", {
+      fetch(BASE_API_URL + `/article/${articleID}` || "", {
         method: "GET",
       }).then((res) => {
         if (res.ok) {
@@ -44,6 +47,21 @@ export default function EditBlogPost() {
         }
       }),
   });
+
+  useEffect(() => {
+    if (data) {
+      reset({
+        title: data.title,
+        author: data.author,
+        content: data.content,
+        description: data.description,
+        image: data.image,
+        imageDescription: data.imageDescription,
+        imageSub: data.imageSub,
+        status: data.status,
+      });
+    }
+  }, [data]);
 
   if (isLoading) {
     return <SpinnerLoad />;
@@ -57,9 +75,11 @@ export default function EditBlogPost() {
     <EditBlogPostForm
       data={data}
       register={register}
+      control={control}
       handleSubmit={handleSubmit}
       reset={reset}
       errors={errors}
+      onSubmit={onSubmit}
     />
   );
 }
