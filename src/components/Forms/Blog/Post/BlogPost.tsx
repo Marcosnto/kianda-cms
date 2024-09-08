@@ -84,7 +84,7 @@ export default function BlogPost({
 
           <Stack spacing={8} direction="row">
             <FormControl isInvalid={!!errors.description} isRequired>
-              <FormLabel htmlFor="description">Resumo</FormLabel>
+              <FormLabel htmlFor="description">Subtítulo</FormLabel>
 
               <Input
                 id="description"

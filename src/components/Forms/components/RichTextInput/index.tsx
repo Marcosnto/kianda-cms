@@ -3,6 +3,7 @@ import { useCallback, useMemo, useRef } from "react";
 import { Noop } from "react-hook-form";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import "./styles.css";
 
 interface RichTextInputType {
   onChange: (...event: any[]) => void;
@@ -10,25 +11,25 @@ interface RichTextInputType {
   value: string;
 }
 
-async function uploadImage(file) {
-  const formData = new FormData();
-  formData.append("image", file);
-
-  const response = await fetch(BASE_API_URL + "/images", {
-    method: "POST",
-    body: formData,
-  });
-
-  try {
-    const data = await response.json();
-    return data[0].url;
-  } catch (error) {
-    throw new Error("Something went wrong with image upload");
-  }
-}
-
 const RichTextInput = ({ onChange, onBlur, value }: RichTextInputType) => {
   const quillRef = useRef(null);
+
+  const uploadImage = useCallback(async (file: File) => {
+    const formData = new FormData();
+    formData.append("image", file);
+
+    const response = await fetch(BASE_API_URL + "/images", {
+      method: "POST",
+      body: formData,
+    });
+
+    try {
+      const data = await response.json();
+      return data[0].url;
+    } catch (error) {
+      throw new Error("Something went wrong with image upload");
+    }
+  }, []);
 
   const imageHandler = useCallback(() => {
     const input = document.createElement("input");
@@ -37,10 +38,12 @@ const RichTextInput = ({ onChange, onBlur, value }: RichTextInputType) => {
     input.click();
 
     input.onchange = async () => {
+      //@ts-ignore
       const file = input.files[0];
 
       const imageUrl = await uploadImage(file);
 
+      //@ts-ignore
       const quill = quillRef?.current?.getEditor();
       const range = quill.getSelection();
       quill.insertEmbed(range.index, "image", imageUrl);
@@ -68,6 +71,7 @@ const RichTextInput = ({ onChange, onBlur, value }: RichTextInputType) => {
 
   return (
     <ReactQuill
+      className="react-quill"
       value={value}
       ref={quillRef}
       onChange={onChange}
