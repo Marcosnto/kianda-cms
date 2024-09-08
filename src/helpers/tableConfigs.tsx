@@ -48,18 +48,11 @@ export const terapheuticContractListOptions = [
 
 export const blogListOptions = [
   {
-    key: "create-article",
-    from: "blog",
-    ariaLabel: "Criar Artigo",
-    toolTipMessage: "Criar Artigo",
-    icon: <IoCreateOutline />,
-    isModal: false,
-  },
-  {
     key: "edit-article",
     from: "blog",
     ariaLabel: "Editar Artigo",
     toolTipMessage: "Editar Artigo",
+    route: (articleID: string | number) => `article/${articleID}`,
     icon: <IoCreateOutline />,
     isModal: false,
   },

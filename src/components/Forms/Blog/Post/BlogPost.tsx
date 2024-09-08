@@ -41,12 +41,6 @@ export default function BlogPost({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [resetForm]);
 
-  const test = watch("content");
-
-  useEffect(() => {
-    console.log(test);
-  }, [test]);
-
   return (
     <>
       <ComponentTitle title="Novo Artigo" type="h1" size="lg" />

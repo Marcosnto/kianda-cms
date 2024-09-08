@@ -6,7 +6,7 @@ import useBlogList from "./blog-list.hook";
 import { apiError, noDataToShow } from "@/helpers/messages";
 import { Article } from "./blog-list.types";
 import getStatusBadge from "@/utils/getStatusBadge";
-// import ButtonsActions from "@/components/Forms/components/ActionsButton/ActionsButtons";
+import ButtonsActions from "@/components/Forms/components/ActionsButton/ActionsButtons";
 import { blogListOptions, blogTableHeaders } from "@/helpers/tableConfigs";
 import ComponentTitle from "@/components/Title";
 import TableList from "@/components/Table";
@@ -25,16 +25,16 @@ export default function PostsList() {
     return <h1>{apiError}</h1>;
   }
 
-  const tableBody = blogPosts?.map((post: Article) => (
-    <Tr key={post.id}>
-      <Td>{post.id}</Td>
-      <Td>{post.title}</Td>
+  const tableBody = blogPosts?.map((article: Article) => (
+    <Tr key={article.id}>
+      <Td>{article.id}</Td>
+      <Td>{article.title}</Td>
       <Td overflow="hidden" maxW="30ch" textOverflow="ellipsis">
-        {post.description}
+        {article.description}
       </Td>
-      <Td>{getStatusBadge(post.status)}</Td>
+      <Td>{getStatusBadge(article.status)}</Td>
       <Td>
-        {/* <ButtonsActions tableOptions={blogListOptions} id={post.id} /> */}
+        <ButtonsActions tableOptions={blogListOptions} articleId={article.id} />
       </Td>
     </Tr>
   ));

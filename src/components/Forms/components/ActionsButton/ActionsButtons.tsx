@@ -1,26 +1,31 @@
 import { TableOptionsType } from "@/components/Table/table.types";
 import useStore from "@/store";
 import { useRouter } from "@/utils/libs/routerFacade";
+
 import { UserProps } from "@/utils/types/user";
 import { IconButton, Stack, Tooltip } from "@chakra-ui/react";
 import { useCallback } from "react";
 
-export type ButtonActionsProps = TableOptionsType & {
-  user: UserProps;
+type DataProps = {
+  user?: UserProps;
+  articleId?: number | string;
 };
 
-type IconButtonFunctionType = {
+export type ButtonActionsProps = TableOptionsType & DataProps;
+
+type IconButtonFunctionType = DataProps & {
   route?: ((params: string | number) => string) | string;
-  user: UserProps;
   from: string;
 };
 
 export default function ButtonsActions({
+  articleId,
   user,
   modalsOptions,
   tableOptions,
 }: {
-  user: UserProps;
+  articleId?: number | string;
+  user?: UserProps;
   modalsOptions?: { [key: string]: (...arg0: string[]) => void } | undefined;
   tableOptions: TableOptionsType[];
 }) {
@@ -28,7 +33,7 @@ export default function ButtonsActions({
   const navigate = useRouter();
 
   const setModalFunction = useCallback(
-    (key: string, user: UserProps) => {
+    (key: string, user?: UserProps) => {
       if (user) setCurrentSelectedUser(user);
       if (modalsOptions) modalsOptions[key](user?.registerStatus || "");
     },
@@ -44,17 +49,25 @@ export default function ButtonsActions({
 
     switch (from) {
       case "user":
-        setCurrentSelectedUser(user);
-        const routeUserPath = getRoutePath(user.id);
-        navigate(`../${routeUserPath}`, { relative: "path" });
+        if (user) {
+          setCurrentSelectedUser(user);
+          const routeUserPath = getRoutePath(user.id);
+          navigate(`../${routeUserPath}`, { relative: "path" });
+        }
         break;
 
       case "terapheuticContract":
-        const routeContractPath = getRoutePath(user.id);
-        navigate(`../${routeContractPath}`, { relative: "path" });
+        if (user) {
+          const routeContractPath = getRoutePath(user.id);
+          navigate(`../${routeContractPath}`, { relative: "path" });
+        }
         break;
 
       case "blog":
+        if (articleId) {
+          const routeArticlePath = getRoutePath(articleId);
+          navigate(`../${routeArticlePath}`, { relative: "path" });
+        }
         break;
 
       default:
@@ -113,6 +126,7 @@ export default function ButtonsActions({
           isModal: icon.isModal,
           from: icon.from,
           user,
+          articleId,
         }),
       )}
     </Stack>
