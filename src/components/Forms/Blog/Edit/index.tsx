@@ -7,9 +7,12 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { EditBlogPostForm } from "./EditBlogPostForm";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
+import { useToast } from "@chakra-ui/react";
 
 export default function EditBlogPost() {
   let { articleID } = useParams();
+  const toast = useToast();
+  const token = localStorage.getItem("token");
 
   const {
     register,
@@ -30,8 +33,33 @@ export default function EditBlogPost() {
     },
   });
 
-  const onSubmit: SubmitHandler<Article> = () => {
-    console.log("edit data", data);
+  const onSubmit: SubmitHandler<Article> = (e) => {
+    const formData = new FormData();
+    formData.append("postInfo", JSON.stringify(e));
+
+    fetch(BASE_API_URL + `/article/${articleID}` || "", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    }).then((response) => {
+      if (response.ok) {
+        toast({
+          title: `Artigo publicado com sucesso!`,
+          position: "top",
+          status: "success",
+          isClosable: true,
+        });
+      } else {
+        toast({
+          title: `Ocorreu um erro no servidor`,
+          position: "top",
+          status: "error",
+          isClosable: true,
+        });
+      }
+    });
   };
 
   const { data, isLoading, error } = useQuery({

@@ -8,14 +8,21 @@ import { BASE_API_URL } from "@/helpers/envs";
 export default function Post() {
   const toast = useToast();
   const [resetForm, setResetForm] = useState(false);
+  const token = localStorage.getItem("token");
 
   function post(data: Article) {
+    const user = localStorage.getItem("user");
+
     const formData = new FormData();
+    formData.append("userData", JSON.stringify(user));
     formData.append("postInfo", JSON.stringify(data));
     formData.append("image", data.image[0]);
 
     fetch(BASE_API_URL + "/article" || "", {
       method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
       body: formData,
     }).then((response) => {
       if (response.ok) {
