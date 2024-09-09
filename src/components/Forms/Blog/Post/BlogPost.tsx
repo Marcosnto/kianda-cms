@@ -27,7 +27,6 @@ export default function BlogPost({
     handleSubmit,
     reset,
     control,
-    watch,
     formState: { errors },
   } = useForm<Article>();
 
@@ -91,6 +90,10 @@ export default function BlogPost({
                 type="text"
                 {...register("description", {
                   required: "Esse Campo é obrigatório",
+                  maxLength: {
+                    value: 150,
+                    message: "O limíte máximo de caracteres é de 150.",
+                  },
                 })}
                 focusBorderColor="green.800"
               />

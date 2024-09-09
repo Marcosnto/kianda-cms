@@ -22,9 +22,9 @@ export function EditBlogPostForm({
 }: any) {
   return (
     <>
-      <form typeof="form" onSubmit={handleSubmit(onSubmit)}>
-        <ComponentTitle title={`Artigo - ${data.title}`} type="h1" size="lg" />
+      <ComponentTitle title={`Artigo - ${data.title}`} type="h1" size="lg" />
 
+      <form typeof="form" onSubmit={handleSubmit(onSubmit)}>
         <Box display="flex" flexDirection="column" gap="8">
           <Stack spacing={8} direction="row">
             <FormControl isInvalid={!!errors.title}>
