@@ -5,12 +5,16 @@ import BlogPost from "./BlogPost";
 import { Article } from "@/utils/types/blog";
 import { BASE_API_URL } from "@/helpers/envs";
 
+interface BlogPostType extends Omit<Article, "image"> {
+  image: File[];
+}
+
 export default function Post() {
   const toast = useToast();
   const [resetForm, setResetForm] = useState(false);
   const token = localStorage.getItem("token");
 
-  function post(data: Article) {
+  function post(data: BlogPostType) {
     const user = localStorage.getItem("user");
 
     const formData = new FormData();

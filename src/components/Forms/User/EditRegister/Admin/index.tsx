@@ -29,16 +29,17 @@ function EditRegister() {
 
   useEffect(() => {
     if (data) {
+      console.log(data);
       reset({
-        fullName: data.data.fullName,
-        email: data.data.email,
-        bornDate: data.data.bornDate,
-        gender: data.data.gender,
-        otherGender: data.data.otherGender,
-        disabledPerson: data.data.disabledPerson,
-        disabledPersonDescription: data.data.disabledPersonDescription,
-        registerStatus: data.data.registerStatus,
-        role: data.data.role,
+        fullName: data.fullName,
+        email: data.email,
+        bornDate: data.bornDate,
+        gender: data.gender,
+        otherGender: data.otherGender,
+        disabledPerson: data.disabledPerson,
+        disabledPersonDescription: data.disabledPersonDescription,
+        registerStatus: data.registerStatus,
+        role: data.role,
       });
     }
   }, [data, reset]);
@@ -54,7 +55,7 @@ function EditRegister() {
   return (
     <EditRegisterForm
       control={control}
-      userName={data?.data.fullName}
+      userName={data?.fullName}
       errors={formErros}
       isSubmitting={
         isSendingEmail ||

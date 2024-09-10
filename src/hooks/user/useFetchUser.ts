@@ -2,7 +2,6 @@ import useStore from "@/store";
 import { useQuery } from "@tanstack/react-query";
 import { LoggedUserType } from "@/components/Forms/User/EditRegister/EditRegisterForm.hook";
 import { axiosInstance } from "@/api/axiosInstance";
-import { UserProps } from "@/utils/types/user";
 
 const useFetchUser = () => {
   const loggedUser: LoggedUserType = JSON.parse(
@@ -14,12 +13,16 @@ const useFetchUser = () => {
     ? currentSelectedUser?.id
     : loggedUser.id;
 
-  const { data, isLoading, error } = useQuery<UserProps>({
+  const {
+    data: fetchData,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ["editUser"],
     queryFn: () => axiosInstance.get(`/user/${currentSelectedID}`),
   });
 
-  return { data, isLoading, error };
+  return { fetchData, isLoading, error };
 };
 
 export default useFetchUser;

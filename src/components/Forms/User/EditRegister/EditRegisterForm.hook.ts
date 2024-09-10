@@ -2,8 +2,9 @@ import useStore from "@/store";
 import useFetchUser from "@/hooks/user/useFetchUser";
 import useUpdateUserStatus from "@/hooks/user/useUpdateUserStatus";
 import { RegisterProps } from "@/utils/types/forms";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { UserProps } from "@/utils/types/user";
 
 export type LoggedUserType = {
   id: number;
@@ -13,6 +14,7 @@ export type LoggedUserType = {
 
 export default function useEditRegisterForm() {
   const [sendEmail, setSendEmail] = useState(false);
+  const [data, setData] = useState<UserProps>();
   const { currentSelectedUser } = useStore();
   const loggedUser: LoggedUserType = JSON.parse(
     localStorage.getItem("user") || "",
@@ -27,7 +29,13 @@ export default function useEditRegisterForm() {
     updateUserRegisterLoading,
   } = useUpdateUserStatus();
 
-  const { data, isLoading, error } = useFetchUser();
+  const { fetchData, isLoading, error } = useFetchUser();
+
+  useEffect(() => {
+    if (fetchData) {
+      setData(fetchData.data);
+    }
+  }, [fetchData]);
 
   const {
     register,
