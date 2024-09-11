@@ -52,7 +52,7 @@ export default function AvatarMenu() {
             onClick: () => {
               logout();
               //TODO: Understand why the navite to / don't working
-              navigate(0);
+              navigate("/login");
             },
           })}
         </MenuList>

@@ -1,6 +1,6 @@
 import { Td, Text, Tr } from "@chakra-ui/react";
 
-import useList from "./user-list.hook";
+import userList from "./user-list.hook";
 import SpinnerLoad from "@/components/SpinnerLoad";
 import { apiError, noDataToShow } from "@/helpers/messages";
 import { UserProps } from "@/utils/types/user";
@@ -33,7 +33,7 @@ export default function UsersList() {
     onCloseDeleteModal,
     setCurrentPage,
     getTableStatusBadge,
-  } = useList();
+  } = userList();
 
   if (isLoading) {
     return <SpinnerLoad />;

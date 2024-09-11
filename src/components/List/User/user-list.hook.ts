@@ -7,7 +7,7 @@ import { useDisclosure } from "@chakra-ui/react";
 import { useCallback, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-const useList = () => {
+const userList = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const { currentSelectedUser } = useStore();
 
@@ -116,4 +116,4 @@ const useList = () => {
   };
 };
 
-export default useList;
+export default userList;
