@@ -8,6 +8,7 @@ import {
   FormLabel,
   Input,
   Stack,
+  Text,
 } from "@chakra-ui/react";
 import { Dispatch, SetStateAction, useEffect } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
@@ -147,10 +148,10 @@ export default function BlogPost({
               {...register("imageDescription")}
               focusBorderColor="green.800"
             />
-            <p>
+            <Text fontSize="xs">
               Essa descrição é utilizada para leitores de telas (pessoas com
               baixa/nenhuma visão)
-            </p>
+            </Text>
             <FormErrorMessage>
               {errors.imageDescription && errors.imageDescription.message}
             </FormErrorMessage>
@@ -165,7 +166,7 @@ export default function BlogPost({
               {...register("imageSub")}
               focusBorderColor="green.800"
             />
-            <p>Será exibida abaixo da imagem</p>
+            <Text fontSize="xs">Será exibida abaixo da imagem</Text>
 
             <FormErrorMessage>
               {errors.imageSub && errors.imageSub.message}
