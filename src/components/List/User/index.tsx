@@ -25,7 +25,6 @@ export default function UsersList() {
     statusOptionsFormHandleSubmit,
     statusOptionsFormOnSubmit,
     isUpdateUserPeding,
-    isSendingEmail,
     statusOptionsFormErrors,
     statusOptionsFormIsSubmitting,
     isOpenUpdateRegisterModal,
@@ -109,11 +108,7 @@ export default function UsersList() {
             isOpen={isOpenUpdateRegisterModal}
             onClose={onCloseUpdateRegisterModal}
             content={<ContentUpdateRegistration />}
-            isLoading={
-              statusOptionsFormIsSubmitting ||
-              isUpdateUserPeding ||
-              isSendingEmail
-            }
+            isLoading={statusOptionsFormIsSubmitting || isUpdateUserPeding}
             onConfirm={statusOptionsFormHandleSubmit(statusOptionsFormOnSubmit)}
           />
           <GenericModal

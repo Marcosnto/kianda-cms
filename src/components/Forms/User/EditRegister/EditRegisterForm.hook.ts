@@ -13,7 +13,7 @@ export type LoggedUserType = {
 };
 
 export default function useEditRegisterForm() {
-  const [sendEmail, setSendEmail] = useState(false);
+  // const [sendEmail, setSendEmail] = useState(false);
   const [data, setData] = useState<UserProps>();
   const { currentSelectedUser } = useStore();
   const loggedUser: LoggedUserType = JSON.parse(
@@ -25,7 +25,7 @@ export default function useEditRegisterForm() {
   const {
     updateUserStatusMutation,
     isUpdateUserPeding,
-    isSendingEmail,
+    // isSendingEmail,
     updateUserRegisterLoading,
   } = useUpdateUserStatus();
 
@@ -57,24 +57,24 @@ export default function useEditRegisterForm() {
           email: data.email,
           registerStatus: data.registerStatus,
           role: data.role,
-          sendEmail: sendEmail,
+          sendEmail: false,
         });
       }
     },
-    [currentSelectedUser, isValid, sendEmail, updateUserStatusMutation],
+    [currentSelectedUser, isValid, updateUserStatusMutation],
   );
 
   return {
     data,
     isLoading,
-    isSendingEmail,
+    // isSendingEmail,
     isUpdateUserPeding,
     error,
     formErros,
     formSubmitting,
     control,
     currentValues,
-    sendEmail,
+    // sendEmail,
     disabledRoleChange,
     updateUserRegisterLoading,
     canChangeRole,
@@ -82,6 +82,6 @@ export default function useEditRegisterForm() {
     reset,
     handleSubmit,
     onSubmit,
-    setSendEmail,
+    // setSendEmail,
   };
 }

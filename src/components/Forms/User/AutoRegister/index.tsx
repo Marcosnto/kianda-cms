@@ -25,7 +25,6 @@ import { Link } from "@/utils/libs/routerFacade";
 
 function UserAutoRegister() {
   const {
-    isSendingEmail,
     privacyPolicyLink,
     useTermsLink,
     modalStatus,
@@ -65,7 +64,7 @@ function UserAutoRegister() {
           borderRadius: "6px",
         }}
       >
-        {isSendingEmail ? (
+        {false ? (
           <SpinnerLoad height="68vh" width="60vh" />
         ) : (
           <>

@@ -1,9 +1,8 @@
-import { sendEmail } from "@/emails/hooks/useSendEmailToUser";
 import { BASE_API_URL, PRIVACY_POLICY, USE_TERMS } from "@/helpers/envs";
 import { useRouter } from "@/utils/libs/routerFacade";
 import { RegisterProps } from "@/utils/types/forms";
 import { useBoolean, useToast } from "@chakra-ui/react";
-import { useMutation } from "@tanstack/react-query";
+// import { useMutation } from "@tanstack/react-query";
 import { useCallback } from "react";
 
 export default function useAutoRegister() {
@@ -13,27 +12,27 @@ export default function useAutoRegister() {
   const privacyPolicyLink = PRIVACY_POLICY;
   const useTermsLink = USE_TERMS;
 
-  const { mutate: sendEmailPost, isPending: isSendingEmail } = useMutation({
-    mutationFn: (data: Partial<RegisterProps>) =>
-      sendEmail({
-        senderEmail: "teste@kiandadiversidade.com",
-        senderName: "Kianda",
-        recepients: [{ email: data.email, name: data.fullName }],
-        template: "auto-register",
-        subject: "Cadastro realizado com sucesso!",
-      }),
-    onSuccess: () => {
-      setModalStatus.on();
-    },
-    onError: () => {
-      toast({
-        title: `Ocorreu um erro ao enviar o email!`,
-        position: "top",
-        status: "error",
-        isClosable: true,
-      });
-    },
-  });
+  // const { mutate: sendEmailPost, isPending: isSendingEmail } = useMutation({
+  //   mutationFn: (data: Partial<RegisterProps>) =>
+  //     sendEmail({
+  //       senderEmail: "teste@kiandadiversidade.com",
+  //       senderName: "Kianda",
+  //       recepients: [{ email: data.email, name: data.fullName }],
+  //       template: "auto-register",
+  //       subject: "Cadastro realizado com sucesso!",
+  //     }),
+  //   onSuccess: () => {
+  //     setModalStatus.on();
+  //   },
+  //   onError: () => {
+  //     toast({
+  //       title: `Ocorreu um erro ao enviar o email!`,
+  //       position: "top",
+  //       status: "error",
+  //       isClosable: true,
+  //     });
+  //   },
+  // });
 
   const post = useCallback(
     (data: RegisterProps) => {
@@ -56,7 +55,7 @@ export default function useAutoRegister() {
         }),
       }).then(async (response) => {
         if (response.ok) {
-          sendEmailPost(data);
+          setModalStatus.on();
         } else {
           toast({
             title: `Ocorreu um erro ao registrar!`,
@@ -67,7 +66,7 @@ export default function useAutoRegister() {
         }
       });
     },
-    [sendEmailPost, toast],
+    [toast],
   );
 
   const onModalClose = useCallback(() => {
@@ -76,7 +75,6 @@ export default function useAutoRegister() {
   }, [setModalStatus]);
 
   return {
-    isSendingEmail,
     privacyPolicyLink,
     useTermsLink,
     modalStatus,

@@ -25,7 +25,7 @@ const useList = () => {
 
   const { users, error, isLoading, totalPages } = useUsersList(currentPage);
 
-  const { updateUserStatusMutation, isUpdateUserPeding, isSendingEmail } =
+  const { updateUserStatusMutation, isUpdateUserPeding } =
     useUpdateUserStatus();
 
   const {
@@ -54,7 +54,7 @@ const useList = () => {
           sendEmail: true,
         });
 
-        if (!isUpdateUserPeding && !isSendingEmail) {
+        if (!isUpdateUserPeding) {
           statusOptionsFormReset();
           onCloseUpdateRegisterModal();
         }
@@ -63,7 +63,7 @@ const useList = () => {
         currentSelectedUser?.email,
         currentSelectedUser?.fullName,
         currentSelectedUser?.id,
-        isSendingEmail,
+        // isSendingEmail,
         isUpdateUserPeding,
         onCloseUpdateRegisterModal,
         statusOptionsFormReset,
@@ -103,7 +103,7 @@ const useList = () => {
     statusOptionsFormErrors,
     statusOptionsFormIsSubmitting,
     isUpdateUserPeding,
-    isSendingEmail,
+    // isSendingEmail,
     statusOptionsFormOnSubmit,
     isOpenUpdateRegisterModal,
     onOpenUpdateRegisterModal,

@@ -9,7 +9,7 @@ function EditRegister() {
   const {
     data,
     isLoading,
-    isSendingEmail,
+    // isSendingEmail,
     isUpdateUserPeding,
     error,
     formErros,
@@ -18,10 +18,10 @@ function EditRegister() {
     register,
     currentValues,
     control,
-    sendEmail,
+    // sendEmail,
     reset,
     handleSubmit,
-    setSendEmail,
+    // setSendEmail,
     updateUserRegisterLoading,
     disabledRoleChange,
     canChangeRole,
@@ -57,17 +57,15 @@ function EditRegister() {
       userName={data?.fullName}
       errors={formErros}
       isSubmitting={
-        isSendingEmail ||
-        isUpdateUserPeding ||
-        formSubmitting ||
-        updateUserRegisterLoading
+        // isSendingEmail ||
+        isUpdateUserPeding || formSubmitting || updateUserRegisterLoading
       }
       currentValues={currentValues}
       onSubmit={onSubmit}
       register={register}
       handleSubmit={handleSubmit}
-      sendEmail={sendEmail}
-      setSendEmail={setSendEmail}
+      // sendEmail={sendEmail}
+      // setSendEmail={setSendEmail}
       disabledRoleChange={disabledRoleChange}
       canChangeRole={canChangeRole}
     />
