@@ -24,6 +24,7 @@ export default function useLogin() {
         if (response.ok) {
           response.json().then((response: ResponseProps) => {
             if (response.registerStatus === "1") {
+              console.log("response", response);
               const user = {
                 id: response.id,
                 role: response.role,
