@@ -23,7 +23,7 @@ export default function TerapheuticContractsList() {
   if (error) {
     return <h1>{apiError}</h1>;
   }
-  console.log(users);
+
   const tableBody = users?.map((user) => (
     <Tr key={user.id}>
       <Td>{user.id}</Td>
