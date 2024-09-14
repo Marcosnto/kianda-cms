@@ -10,7 +10,7 @@ import {
   IoFolderOutline,
   IoPeopleOutline,
   IoWalletOutline,
-  IoCalendarOutline,
+  // IoCalendarOutline,
 } from "react-icons/io5";
 
 function getIcon(iconName: IconType) {
@@ -56,12 +56,12 @@ export const admin: UserOptionsProps = {
       displayName: "Contratos Terapêuticos",
       path: "psi/terapheutic-contracts",
     },
-    {
-      key: "user-admin-04",
-      icon: getIcon(IoCalendarOutline),
-      displayName: "Calendário",
-      path: "psi/schedule",
-    },
+    // {
+    //   key: "user-admin-04",
+    //   icon: getIcon(IoCalendarOutline),
+    //   displayName: "Calendário",
+    //   path: "psi/schedule",
+    // },
   ],
   blog: [
     {

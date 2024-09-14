@@ -1,4 +1,4 @@
-import { L10n, loadCldr, registerLicense } from "@syncfusion/ej2-base";
+import { L10n, loadCldr } from "@syncfusion/ej2-base";
 
 import { SYNCFUSION_API_KEY } from "@/helpers/envs";
 import { caGregorian } from "./helpers/ca-gregorian";
@@ -22,8 +22,6 @@ import "@syncfusion/ej2-react-schedule/styles/material.css";
 L10n.load({
   pt: localesPt.pt,
 });
-
-registerLicense(SYNCFUSION_API_KEY);
 
 function withSyncFusionConfig<T extends {}>(
   WrappedComponent: ComponentType<T>,
