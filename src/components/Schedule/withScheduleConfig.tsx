@@ -29,7 +29,7 @@ function withSyncFusionConfig<T extends {}>(
   WrappedComponent: ComponentType<T>,
 ) {
   loadCldr(caGregorian, numberingSystems, numbers, timeZoneNames);
-
+  console.log("p", SYNCFUSION_API_KEY);
   return class extends React.Component<T> {
     render() {
       return <WrappedComponent {...this.props} />;

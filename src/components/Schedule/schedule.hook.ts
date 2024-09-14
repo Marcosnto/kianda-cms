@@ -37,8 +37,8 @@ export default function useSchedule() {
     isSuccess: postSuccess,
   } = useMutation({
     mutationFn: (data) => axiosInstance.post("/schedule", data),
-    onSuccess: () => console.log("sucesso!!!!"),
-    onError: (err) => console.log("deu erro pai ", err),
+    onSuccess: () => console.log("Sucesso!"),
+    onError: (err) => console.log("Deu erro", err),
   });
 
   const {
@@ -50,8 +50,8 @@ export default function useSchedule() {
     mutationFn: (data) =>
       //@ts-ignore
       axiosInstance.put(`/schedule/${data.calendarID}`, data),
-    onSuccess: () => console.log("editado!!!!"),
-    onError: (err) => console.log("deu na edicao erro pai ", err),
+    onSuccess: () => console.log("Editado!"),
+    onError: (err) => console.log("Deu erro na edição", err),
   });
 
   const {
@@ -62,7 +62,7 @@ export default function useSchedule() {
   } = useMutation({
     //@ts-ignore
     mutationFn: (data) => axiosInstance.delete(`/schedule/${data.calendarID}`),
-    onSuccess: () => console.log("deletado!!!!"),
+    onSuccess: () => console.log("Deletado!"),
     onError: (err) => console.log("deu na deleção erro pai ", err),
   });
 
