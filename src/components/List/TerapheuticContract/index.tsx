@@ -8,13 +8,14 @@ import {
   terapheuticContractListOptions,
   terapheuticContractTableHeaders,
 } from "@/helpers/tableConfigs";
-import useUsersList from "@/hooks/user/useUsersList";
+
 import { Td, Tr } from "@chakra-ui/react";
 import { useState } from "react";
+import useGetUsers from "@/api/user";
 
 export default function TerapheuticContractsList() {
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const { users, error, isLoading, totalPages } = useUsersList(currentPage);
+  const { users, error, isLoading, totalPages } = useGetUsers(currentPage);
 
   if (isLoading) {
     return <SpinnerLoad />;

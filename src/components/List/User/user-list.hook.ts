@@ -1,11 +1,10 @@
 import useStore from "@/store";
 import getStatusBadge from "@/utils/getStatusBadge";
-import useUpdateUserStatus from "@/hooks/user/useUpdateUserStatus";
-import useUsersList from "@/hooks/user/useUsersList";
 import { RegisterProps } from "@/utils/types/forms";
 import { useDisclosure } from "@chakra-ui/react";
 import { useCallback, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import useGetUsers, { updateUserStatus } from "@/api/user";
 
 const userList = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -23,10 +22,9 @@ const userList = () => {
     onClose: onCloseDeleteModal,
   } = useDisclosure();
 
-  const { users, error, isLoading, totalPages } = useUsersList(currentPage);
+  const { users, error, isLoading, totalPages } = useGetUsers(currentPage);
 
-  const { updateUserStatusMutation, isUpdateUserPeding } =
-    useUpdateUserStatus();
+  const { updateUserStatusMutation, isUpdateUserPeding } = updateUserStatus();
 
   const {
     control: statusOptionsFormControl,
