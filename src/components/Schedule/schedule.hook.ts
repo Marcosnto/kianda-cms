@@ -1,11 +1,22 @@
-import { axiosInstance } from "@/api/axiosInstance";
 import { ActionEventArgs } from "@syncfusion/ej2-react-schedule";
-import { useMutation, useQuery } from "@tanstack/react-query";
 import { useRef } from "react";
 import editorWindowTemplate from "./components/editorWindow";
+import {
+  handleDeleteSchedule,
+  handleGetScheduleList,
+  handlePostSchedule,
+  handlePutSchedule,
+} from "@/api/schedule";
 
 export default function useSchedule() {
   const recurrObject = useRef(null);
+  const { scheduleListData, isScheduleListLoading, isScheduleListError } =
+    handleGetScheduleList();
+  const { postSchedule, postPending, postError, postSuccess } =
+    handlePostSchedule();
+  const { putSchedule, putPending, putError, putSuccess } = handlePutSchedule();
+  const { deleteSchedule, deletePending, deleteError, deleteSuccess } =
+    handleDeleteSchedule();
 
   function editorWindowComponent(e: any) {
     return editorWindowTemplate({ ...e, recurrObject });
@@ -18,53 +29,6 @@ export default function useSchedule() {
       args.data.RecurrenceRule = recurrObject.current.value;
     }
   };
-
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["schedulesList"],
-    queryFn: () =>
-      axiosInstance
-        .get("/schedules")
-        .then(({ data }) => {
-          return data;
-        })
-        .catch((error) => new Error(error)),
-  });
-
-  const {
-    mutate: postSchedule,
-    isPending: postPending,
-    isError: postError,
-    isSuccess: postSuccess,
-  } = useMutation({
-    mutationFn: (data) => axiosInstance.post("/schedule", data),
-    onSuccess: () => console.log("Sucesso!"),
-    onError: (err) => console.log("Deu erro", err),
-  });
-
-  const {
-    mutate: putSchedule,
-    isPending: putPending,
-    isError: putError,
-    isSuccess: putSuccess,
-  } = useMutation({
-    mutationFn: (data) =>
-      //@ts-ignore
-      axiosInstance.put(`/schedule/${data.calendarID}`, data),
-    onSuccess: () => console.log("Editado!"),
-    onError: (err) => console.log("Deu erro na edição", err),
-  });
-
-  const {
-    mutate: deleteSchedule,
-    isPending: deletePending,
-    isError: deleteError,
-    isSuccess: deleteSuccess,
-  } = useMutation({
-    //@ts-ignore
-    mutationFn: (data) => axiosInstance.delete(`/schedule/${data.calendarID}`),
-    onSuccess: () => console.log("Deletado!"),
-    onError: (err) => console.log("deu na deleção erro pai ", err),
-  });
 
   const handleCompleteAction = (e: ActionEventArgs) => {
     console.log(e);
@@ -90,9 +54,9 @@ export default function useSchedule() {
   };
 
   return {
-    data,
-    isLoading,
-    error,
+    data: scheduleListData,
+    isLoading: isScheduleListLoading,
+    error: isScheduleListError,
     postPending,
     postError,
     postSuccess,
