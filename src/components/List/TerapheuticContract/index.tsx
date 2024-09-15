@@ -11,7 +11,7 @@ import {
 
 import { Td, Tr } from "@chakra-ui/react";
 import { useState } from "react";
-import useGetUsers from "@/api/user";
+import { useGetUsers } from "@/api/user";
 
 export default function TerapheuticContractsList() {
   const [currentPage, setCurrentPage] = useState<number>(1);

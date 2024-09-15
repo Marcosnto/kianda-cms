@@ -4,7 +4,7 @@ import { RegisterProps } from "@/utils/types/forms";
 import { useDisclosure } from "@chakra-ui/react";
 import { useCallback, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import useGetUsers, { updateUserStatus } from "@/api/user";
+import { updateUserStatus, useGetUsers } from "@/api/user";
 
 const userList = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);

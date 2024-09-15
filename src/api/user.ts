@@ -8,6 +8,32 @@ import { UpdateRegister } from "@/components/Forms/User/EditRegister/EditRegiste
 import { useState } from "react";
 import { UserProps } from "@/utils/types/user";
 import setNumberOfPages from "@/utils/setNumberOfPages";
+import { RegisterProps } from "@/utils/types/forms";
+
+export const postUser = () => {
+  const {
+    mutate: postUserFn,
+    isPending: isPostUserPending,
+    isError: hasPostUserError,
+    isSuccess: isPostUserSucess,
+  } = useMutation({
+    mutationFn: (data: RegisterProps) =>
+      axiosInstance.post(`${BASE_API_URL}/user-register`, {
+        fullName: data.fullName,
+        bornDate: data.bornDate,
+        email: data.email,
+        password: data.password,
+        pronouns: data.pronouns,
+        gender: data.gender,
+        otherGender: data.otherGender,
+        disabledPerson: data.disabledPerson,
+        disabledPersonDescription: data.disabledPersonDescription,
+        acceptTerms: data.acceptTerm ? 1 : 0,
+      }),
+  });
+
+  return { postUserFn, isPostUserSucess, isPostUserPending, hasPostUserError };
+};
 
 export const fetchUsers = () => {
   const loggedUser: LoggedUserType = JSON.parse(
@@ -31,7 +57,7 @@ export const fetchUsers = () => {
   return { fetchData, isLoading, error };
 };
 
-export default function useGetUsers(currentPage: number) {
+export function useGetUsers(currentPage: number) {
   const [totalPages, setTotalPages] = useState<number>(0);
 
   const { data, isLoading, error } = useQuery<UserProps[]>({
@@ -57,6 +83,8 @@ export const updateUserRegister = () => {
   const {
     mutate: updateUserRegisterMutation,
     isPending: updateUserRegisterLoading,
+    isError: hasUpdateUserRegisterError,
+    isSuccess: isUpdateUserRegisterSucess,
   } = useMutation({
     mutationFn: ({ id, ...props }: UpdateRegister) =>
       fetch(BASE_API_URL + `/user/update/${id}` || "", {
@@ -89,37 +117,20 @@ export const updateUserRegister = () => {
     },
   });
 
-  return { updateUserRegisterMutation, updateUserRegisterLoading };
+  return {
+    updateUserRegisterMutation,
+    updateUserRegisterLoading,
+    isUpdateUserRegisterSucess,
+    hasUpdateUserRegisterError,
+  };
 };
 
 export const updateUserStatus = () => {
   const token = localStorage.getItem("token");
   const toast = useToast();
-  // const { currentSelectedUser } = useStore();
-  // const { sendEmailPost, isSendingEmail } = useSendEmailToUser({
-  //   toastMessage: "Alteração realizada com sucesso",
-  // });
+
   const { updateUserRegisterMutation, updateUserRegisterLoading } =
     updateUserRegister();
-
-  // const sendEditRegisterEmail = useCallback(
-  //   ({ fullName, email }: { fullName: string; email: string }) => {
-  //     sendEmailPost({
-  //       senderEmail: "teste@kiandadiversidade.com",
-  //       senderName: "Kianda",
-  //       recepients: [
-  //         {
-  //           email: email || currentSelectedUser?.email || "",
-  //           name: fullName || currentSelectedUser?.fullName || "",
-  //         },
-  //       ],
-  //       template: "",
-  //       subject: "Cadastro alterado!",
-  //       text: "Seu cadastro foi alterado. :)",
-  //     });
-  //   },
-  //   [currentSelectedUser?.email, currentSelectedUser?.fullName, sendEmailPost],
-  // );
 
   const { mutate: updateUserStatusMutation, isPending: isUpdateUserPeding } =
     useMutation({

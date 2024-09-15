@@ -1,4 +1,11 @@
-import { Box, Button, Divider, Heading, Stack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Divider,
+  Heading,
+  Stack,
+  useToast,
+} from "@chakra-ui/react";
 
 import FirstEmergencyContact from "./FirstEmergencyContact";
 import GeneralInformations from "./GeneralInformations";
@@ -11,6 +18,7 @@ import { apiError } from "@/helpers/messages";
 import { useEffect } from "react";
 
 export default function TerapheuticContract() {
+  const toast = useToast();
   const {
     register,
     handleSubmit,
@@ -18,25 +26,50 @@ export default function TerapheuticContract() {
     onSubmit,
     reset,
     formErros,
-    isLoading,
+    isContractDataLoading,
     hasErros,
-    error,
-    patientData,
+    isContractDataError,
+    contractData,
     watched,
     control,
+    ispostTherapeuticContractFnError,
+    ispostTherapeuticContractFnPending,
+    ispostTherapeuticContractFnSuccess,
   } = useTerapheuticContractForm();
 
   useEffect(() => {
-    if (patientData) {
-      reset(patientData);
+    if (contractData) {
+      reset(contractData);
     }
-  }, [patientData, reset]);
+  }, [contractData, reset]);
 
-  if (isLoading) {
+  if (ispostTherapeuticContractFnPending) {
+    console.log("carregando therapeutic contract...");
+  }
+
+  if (ispostTherapeuticContractFnSuccess) {
+    toast({
+      title: `Dados atualizados com sucesso!`,
+      position: "top",
+      status: "success",
+      isClosable: true,
+    });
+  }
+
+  if (ispostTherapeuticContractFnError) {
+    toast({
+      title: `Ocorreu um erro ao atualizar os dados`,
+      position: "top",
+      status: "error",
+      isClosable: true,
+    });
+  }
+
+  if (isContractDataLoading) {
     return <SpinnerLoad />;
   }
 
-  if (error) {
+  if (isContractDataError) {
     return <h1>{apiError}</h1>;
   }
 
