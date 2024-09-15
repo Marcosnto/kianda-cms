@@ -1,4 +1,4 @@
-import { useAuth } from "@/hooks/useAuth";
+import { useAuth } from "@/api/auth";
 import { Navigate, Outlet } from "@/utils/libs/routerFacade";
 
 interface AuthGuardProps {
