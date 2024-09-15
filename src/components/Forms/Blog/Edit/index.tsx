@@ -1,18 +1,25 @@
-import SpinnerLoad from "@/components/SpinnerLoad";
-import { BASE_API_URL } from "@/helpers/envs";
-import { apiError } from "@/helpers/messages";
-import { Article } from "@/utils/types/blog";
-import { useQuery } from "@tanstack/react-query";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { EditBlogPostForm } from "./EditBlogPostForm";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
+import { getArticle, handlePostArticle } from "@/api/blog";
+
+import { EditBlogPostForm } from "./EditBlogPostForm";
+import SpinnerLoad from "@/components/SpinnerLoad";
+import { apiError } from "@/helpers/messages";
+
+import { Article } from "@/utils/types/blog";
 import { useToast } from "@chakra-ui/react";
 
 export default function EditBlogPost() {
   let { articleID } = useParams();
   const toast = useToast();
-  const token = localStorage.getItem("token");
+
+  const {
+    postArticleFn,
+    isPostArticleError,
+    isPostArticlePending,
+    isPostArticleSuccess,
+  } = handlePostArticle(articleID);
 
   const {
     register,
@@ -33,75 +40,64 @@ export default function EditBlogPost() {
     },
   });
 
-  const onSubmit: SubmitHandler<Article> = (e) => {
+  const onSubmit: SubmitHandler<Article> = (data) => {
     const formData = new FormData();
-    formData.append("postInfo", JSON.stringify(e));
+    formData.append("postInfo", JSON.stringify(data));
 
-    fetch(BASE_API_URL + `/article/${articleID}` || "", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      body: formData,
-    }).then((response) => {
-      if (response.ok) {
-        toast({
-          title: `Artigo publicado com sucesso!`,
-          position: "top",
-          status: "success",
-          isClosable: true,
-        });
-      } else {
-        toast({
-          title: `Ocorreu um erro no servidor`,
-          position: "top",
-          status: "error",
-          isClosable: true,
-        });
-      }
-    });
+    postArticleFn(formData);
   };
 
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["editPost"],
-    queryFn: () =>
-      fetch(BASE_API_URL + `/article/${articleID}` || "", {
-        method: "GET",
-      }).then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          throw new Error("Ocorreu um erro ao obter os dados");
-        }
-      }),
-  });
+  const { articleData, isGetArticleLoading, isGetArticleError } =
+    getArticle(articleID);
 
   useEffect(() => {
-    if (data) {
+    if (articleData) {
       reset({
-        title: data.title,
-        author: data.author,
-        content: data.content,
-        description: data.description,
-        image: data.image,
-        imageDescription: data.imageDescription,
-        imageSub: data.imageSub,
-        status: data.status,
+        title: articleData.title,
+        author: articleData.author,
+        content: articleData.content,
+        description: articleData.description,
+        image: articleData.image,
+        imageDescription: articleData.imageDescription,
+        imageSub: articleData.imageSub,
+        status: articleData.status,
       });
     }
-  }, [data]);
+  }, [articleData]);
 
-  if (isLoading) {
+  if (isPostArticleSuccess) {
+    toast({
+      title: `Artigo publicado com sucesso!`,
+      position: "top",
+      status: "success",
+      isClosable: true,
+    });
+  }
+
+  if (isPostArticleError) {
+    toast({
+      title: `Ocorreu um erro no servidor`,
+      position: "top",
+      status: "error",
+      isClosable: true,
+    });
+  }
+
+  if (isPostArticlePending) {
+    console.log("carregando post article...");
+  }
+
+  if (isGetArticleLoading) {
     return <SpinnerLoad />;
   }
 
-  if (error) {
+  if (isGetArticleError) {
     return <h1>{apiError}</h1>;
   }
 
   return (
     <EditBlogPostForm
-      data={data}
+      data={articleData}
       register={register}
       control={control}
       handleSubmit={handleSubmit}
