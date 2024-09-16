@@ -1,5 +1,4 @@
-import { useState } from "react";
-
+import { useLocation } from "react-router-dom";
 import getMenuOptions from "../../helpers/menuOptionsPermitions";
 import { OptionsProps } from "./MenuOptions";
 
@@ -10,6 +9,7 @@ export type UserOptionsProps = {
 };
 
 const useMenu = () => {
+  const { pathname } = useLocation();
   const user = localStorage?.getItem("user");
   let menuOptions;
 
@@ -20,6 +20,7 @@ const useMenu = () => {
   }
 
   return {
+    pathName: pathname,
     menuOptions,
   };
 };
