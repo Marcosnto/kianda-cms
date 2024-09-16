@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { useRouter } from "@/utils/libs/routerFacade";
-import { handleLogin } from "@/api/auth";
+import { useHandleLogin } from "@/api/auth";
 
 export default function useLogin() {
   const navigate = useRouter();
@@ -13,7 +13,7 @@ export default function useLogin() {
     isPendingLogin,
     isSucessLogin,
     registerStatus,
-  } = handleLogin();
+  } = useHandleLogin();
 
   return {
     isErrorLogin,

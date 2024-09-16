@@ -30,14 +30,14 @@ export default function Login() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<LoginProps>();
 
   const onSubmit: SubmitHandler<LoginProps> = (data) => {
     loginFn(data);
   };
 
-  if (isSucessLogin) {
+  if (isSucessLogin && registerStatus === 1) {
     setTimeout(() => navigate("/dashboard"), 100);
   }
 
