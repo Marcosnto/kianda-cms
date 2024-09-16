@@ -10,6 +10,10 @@ export type MenuProps = {
 export default function Menu({ onClose }: MenuProps) {
   const { menuOptions } = useMenu();
 
+  if (menuOptions?.type === "default" || !menuOptions) {
+    return <p>Ocorreu um erro ao solicitar as opções</p>;
+  }
+
   return (
     <Flex
       flexDir="column"

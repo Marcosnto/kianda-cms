@@ -2,7 +2,6 @@ import { useState } from "react";
 
 import getMenuOptions from "../../helpers/menuOptionsPermitions";
 import { OptionsProps } from "./MenuOptions";
-import { useLocation } from "@/utils/libs/routerFacade";
 
 export type UserOptionsProps = {
   type: string;
@@ -11,22 +10,17 @@ export type UserOptionsProps = {
 };
 
 const useMenu = () => {
-  const { pathname } = useLocation();
   const user = localStorage?.getItem("user");
-  const [menuOptions, setOptions] = useState<UserOptionsProps>({
-    type: "",
-    users: [],
-    blog: undefined,
-  });
+  let menuOptions;
+
   //TODO: Improve this way to get the options
-  if (window && user && menuOptions.users?.length == 0) {
+  if (window && user) {
     const userData = JSON.parse(user);
-    setOptions(getMenuOptions(userData.role));
+    menuOptions = getMenuOptions(userData.role);
   }
 
   return {
     menuOptions,
-    pathName: pathname,
   };
 };
 
