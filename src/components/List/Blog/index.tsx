@@ -1,6 +1,6 @@
 //@ts-nocheck
 import SpinnerLoad from "@/components/SpinnerLoad";
-import { Td, Tr } from "@chakra-ui/react";
+import { Box, Button, Td, Tr } from "@chakra-ui/react";
 import { useState } from "react";
 
 import { apiError, noDataToShow } from "@/helpers/messages";
@@ -11,13 +11,15 @@ import { blogListOptions, blogTableHeaders } from "@/helpers/tableConfigs";
 import ComponentTitle from "@/components/Title";
 import TableList from "@/components/Table";
 import FeedbackAPI from "@/components/FeedbackAPI";
-import useGetArticles from "@/api/blog";
+import { useGetArticles } from "@/api/blog";
+import { useNavigate } from "react-router-dom";
 
 export default function PostsList() {
   const [currentPage, setCurrentPage] = useState<number>(0);
+  const navigate = useNavigate();
 
   const { blogPosts, error, isLoading, totalPages } =
-    useGetArticlest(currentPage);
+    useGetArticles(currentPage);
 
   if (isLoading) {
     return <SpinnerLoad />;
@@ -43,9 +45,19 @@ export default function PostsList() {
 
   return (
     <>
+      <ComponentTitle title="Artigos" type="h1" size="lg" />
+      <Box pb={5} display="flex" justifyContent="end">
+        <Button
+          size="sm"
+          variant="outline"
+          colorScheme="green"
+          onClick={() => navigate("../create-article", { relative: "path" })}
+        >
+          +
+        </Button>
+      </Box>
       {blogPosts.length > 0 ? (
         <>
-          <ComponentTitle title="Artigos" type="h1" size="lg" />
           <TableList
             headers={blogTableHeaders}
             totalPages={totalPages}
