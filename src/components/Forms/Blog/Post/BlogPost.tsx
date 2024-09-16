@@ -13,6 +13,7 @@ import {
 import { Dispatch, SetStateAction, useEffect } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import RichTextInput from "../../components/RichTextInput";
+import { useNavigate } from "react-router-dom";
 
 export default function BlogPost({
   post,
@@ -23,6 +24,8 @@ export default function BlogPost({
   resetForm: boolean;
   setResetForm: Dispatch<SetStateAction<boolean>>;
 }) {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -201,8 +204,12 @@ export default function BlogPost({
             mt="6"
             mb="8"
           >
-            <Button colorScheme="green" variant="outline" type="reset">
-              Cancelar
+            <Button
+              colorScheme="green"
+              variant="outline"
+              onClick={() => navigate("../articles", { relative: "path" })}
+            >
+              Voltar
             </Button>
             <Button colorScheme="green" variant="solid" type="submit">
               Salvar
