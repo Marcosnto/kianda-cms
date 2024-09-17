@@ -53,12 +53,11 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isValidateAuthError]);
 
-  //TODO: LOGIN LOADING PAGE
   return (
     <AuthContext.Provider
       value={{ isAuth: signedIn && isValidateAuthSuccess, signin, signout }}
     >
-      {true ? <SpinnerLoad size="xl" /> : children}
+      {isValidateAuthLoading ? <SpinnerLoad size="xl" /> : children}
     </AuthContext.Provider>
   );
 }
