@@ -1,4 +1,5 @@
 import { handleValidateAuth } from "@/api/auth";
+import SpinnerLoad from "@/components/SpinnerLoad";
 import { Spinner, useToast } from "@chakra-ui/react";
 import { useQueryClient } from "@tanstack/react-query";
 import { createContext, useCallback, useEffect, useState } from "react";
@@ -57,7 +58,7 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
     <AuthContext.Provider
       value={{ isAuth: signedIn && isValidateAuthSuccess, signin, signout }}
     >
-      {isValidateAuthLoading ? <Spinner /> : children}
+      {true ? <SpinnerLoad size="xl" /> : children}
     </AuthContext.Provider>
   );
 }
