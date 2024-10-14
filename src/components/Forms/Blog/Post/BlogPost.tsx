@@ -86,14 +86,13 @@ export default function BlogPost({
           </Stack>
 
           <Stack spacing={8} direction="row">
-            <FormControl isInvalid={!!errors.description} isRequired>
+            <FormControl isInvalid={!!errors.description}>
               <FormLabel htmlFor="description">Subtítulo</FormLabel>
 
               <Input
                 id="description"
                 type="text"
                 {...register("description", {
-                  required: "Esse Campo é obrigatório",
                   maxLength: {
                     value: 150,
                     message: "O limíte máximo de caracteres é de 150.",
