@@ -1,6 +1,6 @@
 import { handleValidateAuth } from "@/api/auth";
 import SpinnerLoad from "@/components/SpinnerLoad";
-import { Spinner, useToast } from "@chakra-ui/react";
+import { useToast } from "@chakra-ui/react";
 import { useQueryClient } from "@tanstack/react-query";
 import { createContext, useCallback, useEffect, useState } from "react";
 
