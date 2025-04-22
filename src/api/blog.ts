@@ -4,22 +4,39 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { axiosInstance } from "./axiosInstance";
 
-export function useGetArticles(currentPage: number) {
+export function useGetAllArticles(currentPage: number) {
   const [totalPages, setTotalPages] = useState<number>(0);
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["blogList", currentPage],
     queryFn: () =>
-      fetch(BASE_API_URL + `/articles?_page=${currentPage}` || "", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }).then((res) => {
-        const totalItens = res.headers.get("X-Total-Count");
+      axiosInstance.get(`/articles?_page=${currentPage}`).then((res) => {
+        const { data, headers } = res;
+        const totalItens =
+          typeof headers.get === "function" && headers.get("X-Total-Count");
         setTotalPages(setNumberOfPages(totalItens) || 0);
-        return res.json();
+        return data;
       }),
+  });
+
+  return { blogPosts: data, isLoading, error, totalPages };
+}
+
+export function useGetArticlesById(currentPage: number, userId: string) {
+  const [totalPages, setTotalPages] = useState<number>(0);
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["blogList", currentPage],
+    queryFn: () =>
+      axiosInstance
+        .get(`/articles-by-id?_page=${currentPage}&user_id=${userId}`)
+        .then((res) => {
+          const { data, headers } = res;
+          const totalItens =
+            typeof headers.get === "function" && headers.get("X-Total-Count");
+          setTotalPages(setNumberOfPages(totalItens) || 0);
+          return data;
+        }),
   });
 
   return { blogPosts: data, isLoading, error, totalPages };
