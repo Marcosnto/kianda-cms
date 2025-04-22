@@ -57,14 +57,14 @@ export const fetchUsers = () => {
   return { fetchData, isLoading, error };
 };
 
-export function useGetUsers(currentPage: number) {
+export function useGetUsers(currentPage: number, type: string | undefined) {
   const [totalPages, setTotalPages] = useState<number>(0);
 
   const { data, isLoading, error } = useQuery<UserProps[]>({
-    queryKey: ["usersList", currentPage],
+    queryKey: [currentPage, type],
     queryFn: () =>
       axiosInstance
-        .get(`/users?_page=${currentPage}`)
+        .get(`/users?_page=${currentPage}&type=${type}`)
         .then(({ data, headers }) => {
           const totalItens = headers["x-total-count"];
           setTotalPages(setNumberOfPages(totalItens) || 0);

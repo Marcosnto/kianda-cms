@@ -33,6 +33,7 @@ export default function UsersList() {
     onCloseDeleteModal,
     setCurrentPage,
     getTableStatusBadge,
+    pageTitle,
   } = userList();
 
   if (isLoading) {
@@ -94,7 +95,7 @@ export default function UsersList() {
     <>
       {users && users.length > 0 ? (
         <>
-          <ComponentTitle title="Pacientes" type="h1" />
+          <ComponentTitle title={pageTitle} type="h1" />
           <TableList
             headers={userTableHeaders}
             totalPages={totalPages}
