@@ -21,6 +21,7 @@ type GenericModalTypes = {
   colorSchemeConfirm?: string;
   btnConfirmLabel?: string;
   btnCancelLabel?: string;
+  hasBtnCancel?: boolean;
 };
 
 export function GenericModal({
@@ -35,6 +36,7 @@ export function GenericModal({
   colorSchemeConfirm = "green",
   btnCancelLabel = "Cancelar",
   btnConfirmLabel = "Confirmar",
+  hasBtnCancel = true,
 }: GenericModalTypes) {
   return (
     <Modal
@@ -54,15 +56,18 @@ export function GenericModal({
         <ModalBody>{content}</ModalBody>
 
         <ModalFooter>
-          <Button
-            colorScheme={colorSchemeCancel}
-            mr={3}
-            size="sm"
-            variant="outline"
-            onClick={onClose}
-          >
-            {btnCancelLabel}
-          </Button>
+          {hasBtnCancel && (
+            <Button
+              colorScheme={colorSchemeCancel}
+              mr={3}
+              size="sm"
+              variant="outline"
+              onClick={onClose}
+            >
+              {btnCancelLabel}
+            </Button>
+          )}
+
           <Button
             colorScheme={colorSchemeConfirm}
             type="submit"

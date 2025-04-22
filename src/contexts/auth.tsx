@@ -1,6 +1,7 @@
-import { JWT_VALIDATE } from "@/helpers/envs";
-import { Spinner, useToast } from "@chakra-ui/react";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { handleValidateAuth } from "@/api/auth";
+import SpinnerLoad from "@/components/SpinnerLoad";
+import { useToast } from "@chakra-ui/react";
+import { useQueryClient } from "@tanstack/react-query";
 import { createContext, useCallback, useEffect, useState } from "react";
 
 type AuthContextTypes = {
@@ -20,25 +21,8 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
     return !!storageAccessToken;
   });
 
-  const { isLoading, isError, isSuccess } = useQuery({
-    queryKey: ["auth"],
-    queryFn: () =>
-      fetch(JWT_VALIDATE || "", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      }).then((response) => {
-        if (!response.ok) {
-          throw new Error("Invalid token");
-        }
-
-        return response.json();
-      }),
-    enabled: signedIn,
-    staleTime: Infinity,
-  });
+  const { isValidateAuthLoading, isValidateAuthError, isValidateAuthSuccess } =
+    handleValidateAuth(signedIn);
 
   const signin = useCallback((accessToken: string) => {
     localStorage.setItem("token", accessToken);
@@ -56,7 +40,7 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [queryClient]);
 
   useEffect(() => {
-    if (isError) {
+    if (isValidateAuthError) {
       toast({
         title: `Sua sessão expirou!`,
         position: "top",
@@ -67,14 +51,13 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
       signout();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isError]);
+  }, [isValidateAuthError]);
 
-  //TODO: LOGIN LOADING PAGE
   return (
     <AuthContext.Provider
-      value={{ isAuth: signedIn && isSuccess, signin, signout }}
+      value={{ isAuth: signedIn && isValidateAuthSuccess, signin, signout }}
     >
-      {isLoading ? <Spinner /> : children}
+      {isValidateAuthLoading ? <SpinnerLoad size="xl" /> : children}
     </AuthContext.Provider>
   );
 }

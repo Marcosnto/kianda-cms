@@ -1,15 +1,30 @@
 import useStore from "@/store";
 import getStatusBadge from "@/utils/getStatusBadge";
-import useUpdateUserStatus from "@/hooks/user/useUpdateUserStatus";
-import useUsersList from "@/hooks/user/useUsersList";
 import { RegisterProps } from "@/utils/types/forms";
 import { useDisclosure } from "@chakra-ui/react";
 import { useCallback, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { updateUserStatus, useGetUsers } from "@/api/user";
+import { useParams } from "react-router-dom";
 
 const userList = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const { type: userType } = useParams();
   const { currentSelectedUser } = useStore();
+  let pageTitle = "";
+
+  switch (userType) {
+    case "patient":
+      pageTitle = "Pacientes";
+      break;
+
+    case "web-editor":
+      pageTitle = "Editores";
+      break;
+    default:
+      "Indefinido";
+      break;
+  }
 
   const {
     isOpen: isOpenUpdateRegisterModal,
@@ -23,10 +38,12 @@ const userList = () => {
     onClose: onCloseDeleteModal,
   } = useDisclosure();
 
-  const { users, error, isLoading, totalPages } = useUsersList(currentPage);
+  const { users, error, isLoading, totalPages } = useGetUsers(
+    currentPage,
+    userType,
+  );
 
-  const { updateUserStatusMutation, isUpdateUserPeding } =
-    useUpdateUserStatus();
+  const { updateUserStatusMutation, isUpdateUserPeding } = updateUserStatus();
 
   const {
     control: statusOptionsFormControl,
@@ -113,6 +130,7 @@ const userList = () => {
     onCloseDeleteModal,
     setCurrentPage,
     getTableStatusBadge,
+    pageTitle,
   };
 };
 

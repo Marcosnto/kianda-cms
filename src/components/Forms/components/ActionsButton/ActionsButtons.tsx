@@ -18,7 +18,7 @@ type IconButtonFunctionType = DataProps & {
   from: string;
 };
 
-export default function ButtonsActions({
+export default function ActionsButtons({
   articleId,
   user,
   modalsOptions,
@@ -52,7 +52,7 @@ export default function ButtonsActions({
         if (user) {
           setCurrentSelectedUser(user);
           const routeUserPath = getRoutePath(user.id);
-          navigate(`../${routeUserPath}`, { relative: "path" });
+          navigate(`../../${routeUserPath}`, { relative: "path" });
         }
         break;
 

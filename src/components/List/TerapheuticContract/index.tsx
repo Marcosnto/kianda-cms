@@ -1,4 +1,4 @@
-import ButtonsActions from "@/components/Forms/components/ActionsButton/ActionsButtons";
+import ActionsButtons from "@/components/Forms/components/ActionsButton/ActionsButtons";
 import SpinnerLoad from "@/components/SpinnerLoad";
 import TableList from "@/components/Table";
 import ComponentTitle from "@/components/Title";
@@ -8,14 +8,17 @@ import {
   terapheuticContractListOptions,
   terapheuticContractTableHeaders,
 } from "@/helpers/tableConfigs";
-import useUsersList from "@/hooks/user/useUsersList";
+
 import { Td, Tr } from "@chakra-ui/react";
 import { useState } from "react";
+import { useGetUsers } from "@/api/user";
 
 export default function TerapheuticContractsList() {
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const { users, error, isLoading, totalPages } = useUsersList(currentPage);
-
+  const { users, error, isLoading, totalPages } = useGetUsers(
+    currentPage,
+    "patient",
+  );
   if (isLoading) {
     return <SpinnerLoad />;
   }
@@ -35,7 +38,7 @@ export default function TerapheuticContractsList() {
           )}
       </Td>
       <Td>
-        <ButtonsActions
+        <ActionsButtons
           tableOptions={terapheuticContractListOptions}
           user={user}
         />

@@ -1,6 +1,5 @@
 import { L10n, loadCldr } from "@syncfusion/ej2-base";
 
-import { SYNCFUSION_API_KEY } from "@/helpers/envs";
 import { caGregorian } from "./helpers/ca-gregorian";
 import { numberingSystems } from "./helpers/numberingSystems";
 import { numbers } from "./helpers/numbers";
@@ -27,7 +26,7 @@ function withSyncFusionConfig<T extends {}>(
   WrappedComponent: ComponentType<T>,
 ) {
   loadCldr(caGregorian, numberingSystems, numbers, timeZoneNames);
-  console.log("p", SYNCFUSION_API_KEY);
+
   return class extends React.Component<T> {
     render() {
       return <WrappedComponent {...this.props} />;

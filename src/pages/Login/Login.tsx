@@ -18,19 +18,28 @@ import useLogin from "./login.hook";
 import { LoginProps } from "./types";
 
 export default function Login() {
-  const { apiError, authError, registerStatus, navigate, setApiError, login } =
-    useLogin();
+  const {
+    isErrorLogin,
+    isPendingLogin,
+    isSucessLogin,
+    registerStatus,
+    navigate,
+    loginFn,
+  } = useLogin();
 
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<LoginProps>();
 
   const onSubmit: SubmitHandler<LoginProps> = (data) => {
-    setApiError(false);
-    login(data);
+    loginFn(data);
   };
+
+  if (isSucessLogin && registerStatus === 1) {
+    setTimeout(() => navigate("/dashboard"), 100);
+  }
 
   return (
     <>
@@ -52,14 +61,15 @@ export default function Login() {
             }}
           >
             <Flex flexDir="column" gap="4" mb="5" alignItems="center">
-              {apiError ? (
+              {/* TODO: Trate the Error rerturned by API */}
+              {isErrorLogin ? (
                 <AlertStatus
                   type="error"
                   title="Ocorreu um erro!"
                   description="Entre em contato com o suporte."
                 />
               ) : null}
-              {authError ? (
+              {isErrorLogin ? (
                 <AlertStatus
                   type="error"
                   description="Email ou senha incorretos"
@@ -122,7 +132,7 @@ export default function Login() {
                 colorScheme="green"
                 variant="solid"
                 type="submit"
-                isLoading={isSubmitting}
+                isLoading={isPendingLogin}
                 width="100%"
               >
                 Entrar

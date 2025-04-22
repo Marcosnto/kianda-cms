@@ -1,10 +1,9 @@
 import useStore from "@/store";
-import useFetchUser from "@/hooks/user/useFetchUser";
-import useUpdateUserStatus from "@/hooks/user/useUpdateUserStatus";
 import { RegisterProps } from "@/utils/types/forms";
 import { useCallback, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { UserProps } from "@/utils/types/user";
+import { fetchUsers, updateUserStatus } from "@/api/user";
 
 export type LoggedUserType = {
   id: number;
@@ -27,9 +26,9 @@ export default function useEditRegisterForm() {
     isUpdateUserPeding,
     // isSendingEmail,
     updateUserRegisterLoading,
-  } = useUpdateUserStatus();
+  } = updateUserStatus();
 
-  const { fetchData, isLoading, error } = useFetchUser();
+  const { fetchData, isLoading, error } = fetchUsers();
 
   useEffect(() => {
     if (fetchData) {

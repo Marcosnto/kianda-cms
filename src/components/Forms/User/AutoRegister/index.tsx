@@ -391,6 +391,7 @@ function UserAutoRegister() {
         onClose={onModalClose}
         content="Seu cadastro foi realizado com sucesso e foi enviado para aprovação. Você será notificado por email assim que o seu status for atualizado."
         btnConfirmLabel="Confirmar"
+        hasBtnCancel={false}
       />
     </>
   );

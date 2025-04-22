@@ -10,6 +10,10 @@ export type MenuProps = {
 export default function Menu({ onClose }: MenuProps) {
   const { menuOptions } = useMenu();
 
+  if (menuOptions?.type === "default" || !menuOptions) {
+    return <p>Ocorreu um erro ao solicitar as opções</p>;
+  }
+
   return (
     <Flex
       flexDir="column"
@@ -44,6 +48,24 @@ export default function Menu({ onClose }: MenuProps) {
         </>
       ) : null}
       {menuOptions.blog?.map((option: any) => (
+        <MenuOptions
+          key={option.key}
+          icon={option.icon}
+          path={option.path}
+          onClose={onClose}
+          displayName={option.displayName}
+        />
+      ))}
+
+      {menuOptions.admin ? (
+        <>
+          <Divider mt="8" />
+          <Heading as="h3" size="sm" noOfLines={1} ml="3" mt="8">
+            Administrador
+          </Heading>
+        </>
+      ) : null}
+      {menuOptions.admin?.map((option: any) => (
         <MenuOptions
           key={option.key}
           icon={option.icon}

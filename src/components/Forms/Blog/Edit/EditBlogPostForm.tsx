@@ -11,6 +11,7 @@ import {
 import { Controller } from "react-hook-form";
 import RequiredInput from "../../components/RequiredInput";
 import RichTextInput from "../../components/RichTextInput";
+import { useNavigate } from "react-router-dom";
 
 export function EditBlogPostForm({
   data,
@@ -20,6 +21,7 @@ export function EditBlogPostForm({
   control,
   onSubmit,
 }: any) {
+  const navigate = useNavigate();
   return (
     <>
       <ComponentTitle title={`Artigo - ${data.title}`} type="h1" size="lg" />
@@ -165,8 +167,12 @@ export function EditBlogPostForm({
             mt="6"
             mb="8"
           >
-            <Button colorScheme="green" variant="outline" type="reset">
-              Cancelar
+            <Button
+              colorScheme="green"
+              variant="outline"
+              onClick={() => navigate("../../articles", { relative: "path" })}
+            >
+              Voltar
             </Button>
             <Button colorScheme="green" variant="solid" type="submit">
               Salvar
