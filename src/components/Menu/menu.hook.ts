@@ -1,11 +1,12 @@
 import { useLocation } from "react-router-dom";
-import getMenuOptions from "../../helpers/menuOptionsPermitions";
+import getMenuOptions from "./utils/menuOptionsPermitions";
 import { OptionsProps } from "./MenuOptions";
 
 export type UserOptionsProps = {
   type: string;
   users?: Array<OptionsProps>;
   blog?: Array<OptionsProps>;
+  admin?: Array<OptionsProps>;
 };
 
 const useMenu = () => {

@@ -10,6 +10,7 @@ import {
   IoFolderOutline,
   IoPeopleOutline,
   IoWalletOutline,
+  IoPeopleSharp,
   // IoCalendarOutline,
 } from "react-icons/io5";
 
@@ -30,6 +31,8 @@ export default function getMenuOptions(role: string | undefined) {
       return admin;
     case "patient":
       return patient;
+    case "web-editor":
+      return editor;
     default:
       return { type: "default", users: [] };
   }
@@ -48,7 +51,7 @@ export const admin: UserOptionsProps = {
       key: "user-admin-02",
       icon: getIcon(IoPeopleOutline),
       displayName: "Listar Pacientes",
-      path: "psi/patients",
+      path: "psi/users-list/patient",
     },
     {
       key: "user-admin-03",
@@ -75,6 +78,14 @@ export const admin: UserOptionsProps = {
       icon: getIcon(IoFolderOutline),
       displayName: "Listar Artigos",
       path: "blog/articles",
+    },
+  ],
+  admin: [
+    {
+      key: "admin-01",
+      icon: getIcon(IoPeopleSharp),
+      displayName: "Lista de Editores",
+      path: "admin/users-list/web-editor",
     },
   ],
 };
@@ -105,6 +116,24 @@ export const patient: UserOptionsProps = {
       icon: getIcon(IoWalletOutline),
       displayName: "Recibos",
       path: "",
+    },
+  ],
+};
+
+export const editor: UserOptionsProps = {
+  type: "patient",
+  blog: [
+    {
+      key: "blog-admin-01",
+      icon: getIcon(IoDocumentTextOutline),
+      displayName: "Escrever Artigo",
+      path: "blog/create-article",
+    },
+    {
+      key: "blog-admin-02",
+      icon: getIcon(IoFolderOutline),
+      displayName: "Listar Artigos",
+      path: "blog/articles",
     },
   ],
 };
