@@ -16,7 +16,6 @@ import EditBlogPost from "@/components/Forms/Blog/Edit";
 import TerapheuticContract from "@/components/Forms/User/TerapheuticContract";
 import UserEditRegister from "@/components/Forms/User/EditRegister/Patient";
 import Schedule from "@/components/Schedule";
-import Home from "@/pages/Home";
 
 const router = createBrowserRouter([
   {
@@ -24,7 +23,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home />,
+        element: <Login />,
         errorElement: <PageError404 />,
       },
       {
