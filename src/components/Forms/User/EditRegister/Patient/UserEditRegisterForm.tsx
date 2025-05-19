@@ -21,7 +21,7 @@ export function UserEditRegisterForm({
   handleSubmit,
 }: EditRegisterFormTypes) {
   const navigate = useRouter();
-  console.log("ii");
+
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
