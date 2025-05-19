@@ -31,7 +31,7 @@ export default function getMenuOptions(role: string | undefined) {
       return admin;
     case "patient":
       return patient;
-    case "web_editor":
+    case "blog_editor":
       return editor;
     default:
       return { type: "default" };

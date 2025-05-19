@@ -12,7 +12,6 @@ import Menu from "../Menu";
 export type DrawnerMenu = {
   onClose: () => void;
   isOpen: boolean;
-  setCurrentComponent: (component: JSX.Element) => void;
 };
 
 export default function DrawerMenu({ onClose, isOpen }: DrawnerMenu) {

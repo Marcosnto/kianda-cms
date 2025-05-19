@@ -16,6 +16,7 @@ import EditBlogPost from "@/components/Forms/Blog/Edit";
 import TerapheuticContract from "@/components/Forms/User/TerapheuticContract";
 import UserEditRegister from "@/components/Forms/User/EditRegister/Patient";
 import Schedule from "@/components/Schedule";
+import DefaultDashboardComponent from "@/pages/Dashboard/components/DefaultDashboardComponent";
 
 const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
         path: "dashboard",
         element: <Dashboard />,
         children: [
+          {
+            path: "",
+            element: <DefaultDashboardComponent />,
+          },
           {
             path: "psi",
             children: [

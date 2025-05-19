@@ -1,7 +1,8 @@
-import { Divider, Flex, Heading } from "@chakra-ui/react";
+import { Box, Divider, Flex, Heading } from "@chakra-ui/react";
 
 import useMenu from "./menu.hook";
 import MenuOptions from "./MenuOptions";
+import { TbMoodEmpty } from "react-icons/tb";
 
 export type MenuProps = {
   onClose?: () => void;
@@ -11,7 +12,20 @@ export default function Menu({ onClose }: MenuProps) {
   const { menuOptions } = useMenu();
 
   if (menuOptions?.type === "default" || !menuOptions) {
-    return <p>Ocorreu um erro ao solicitar as opções</p>;
+    return (
+      <Box
+        display="flex"
+        flexDir="column"
+        alignItems="center"
+        justifyContent="center"
+        textAlign="center"
+        gap="2"
+        px="4"
+      >
+        <TbMoodEmpty size={25} />
+        <p>Não há opções para serem exibidas</p>
+      </Box>
+    );
   }
 
   return (

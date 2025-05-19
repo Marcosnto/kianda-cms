@@ -29,7 +29,7 @@ export default function ActionsButtons({
   modalsOptions?: { [key: string]: (...arg0: string[]) => void } | undefined;
   tableOptions: TableOptionsType[];
 }) {
-  const { setComponent, setCurrentSelectedUser } = useStore();
+  const { setCurrentSelectedUser } = useStore();
   const navigate = useRouter();
 
   const setModalFunction = useCallback(
@@ -112,7 +112,7 @@ export default function ActionsButtons({
         </Tooltip>
       );
     },
-    [setComponent, setModalFunction],
+    [setModalFunction],
   );
 
   return (

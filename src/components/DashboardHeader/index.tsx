@@ -1,4 +1,3 @@
-import useStore from "@/store";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { Box, Heading, IconButton, useDisclosure } from "@chakra-ui/react";
 import DrawerMenu from "../DrawerMenu";
@@ -6,7 +5,6 @@ import AvatarMenu from "../AvatarMenu";
 
 export default function DashboardHeader() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { setComponent } = useStore();
 
   return (
     <Box
@@ -31,11 +29,7 @@ export default function DashboardHeader() {
       <Heading as="h1" size="md" noOfLines={1}>
         Kianda
       </Heading>
-      <DrawerMenu
-        onClose={onClose}
-        isOpen={isOpen}
-        setCurrentComponent={setComponent}
-      />
+      <DrawerMenu onClose={onClose} isOpen={isOpen} />
       <AvatarMenu />
     </Box>
   );
