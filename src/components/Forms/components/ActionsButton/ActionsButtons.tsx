@@ -52,7 +52,8 @@ export default function ActionsButtons({
         if (user) {
           setCurrentSelectedUser(user);
           const routeUserPath = getRoutePath(user.id);
-          navigate(`../../${routeUserPath}`, { relative: "path" });
+          console.log(routeUserPath);
+          navigate(`${routeUserPath}`, { relative: "path" });
         }
         break;
 

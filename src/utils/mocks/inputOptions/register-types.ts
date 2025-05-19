@@ -17,7 +17,7 @@ const registerTypes: Array<RegisterTypes> = [
     name: "Suporte",
   },
   {
-    id: "web-editor",
+    id: "blog_editor",
     name: "Editor",
   },
 ];

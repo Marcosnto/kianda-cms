@@ -18,11 +18,11 @@ const userList = () => {
       pageTitle = "Pacientes";
       break;
 
-    case "web-editor":
+    case "blog_editor":
       pageTitle = "Editores";
       break;
     default:
-      "Indefinido";
+      pageTitle = "Usuários";
       break;
   }
 
@@ -65,8 +65,8 @@ const userList = () => {
       (data) => {
         updateUserStatusMutation({
           id: currentSelectedUser?.id,
-          fullName: currentSelectedUser?.fullName,
-          email: currentSelectedUser?.email,
+          // fullName: currentSelectedUser?.fullName,
+          // email: currentSelectedUser?.email,
           registerStatus: data.registerStatus,
           sendEmail: true,
         });
@@ -77,8 +77,8 @@ const userList = () => {
         }
       },
       [
-        currentSelectedUser?.email,
-        currentSelectedUser?.fullName,
+        // currentSelectedUser?.email,
+        // currentSelectedUser?.fullName,
         currentSelectedUser?.id,
         // isSendingEmail,
         isUpdateUserPeding,

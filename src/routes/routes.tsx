@@ -56,7 +56,7 @@ const router = createBrowserRouter([
                 element: <UsersList />,
               },
               {
-                path: "patient/:userID",
+                path: "users-list/patient/:userID",
                 element: <EditRegister />,
               },
               {
@@ -100,6 +100,14 @@ const router = createBrowserRouter([
               {
                 path: "users-list/:type",
                 element: <UsersList />,
+              },
+              {
+                path: "users-list/all/:userID",
+                element: <EditRegister />,
+              },
+              {
+                path: "users-list/blog_editor/:userID",
+                element: <EditRegister />,
               },
             ],
           },

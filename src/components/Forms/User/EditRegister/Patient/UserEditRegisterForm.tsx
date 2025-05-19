@@ -21,6 +21,7 @@ export function UserEditRegisterForm({
   handleSubmit,
 }: EditRegisterFormTypes) {
   const navigate = useRouter();
+  console.log("ii");
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -75,7 +76,7 @@ export function UserEditRegisterForm({
           <Button
             colorScheme="green"
             variant="outline"
-            onClick={() => navigate("../../patients", { relative: "path" })}
+            onClick={() => navigate("../", { relative: "path" })}
           >
             Voltar
           </Button>

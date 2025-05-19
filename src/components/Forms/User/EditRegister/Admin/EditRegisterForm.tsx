@@ -103,7 +103,7 @@ export function EditRegisterForm({
           <Button
             colorScheme="green"
             variant="outline"
-            onClick={() => navigate("../../patients", { relative: "path" })}
+            onClick={() => navigate("../", { relative: "path" })}
           >
             Voltar
           </Button>

@@ -8,6 +8,10 @@ import { Outlet } from "react-router-dom";
 import { REACT_APP_VERSION } from "@/helpers/envs";
 
 export default function Dashboard() {
+  const loggedUser = JSON.parse(localStorage.getItem("user") || "");
+
+  const shouldShowMenuOptions = !!loggedUser.role;
+
   return (
     <>
       <Grid
@@ -46,13 +50,15 @@ export default function Dashboard() {
           <DashboardHeader />
         </GridItem>
 
-        <GridItem
-          display={["none", "none", "flex"]}
-          area={"sidenav"}
-          boxShadow="md"
-        >
-          <Menu />
-        </GridItem>
+        {shouldShowMenuOptions && (
+          <GridItem
+            display={["none", "none", "flex"]}
+            area={"sidenav"}
+            boxShadow="md"
+          >
+            <Menu />
+          </GridItem>
+        )}
 
         <GridItem area={"content"}>
           <Content>

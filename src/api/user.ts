@@ -1,11 +1,11 @@
 import useStore from "@/store";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { LoggedUserType } from "@/components/Forms/User/EditRegister/EditRegisterForm.hook";
 import { axiosInstance } from "@/api/axiosInstance";
 import { useToast } from "@chakra-ui/react";
 import { BASE_API_URL } from "@/helpers/envs";
 import { UpdateRegister } from "@/components/Forms/User/EditRegister/EditRegisterForm.types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { UserProps } from "@/utils/types/user";
 import setNumberOfPages from "@/utils/setNumberOfPages";
 import { RegisterProps } from "@/utils/types/forms";
@@ -59,12 +59,13 @@ export const fetchUsers = () => {
 
 export function useGetUsers(currentPage: number, type: string | undefined) {
   const [totalPages, setTotalPages] = useState<number>(0);
+  const userType = type === "all" ? "" : `&type=${type}`;
 
-  const { data, isLoading, error } = useQuery<UserProps[]>({
-    queryKey: [currentPage, type],
+  const { data, isLoading, error, refetch } = useQuery<UserProps[]>({
+    queryKey: ["userList", type],
     queryFn: () =>
       axiosInstance
-        .get(`/users?_page=${currentPage}&type=${type}`)
+        .get(`/users?_page=${currentPage}${userType}`)
         .then(({ data, headers }) => {
           const totalItens = headers["x-total-count"];
           setTotalPages(setNumberOfPages(totalItens) || 0);
@@ -73,10 +74,15 @@ export function useGetUsers(currentPage: number, type: string | undefined) {
         .catch(() => new Error("Ocorreu um erro ao obter os dados")),
   });
 
+  useEffect(() => {
+    refetch();
+  }, [currentPage]);
+
   return { users: data, isLoading, error, totalPages };
 }
 
 export const updateUserRegister = () => {
+  const queryClient = useQueryClient();
   const token = localStorage.getItem("token");
   const toast = useToast();
 
@@ -100,6 +106,7 @@ export const updateUserRegister = () => {
       }),
     onSuccess: (response) => {
       if (response.ok) {
+        queryClient.invalidateQueries({ queryKey: ["userList"] });
         toast({
           title: `Alteração realizada com sucesso`,
           position: "top",
@@ -126,6 +133,7 @@ export const updateUserRegister = () => {
 };
 
 export const updateUserStatus = () => {
+  const queryClient = useQueryClient();
   const token = localStorage.getItem("token");
   const toast = useToast();
 
@@ -134,7 +142,7 @@ export const updateUserStatus = () => {
 
   const { mutate: updateUserStatusMutation, isPending: isUpdateUserPeding } =
     useMutation({
-      mutationFn: ({ id, fullName, email, registerStatus }: UpdateRegister) =>
+      mutationFn: ({ id, registerStatus }: UpdateRegister) =>
         fetch(BASE_API_URL + "/user/update-status" || "", {
           method: "PUT",
           headers: {
@@ -143,21 +151,19 @@ export const updateUserStatus = () => {
           },
           body: JSON.stringify({
             id,
-            fullName,
-            email,
             registerStatus,
           }),
         }),
-      onSuccess: (response, variables) => {
-        // const { fullName, email, sendEmail } = variables;
+      onSuccess: (response) => {
         if (response.ok) {
-          // if (sendEmail) {
-          //   sendEditRegisterEmail({
-          //     fullName: fullName || "",
-          //     email: email || "",
-          //   });
-          // }
-          updateUserRegisterMutation({ ...variables });
+          queryClient.invalidateQueries({ queryKey: ["userList"] });
+
+          toast({
+            title: `Atualização feita com sucesso!`,
+            position: "top",
+            status: "success",
+            isClosable: true,
+          });
         } else {
           toast({
             title: `Ocorreu um erro no servidor`,
@@ -171,6 +177,7 @@ export const updateUserStatus = () => {
 
   return {
     updateUserStatusMutation,
+    updateUserRegisterMutation,
     isUpdateUserPeding,
     // isSendingEmail,
     updateUserRegisterLoading,

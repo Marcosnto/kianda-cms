@@ -31,10 +31,10 @@ export default function getMenuOptions(role: string | undefined) {
       return admin;
     case "patient":
       return patient;
-    case "web-editor":
+    case "web_editor":
       return editor;
     default:
-      return { type: "default", users: [] };
+      return { type: "default" };
   }
 }
 
@@ -50,7 +50,7 @@ export const admin: UserOptionsProps = {
     {
       key: "user-admin-02",
       icon: getIcon(IoPeopleOutline),
-      displayName: "Listar Pacientes",
+      displayName: "Lista de Pacientes",
       path: "psi/users-list/patient",
     },
     {
@@ -76,16 +76,22 @@ export const admin: UserOptionsProps = {
     {
       key: "blog-admin-02",
       icon: getIcon(IoFolderOutline),
-      displayName: "Listar Artigos",
+      displayName: "Lista de Artigos",
       path: "blog/articles",
+    },
+    {
+      key: "admin-01",
+      icon: getIcon(IoPeopleSharp),
+      displayName: "Lista de Editores",
+      path: "admin/users-list/blog_editor",
     },
   ],
   admin: [
     {
       key: "admin-01",
       icon: getIcon(IoPeopleSharp),
-      displayName: "Lista de Editores",
-      path: "admin/users-list/web-editor",
+      displayName: "Lista de Usuários",
+      path: "admin/users-list/all",
     },
   ],
 };

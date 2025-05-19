@@ -12,7 +12,7 @@ export const userListOptions = [
     ariaLabel: "Visualizar cadastro",
     toolTipMessage: "Visualizar cadastro",
     icon: <IoEyeOutline />,
-    route: (userID: string | number) => `patient/${userID}`,
+    route: (userID: string | number) => `${userID}`,
     isModal: false,
   },
   {

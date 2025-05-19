@@ -4,6 +4,7 @@ import { create } from "zustand";
 import { UserProps } from "./utils/types/user";
 
 type Store = {
+  lastPath?: string;
   currentComponent: JSX.Element;
   previousComponent: {
     component: JSX.Element;

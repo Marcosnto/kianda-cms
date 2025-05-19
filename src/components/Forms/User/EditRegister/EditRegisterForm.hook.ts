@@ -23,6 +23,7 @@ export default function useEditRegisterForm() {
 
   const {
     updateUserStatusMutation,
+    updateUserRegisterMutation,
     isUpdateUserPeding,
     // isSendingEmail,
     updateUserRegisterLoading,
@@ -50,7 +51,7 @@ export default function useEditRegisterForm() {
   const onSubmit: SubmitHandler<Partial<RegisterProps>> = useCallback(
     (data: Partial<RegisterProps>) => {
       if (isValid) {
-        updateUserStatusMutation({
+        updateUserRegisterMutation({
           id: currentSelectedUser?.id,
           fullName: data.fullName,
           email: data.email,
