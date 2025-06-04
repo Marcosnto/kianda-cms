@@ -11,6 +11,7 @@ import {
   IoPeopleOutline,
   IoWalletOutline,
   IoPeopleSharp,
+  IoNewspaperOutline,
   // IoCalendarOutline,
 } from "react-icons/io5";
 
@@ -92,6 +93,12 @@ export const admin: UserOptionsProps = {
       icon: getIcon(IoPeopleSharp),
       displayName: "Lista de Usuários",
       path: "admin/users-list/all",
+    },
+    {
+      key: "admin-02",
+      icon: getIcon(IoNewspaperOutline),
+      displayName: "Newsletter - Assinantes",
+      path: "admin/newsletter",
     },
   ],
 };

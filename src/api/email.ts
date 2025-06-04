@@ -1,9 +1,25 @@
 // import { useMutation } from "@tanstack/react-query";
 
+import { useQuery } from "@tanstack/react-query";
+import { axiosInstance } from "./axiosInstance";
+
 // const { currentSelectedUser } = useStore();
 // const { sendEmailPost, isSendingEmail } = useSendEmailToUser({
 //   toastMessage: "Alteração realizada com sucesso",
 // });
+
+export function getNewsletterList() {
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["newsletter"],
+    queryFn: () =>
+      axiosInstance.get(`newsletter/subscribers`).then((res) => {
+        const { data } = res;
+        return data;
+      }),
+  });
+
+  return { newsletterList: data, isLoading, error };
+}
 
 // const { mutate: sendEmailPost, isPending: isSendingEmail } = useMutation({
 //   mutationFn: (data: Partial<RegisterProps>) =>

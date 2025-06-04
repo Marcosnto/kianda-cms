@@ -78,3 +78,8 @@ export const terapheuticContractTableHeaders = [
   { name: "Status", key: "TC-Status" },
   { name: "Ações", key: "TC-Actions" },
 ];
+
+export const newsletterTableHeards = [
+  { name: "ID", key: "N-ID" },
+  { name: "Email", key: "N-Email" },
+];

@@ -4,7 +4,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { axiosInstance } from "./axiosInstance";
 
-export function useGetAllArticles(currentPage: number) {
+export function getAllArticles(currentPage: number) {
   const [totalPages, setTotalPages] = useState<number>(0);
 
   const { data, isLoading, error } = useQuery({
@@ -22,7 +22,7 @@ export function useGetAllArticles(currentPage: number) {
   return { blogPosts: data, isLoading, error, totalPages };
 }
 
-export function useGetArticlesById(currentPage: number, userId: string) {
+export function getArticlesById(currentPage: number, userId: string) {
   const [totalPages, setTotalPages] = useState<number>(0);
 
   const { data, isLoading, error } = useQuery({

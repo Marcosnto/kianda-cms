@@ -17,6 +17,7 @@ import TerapheuticContract from "@/components/Forms/User/TerapheuticContract";
 import UserEditRegister from "@/components/Forms/User/EditRegister/Patient";
 import Schedule from "@/components/Schedule";
 import DefaultDashboardComponent from "@/pages/Dashboard/components/DefaultDashboardComponent";
+import NewsLetterList from "@/components/List/NewsLetter";
 
 const router = createBrowserRouter([
   {
@@ -113,6 +114,10 @@ const router = createBrowserRouter([
               {
                 path: "users-list/blog_editor/:userID",
                 element: <EditRegister />,
+              },
+              {
+                path: "newsletter",
+                element: <NewsLetterList />,
               },
             ],
           },

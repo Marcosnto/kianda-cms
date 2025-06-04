@@ -11,7 +11,7 @@ import { blogListOptions, blogTableHeaders } from "@/helpers/tableConfigs";
 import ComponentTitle from "@/components/Title";
 import TableList from "@/components/Table";
 import FeedbackAPI from "@/components/FeedbackAPI";
-import { useGetArticlesById } from "@/api/blog";
+import { getArticlesById } from "@/api/blog";
 import { useNavigate } from "react-router-dom";
 
 export default function PostsList() {
@@ -19,7 +19,7 @@ export default function PostsList() {
   const user = JSON.parse(localStorage.getItem("user"));
   const navigate = useNavigate();
 
-  const { blogPosts, error, isLoading, totalPages } = useGetArticlesById(
+  const { blogPosts, error, isLoading, totalPages } = getArticlesById(
     currentPage,
     user.id,
   );
