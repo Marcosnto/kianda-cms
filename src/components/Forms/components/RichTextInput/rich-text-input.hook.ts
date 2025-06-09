@@ -20,7 +20,7 @@ class CustomHtml5Video extends BlockEmbed {
     node.setAttribute("oncontextmenu", "return false");
     node.setAttribute(
       "style",
-      "width: 100%; max-width: 400px; background: black;",
+      "width: 100%; max-width: 560px; background: black;",
     );
     return node;
   }
