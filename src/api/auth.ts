@@ -64,7 +64,7 @@ export const handleValidateAuth = (signedIn: boolean) => {
     queryKey: ["auth"],
     queryFn: () => axiosInstance.post(JWT_VALIDATE),
     enabled: signedIn,
-    retry: 3,
+    retry: 1,
     staleTime: 30000,
     refetchInterval: 30000,
     refetchOnWindowFocus: true,
