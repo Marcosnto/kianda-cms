@@ -30,7 +30,7 @@ function UserRegister() {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <ComponentTitle title="Cadastrar Paciente" type="h1" />
+        <ComponentTitle title="Cadastrar Usuário" type="h1" />
         <Flex flexDir="column" gap="5" mb="10">
           <FormControl isInvalid={!!errors.role}>
             <FormLabel htmlFor="role">

@@ -54,10 +54,6 @@ const router = createBrowserRouter([
             path: "psi",
             children: [
               {
-                path: "user-register",
-                element: <UserRegister />,
-              },
-              {
                 path: "users-list/:type",
                 element: <UsersList />,
               },
@@ -103,6 +99,10 @@ const router = createBrowserRouter([
           {
             path: "admin",
             children: [
+              {
+                path: "user-register",
+                element: <UserRegister />,
+              },
               {
                 path: "users-list/:type",
                 element: <UsersList />,

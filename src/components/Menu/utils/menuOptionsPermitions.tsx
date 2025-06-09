@@ -43,12 +43,6 @@ export const admin: UserOptionsProps = {
   type: "admin",
   users: [
     {
-      key: "user-admin-01",
-      icon: getIcon(IoBodyOutline),
-      displayName: "Cadastrar Paciente",
-      path: "psi/user-register",
-    },
-    {
       key: "user-admin-02",
       icon: getIcon(IoPeopleOutline),
       displayName: "Lista de Pacientes",
@@ -88,6 +82,12 @@ export const admin: UserOptionsProps = {
     },
   ],
   admin: [
+    {
+      key: "user-admin-01",
+      icon: getIcon(IoBodyOutline),
+      displayName: "Cadastrar Usuário",
+      path: "admin/user-register",
+    },
     {
       key: "admin-01",
       icon: getIcon(IoPeopleSharp),
