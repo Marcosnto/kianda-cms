@@ -8,6 +8,19 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 const SizeStyle = Quill.import("attributors/style/size");
 const BlockEmbed = Quill.import("blots/block/embed");
+const Font = Quill.import("formats/font");
+const fontWhitelist = [
+  "arial",
+  "helvetica",
+  "verdana",
+  "georgia",
+  "times-new-roman",
+  "courier-new",
+  "roboto",
+  "monospace",
+];
+Font.whitelist = fontWhitelist;
+
 class CustomHtml5Video extends BlockEmbed {
   static blotName = "html5video";
   static tagName = "video";
@@ -47,6 +60,7 @@ SizeStyle.whitelist = [
 ];
 
 Quill.register(SizeStyle, true);
+Quill.register(Font, true);
 Quill.register("formats/html5video", CustomHtml5Video);
 
 function useRichTextInput(quillRef: React.MutableRefObject<null>) {
@@ -192,6 +206,7 @@ function useRichTextInput(quillRef: React.MutableRefObject<null>) {
     () => ({
       toolbar: {
         container: [
+          [{ font: fontWhitelist }],
           [{ size: SizeStyle.whitelist }],
           ["bold", "italic", "underline", "strike"],
           [{ align: [] }],
