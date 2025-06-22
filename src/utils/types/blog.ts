@@ -2,6 +2,7 @@ export type Article = {
   id: number | string;
   title: string;
   author: string;
+  columnType: string;
   description: string;
   content: string;
   status: string;

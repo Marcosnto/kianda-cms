@@ -7,6 +7,7 @@ import {
   FormErrorMessage,
   FormLabel,
   Input,
+  Select,
   Stack,
   Text,
 } from "@chakra-ui/react";
@@ -106,21 +107,26 @@ export default function BlogPost({
               </FormErrorMessage>
             </FormControl>
 
-            {/* <FormControl isInvalid={!!errors.slug}>
-              <FormLabel htmlFor="slug">Slug</FormLabel>
+            <FormControl isInvalid={!!errors.author} isRequired>
+              <FormLabel htmlFor="columnType">Coluna</FormLabel>
 
-              <Input
-                id="slug"
-                type="text"
-                isDisabled
-                {...register("slug")}
+              <Select
+                id="columnType"
+                {...register("columnType", {
+                  required: "Esse Campo é obrigatório",
+                })}
                 focusBorderColor="green.800"
-              />
+                placeholder="Selecione uma coluna"
+                colorScheme="green"
+              >
+                <option value="option1">Coluna 1</option>
+                <option value="option2">Coluna 2</option>
+              </Select>
 
               <FormErrorMessage>
-                {errors.slug && errors.slug.message}
+                {errors.columnType && errors.columnType.message}
               </FormErrorMessage>
-            </FormControl> */}
+            </FormControl>
           </Stack>
 
           <FormControl isInvalid={!!errors.image}>

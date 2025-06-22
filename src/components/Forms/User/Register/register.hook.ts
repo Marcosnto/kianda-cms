@@ -45,7 +45,7 @@ export default function useRegisterHook({
             }),
           }).then(() => {
             toast({
-              title: `Paciente cadastro com sucesso`,
+              title: `Usuário cadastro com sucesso`,
               position: "top",
               status: "success",
               isClosable: true,
