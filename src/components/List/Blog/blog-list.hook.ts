@@ -1,5 +1,5 @@
 import { useDisclosure } from "@chakra-ui/react";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Article } from "./blog-list.types";
 import { handleUpdateArticleStatus } from "@/api/blog";
@@ -21,12 +21,8 @@ const useBlogList = () => {
     onClose: onCloseDeleteModal,
   } = useDisclosure();
 
-  const {
-    updateArticleStatusFn,
-    isUpArticleStatusError,
-    isUpArticleStatusSuccess,
-    isUpArticleStatusPending,
-  } = handleUpdateArticleStatus();
+  const { updateArticleStatusFn, isUpArticleStatusPending } =
+    handleUpdateArticleStatus();
 
   const {
     control: statusOptionsFormControl,
