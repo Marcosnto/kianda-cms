@@ -14,6 +14,10 @@ export default function getStatusBadge(status: string) {
       colorScheme = "gray";
       statusName = "Rascunho";
       break;
+    case "trash":
+      colorScheme = "red";
+      statusName = "Deletado";
+      break;
 
     /** User Status */
     case "0":

@@ -89,8 +89,12 @@ const userList = () => {
     );
 
   const onOpenModalUpdateRegister = useCallback(
-    (registerStatus: string) => {
-      setValue("registerStatus", registerStatus);
+    (modalInfo: {
+      user: string;
+      postId?: string | number;
+      registerStatus?: string;
+    }) => {
+      setValue("registerStatus", modalInfo.registerStatus);
       onOpenUpdateRegisterModal();
     },
     [onOpenUpdateRegisterModal, setValue],

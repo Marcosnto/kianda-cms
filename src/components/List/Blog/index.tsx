@@ -1,6 +1,5 @@
-//@ts-nocheck
 import SpinnerLoad from "@/components/SpinnerLoad";
-import { Box, Button, Td, Tr } from "@chakra-ui/react";
+import { Box, Button, Td, Text, Tr } from "@chakra-ui/react";
 import { useState } from "react";
 
 import { apiError, noDataToShow } from "@/helpers/messages";
@@ -13,11 +12,34 @@ import TableList from "@/components/Table";
 import FeedbackAPI from "@/components/FeedbackAPI";
 import { getArticlesById } from "@/api/blog";
 import { useNavigate } from "react-router-dom";
+import { MdOutlinePostAdd } from "react-icons/md";
+import { GenericModal } from "@/components/GenericModal";
+
+import useBlogList from "./blog-list.hook";
+
+import ArticleStatusOptions from "@/components/Forms/components/ArticleStatus";
 
 export default function PostsList() {
   const [currentPage, setCurrentPage] = useState<number>(0);
+  //@ts-ignore
   const user = JSON.parse(localStorage.getItem("user"));
   const navigate = useNavigate();
+  const {
+    isOpenUpdateArticleModal,
+    onCloseUpdateArticleModal,
+    isOpenDeleteModal,
+    onCloseDeleteModal,
+    modalsStateControl,
+    statusOptionsFormErrors,
+    statusOptionsFormControl,
+    statusOptionsFormHandleSubmit,
+
+    statusOptionsFormIsSubmitting,
+    statusOptionsFormOnSubmit,
+    isUpArticleStatusPending,
+    updateArticleStatusFn,
+    selectedArticleId,
+  } = useBlogList();
 
   const { blogPosts, error, isLoading, totalPages } = getArticlesById(
     currentPage,
@@ -41,10 +63,44 @@ export default function PostsList() {
       </Td>
       <Td>{getStatusBadge(article.status)}</Td>
       <Td>
-        <ActionsButtons tableOptions={blogListOptions} articleId={article.id} />
+        <ActionsButtons
+          tableOptions={blogListOptions}
+          articleId={article.id}
+          articleStatus={article.status}
+          modalsOptions={modalsStateControl}
+        />
       </Td>
     </Tr>
   ));
+
+  const ContentUpdateArticle = () => {
+    return (
+      <form>
+        <ArticleStatusOptions
+          errors={statusOptionsFormErrors}
+          control={statusOptionsFormControl}
+        />
+      </form>
+    );
+  };
+
+  const ContentArchiveRegistration = () => {
+    return (
+      <div>
+        <Text>
+          Gostaria mesmo de{" "}
+          <Text as="b" color="red">
+            deletar
+          </Text>{" "}
+          o artigo?
+          <br />
+          <br />
+          Ele não ficará visível para os leitores e, após 30 dias, será
+          permanentemente deletado.
+        </Text>
+      </div>
+    );
+  };
 
   return (
     <>
@@ -56,7 +112,7 @@ export default function PostsList() {
           colorScheme="green"
           onClick={() => navigate("../create-article", { relative: "path" })}
         >
-          +
+          <MdOutlinePostAdd size={20} />
         </Button>
       </Box>
       {blogPosts.length > 0 ? (
@@ -68,6 +124,27 @@ export default function PostsList() {
             tableBody={tableBody}
             tableOptions={blogListOptions}
             setCurrentPage={setCurrentPage}
+          />
+          <GenericModal
+            title={`Situação do Artigo`}
+            isOpen={isOpenUpdateArticleModal}
+            onClose={onCloseUpdateArticleModal}
+            content={<ContentUpdateArticle />}
+            isLoading={
+              statusOptionsFormIsSubmitting || isUpArticleStatusPending
+            }
+            onConfirm={statusOptionsFormHandleSubmit(statusOptionsFormOnSubmit)}
+          />
+          <GenericModal
+            title="Arquivar Artigo"
+            isOpen={isOpenDeleteModal}
+            onClose={onCloseDeleteModal}
+            btnConfirmLabel="Deletar"
+            colorSchemeConfirm="red"
+            content={<ContentArchiveRegistration />}
+            onConfirm={() =>
+              updateArticleStatusFn({ id: selectedArticleId, status: "trash" })
+            }
           />
         </>
       ) : (

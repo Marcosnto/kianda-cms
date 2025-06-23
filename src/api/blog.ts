@@ -1,8 +1,9 @@
 import { BASE_API_URL } from "@/helpers/envs";
 import setNumberOfPages from "@/utils/setNumberOfPages";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { axiosInstance } from "./axiosInstance";
+import { useToast } from "@chakra-ui/react";
 
 export function getAllArticles(currentPage: number) {
   const [totalPages, setTotalPages] = useState<number>(0);
@@ -58,6 +59,46 @@ export function handlePostArticle(articleID: string | undefined) {
     isPostArticleError,
     isPostArticlePending,
     isPostArticleSuccess,
+  };
+}
+
+export function handleUpdateArticleStatus() {
+  const queryClient = useQueryClient();
+  const toast = useToast();
+
+  const {
+    mutate: updateArticleStatusFn,
+    isError: isUpArticleStatusError,
+    isSuccess: isUpArticleStatusSuccess,
+    isPending: isUpArticleStatusPending,
+  } = useMutation({
+    mutationFn: (formData: any) =>
+      axiosInstance.put(`${BASE_API_URL}/update-article-status`, formData),
+    onSuccess: (response) => {
+      if (response.status === 200) {
+        queryClient.invalidateQueries({ queryKey: ["blogList"] });
+        toast({
+          title: `Status do Artigo atualizado com sucesso`,
+          position: "top",
+          status: "success",
+          isClosable: true,
+        });
+      } else {
+        toast({
+          title: `Ocorreu um erro ao atualizar o artigo`,
+          position: "top",
+          status: "error",
+          isClosable: true,
+        });
+      }
+    },
+  });
+
+  return {
+    updateArticleStatusFn,
+    isUpArticleStatusError,
+    isUpArticleStatusSuccess,
+    isUpArticleStatusPending,
   };
 }
 

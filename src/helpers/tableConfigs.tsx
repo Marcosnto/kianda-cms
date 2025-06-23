@@ -1,9 +1,11 @@
 import {
-  IoCreateOutline,
   IoEyeOutline,
   IoLockOpenOutline,
   IoTrashBinOutline,
 } from "react-icons/io5";
+
+import { RiDraftLine } from "react-icons/ri";
+import { MdPublishedWithChanges } from "react-icons/md";
 
 export const userListOptions = [
   {
@@ -53,8 +55,24 @@ export const blogListOptions = [
     ariaLabel: "Editar Artigo",
     toolTipMessage: "Editar Artigo",
     route: (articleID: string | number) => `article/${articleID}`,
-    icon: <IoCreateOutline />,
+    icon: <RiDraftLine />,
     isModal: false,
+  },
+  {
+    key: "update-article-status",
+    from: "blog",
+    ariaLabel: "Mudar Situação do Artigo",
+    toolTipMessage: "Mudar Situação do Artigo",
+    icon: <MdPublishedWithChanges />,
+    isModal: true,
+  },
+  {
+    key: "delete-article",
+    from: "blog",
+    ariaLabel: "Excluir Artigo",
+    toolTipMessage: "Excluir Artigo",
+    icon: <IoTrashBinOutline />,
+    isModal: true,
   },
 ];
 

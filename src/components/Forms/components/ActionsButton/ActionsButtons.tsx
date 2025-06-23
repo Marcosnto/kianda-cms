@@ -20,13 +20,15 @@ type IconButtonFunctionType = DataProps & {
 
 export default function ActionsButtons({
   articleId,
+  articleStatus,
   user,
   modalsOptions,
   tableOptions,
 }: {
+  articleStatus?: string;
   articleId?: number | string;
   user?: UserProps;
-  modalsOptions?: { [key: string]: (...arg0: string[]) => void } | undefined;
+  modalsOptions?: { [key: string]: (...arg0: any[]) => void } | undefined;
   tableOptions: TableOptionsType[];
 }) {
   const { setCurrentSelectedUser } = useStore();
@@ -34,8 +36,15 @@ export default function ActionsButtons({
 
   const setModalFunction = useCallback(
     (key: string, user?: UserProps) => {
+      const modalInfo = {
+        user,
+        postId: articleId,
+        registerStatus: user?.registerStatus || "",
+        articleStatus: articleStatus || "",
+      };
+
       if (user) setCurrentSelectedUser(user);
-      if (modalsOptions) modalsOptions[key](user?.registerStatus || "");
+      if (modalsOptions) modalsOptions[key](modalInfo);
     },
     [setCurrentSelectedUser, modalsOptions],
   );
