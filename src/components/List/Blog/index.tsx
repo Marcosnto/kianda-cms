@@ -17,7 +17,7 @@ import { GenericModal } from "@/components/GenericModal";
 
 import useBlogList from "./blog-list.hook";
 
-import ArticleStatusOptions from "@/components/Forms/components/ArticleStatus";
+import ArticleStatusOptions from "@/components/List/Blog/components/ArticleStatus";
 
 export default function PostsList() {
   const [currentPage, setCurrentPage] = useState<number>(0);
@@ -33,7 +33,6 @@ export default function PostsList() {
     statusOptionsFormErrors,
     statusOptionsFormControl,
     statusOptionsFormHandleSubmit,
-
     statusOptionsFormIsSubmitting,
     statusOptionsFormOnSubmit,
     isUpArticleStatusPending,
@@ -136,15 +135,16 @@ export default function PostsList() {
             onConfirm={statusOptionsFormHandleSubmit(statusOptionsFormOnSubmit)}
           />
           <GenericModal
-            title="Arquivar Artigo"
+            title="Deletar Artigo"
             isOpen={isOpenDeleteModal}
             onClose={onCloseDeleteModal}
             btnConfirmLabel="Deletar"
             colorSchemeConfirm="red"
             content={<ContentArchiveRegistration />}
-            onConfirm={() =>
-              updateArticleStatusFn({ id: selectedArticleId, status: "trash" })
-            }
+            onConfirm={() => {
+              updateArticleStatusFn({ id: selectedArticleId, status: "trash" });
+              onCloseDeleteModal();
+            }}
           />
         </>
       ) : (

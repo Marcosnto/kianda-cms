@@ -93,12 +93,6 @@ export default function BlogPost({
               <Input
                 id="description"
                 type="text"
-                {...register("description", {
-                  maxLength: {
-                    value: 150,
-                    message: "O limíte máximo de caracteres é de 150.",
-                  },
-                })}
                 focusBorderColor="green.800"
               />
 

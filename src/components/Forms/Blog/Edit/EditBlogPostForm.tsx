@@ -77,9 +77,6 @@ export function EditBlogPostForm({
               <Input
                 id="description"
                 type="text"
-                {...register("description", {
-                  required: "Esse Campo é obrigatório",
-                })}
                 focusBorderColor="green.800"
               />
 
