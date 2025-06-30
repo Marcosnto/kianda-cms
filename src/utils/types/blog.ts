@@ -3,7 +3,7 @@ export type Article = {
   title: string;
   author: string;
   columnType: string;
-  description: string;
+  subtitle: string;
   content: string;
   status: string;
   image?: {

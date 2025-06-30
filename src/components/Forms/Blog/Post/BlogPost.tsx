@@ -87,17 +87,18 @@ export default function BlogPost({
           </Stack>
 
           <Stack spacing={8} direction="row">
-            <FormControl isInvalid={!!errors.description}>
-              <FormLabel htmlFor="description">Subtítulo</FormLabel>
+            <FormControl isInvalid={!!errors.subtitle}>
+              <FormLabel htmlFor="subtitle">Subtítulo</FormLabel>
 
               <Input
-                id="description"
+                id="subtitle"
                 type="text"
+                {...register("subtitle")}
                 focusBorderColor="green.800"
               />
 
               <FormErrorMessage>
-                {errors.description && errors.description.message}
+                {errors.subtitle && errors.subtitle.message}
               </FormErrorMessage>
             </FormControl>
 

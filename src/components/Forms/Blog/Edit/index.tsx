@@ -32,17 +32,20 @@ export default function EditBlogPost() {
     defaultValues: {
       title: "",
       author: "",
+      columnType: "",
       content: "",
-      description: "",
+      subtitle: "",
       image: undefined,
       imageDescription: "",
       imageSub: "",
       status: "",
+      slug: "",
     },
   });
 
   const onSubmit: SubmitHandler<Article> = (data) => {
     const formData = new FormData();
+    console.log("data", data);
     formData.append("postInfo", JSON.stringify(data));
 
     postArticleFn(formData);
@@ -57,11 +60,13 @@ export default function EditBlogPost() {
         title: articleData.title,
         author: articleData.author,
         content: articleData.content,
-        description: articleData.description,
+        subtitle: articleData.description,
         image: articleData.image,
         imageDescription: articleData.imageDescription,
         imageSub: articleData.imageSub,
         status: articleData.status,
+        columnType: articleData.columnType,
+        slug: articleData.slug,
       });
     }
   }, [articleData]);

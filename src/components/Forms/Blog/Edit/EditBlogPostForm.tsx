@@ -6,6 +6,7 @@ import {
   FormErrorMessage,
   FormLabel,
   Input,
+  Select,
   Stack,
 } from "@chakra-ui/react";
 import { Controller } from "react-hook-form";
@@ -69,19 +70,39 @@ export function EditBlogPostForm({
           </Stack>
 
           <Stack spacing={8} direction="row">
-            <FormControl isInvalid={!!errors.description}>
-              <FormLabel htmlFor="description">
-                Resumo <RequiredInput />
-              </FormLabel>
+            <FormControl isInvalid={!!errors.subtitle}>
+              <FormLabel htmlFor="subtitle">Subtítulo</FormLabel>
 
               <Input
-                id="description"
+                id="subtitle"
                 type="text"
+                {...register("subtitle")}
                 focusBorderColor="green.800"
               />
 
               <FormErrorMessage>
-                {errors.description && errors.description.message}
+                {errors.subtitle && errors.subtitle.message}
+              </FormErrorMessage>
+            </FormControl>
+
+            <FormControl isInvalid={!!errors.author} isRequired>
+              <FormLabel htmlFor="columnType">Coluna</FormLabel>
+
+              <Select
+                id="columnType"
+                {...register("columnType", {
+                  required: "Esse Campo é obrigatório",
+                })}
+                focusBorderColor="green.800"
+                placeholder="Selecione uma coluna"
+                colorScheme="green"
+              >
+                <option value="option1">Coluna 1</option>
+                <option value="option2">Coluna 2</option>
+              </Select>
+
+              <FormErrorMessage>
+                {errors.columnType && errors.columnType.message}
               </FormErrorMessage>
             </FormControl>
           </Stack>

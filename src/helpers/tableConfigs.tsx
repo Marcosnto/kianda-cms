@@ -86,7 +86,7 @@ export const userTableHeaders = [
 export const blogTableHeaders = [
   { name: "ID", key: "Blog-ID" },
   { name: "Título", key: "Blog-Title" },
-  { name: "Descrição", key: "Blog-Descriptin" },
+  { name: "Subtítulo", key: "Blog-Descriptin" },
   { name: "Situação", key: "Blog-Status" },
 ];
 
