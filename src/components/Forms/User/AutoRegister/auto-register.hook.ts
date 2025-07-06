@@ -2,10 +2,11 @@ import { postUser } from "@/api/user";
 import { PRIVACY_POLICY, USE_TERMS } from "@/helpers/envs";
 import { useRouter } from "@/utils/libs/routerFacade";
 import { useBoolean, useToast } from "@chakra-ui/react";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 
 export default function useAutoRegister() {
   const [modalStatus, setModalStatus] = useBoolean();
+  const [showPassword, setShowPassword] = useState(false);
   const { postUserFn, isPostUserSucess, isPostUserPending, hasPostUserError } =
     postUser();
   const toast = useToast();
@@ -42,5 +43,7 @@ export default function useAutoRegister() {
     post: postUserFn,
     onModalClose,
     navigate,
+    showPassword,
+    setShowPassword,
   };
 }

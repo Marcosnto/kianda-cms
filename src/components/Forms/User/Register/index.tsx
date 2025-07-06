@@ -15,6 +15,7 @@ import { RegisterProps } from "@/utils/types/forms";
 import ComponentTitle from "@/components/Title";
 import RequiredInput from "../../components/RequiredInput";
 import registerTypes from "@/utils/mocks/inputOptions/register-types";
+import PasswordInput from "@/components/PasswordInput";
 
 function UserRegister() {
   const {
@@ -25,7 +26,10 @@ function UserRegister() {
     formState: { errors, isSubmitting, isValid },
   } = useForm<RegisterProps>();
 
-  const { onSubmit } = useRegisterHook({ reset, isValid });
+  const { onSubmit, showPassword, setShowPassword } = useRegisterHook({
+    reset,
+    isValid,
+  });
 
   return (
     <>
@@ -137,18 +141,19 @@ function UserRegister() {
                 Senha <RequiredInput />
               </FormLabel>
 
-              <Input
+              <PasswordInput
                 id="password"
-                type="password"
-                {...register("password", {
+                showPassword={showPassword}
+                setShowPassword={setShowPassword}
+                register={register}
+                objectRule={{
                   required: "Esse Campo é obrigatório",
                   validate: {
-                    equalPasswords: (value) =>
+                    equalPasswords: (value: unknown) =>
                       getValues("passwordCheck") === value ||
                       "Senhas devem ser iguais",
                   },
-                })}
-                focusBorderColor="green.800"
+                }}
               />
 
               <FormErrorMessage>
@@ -161,18 +166,19 @@ function UserRegister() {
                 Confirme a senha <RequiredInput />
               </FormLabel>
 
-              <Input
+              <PasswordInput
                 id="passwordCheck"
-                type="password"
-                {...register("passwordCheck", {
+                showPassword={showPassword}
+                setShowPassword={setShowPassword}
+                register={register}
+                objectRule={{
                   required: "Esse Campo é obrigatório",
                   validate: {
-                    equalPasswords: (value) =>
-                      getValues("password") === value ||
+                    equalPasswords: (value: unknown) =>
+                      getValues("passwordCheck") === value ||
                       "Senhas devem ser iguais",
                   },
-                })}
-                focusBorderColor="green.800"
+                }}
               />
 
               <FormErrorMessage>

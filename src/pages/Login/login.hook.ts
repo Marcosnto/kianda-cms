@@ -6,6 +6,7 @@ import { useHandleLogin } from "@/api/auth";
 export default function useLogin() {
   const navigate = useRouter();
   const [apiError, setApiError] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const {
     loginFn,
@@ -24,5 +25,7 @@ export default function useLogin() {
     navigate,
     setApiError,
     loginFn,
+    showPassword,
+    setShowPassword,
   };
 }

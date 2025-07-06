@@ -5,7 +5,7 @@ import LogoImage from "../components/LogoImage";
 
 export default function Register() {
   return (
-    <Box background="green.900" height="100dvh">
+    <Box background="green.900">
       <title>Kianda - Registrar-se</title>
 
       <Center flexDirection="column" pt="15" pb="15" gap="5">

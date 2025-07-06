@@ -1,7 +1,7 @@
 import { BASE_API_URL } from "@/helpers/envs";
 import { RegisterProps } from "@/utils/types/forms";
 import { useToast } from "@chakra-ui/react";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { SubmitHandler, UseFormReset } from "react-hook-form";
 
 export default function useRegisterHook({
@@ -13,6 +13,7 @@ export default function useRegisterHook({
 }) {
   const toast = useToast();
   const token = localStorage.getItem("token");
+  const [showPassword, setShowPassword] = useState(false);
 
   const post = useCallback(
     (data: RegisterProps) => {
@@ -84,5 +85,7 @@ export default function useRegisterHook({
   return {
     post,
     onSubmit,
+    showPassword,
+    setShowPassword,
   };
 }

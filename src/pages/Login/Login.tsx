@@ -9,6 +9,7 @@ import {
   Heading,
   Input,
 } from "@chakra-ui/react";
+
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import AlertStatus from "../../components/AlertStatus";
@@ -16,6 +17,7 @@ import RequiredInput from "../../components/Forms/components/RequiredInput";
 import LogoImage from "../../components/LogoImage";
 import useLogin from "./login.hook";
 import { LoginProps } from "./types";
+import PasswordInput from "@/components/PasswordInput";
 
 export default function Login() {
   const {
@@ -25,6 +27,8 @@ export default function Login() {
     registerStatus,
     navigate,
     loginFn,
+    showPassword,
+    setShowPassword,
   } = useLogin();
 
   const {
@@ -112,14 +116,12 @@ export default function Login() {
                   Senha <RequiredInput />
                 </FormLabel>
 
-                <Input
+                <PasswordInput
                   id="password"
-                  type="password"
-                  // disabled={isAuth}
-                  {...register("password", {
-                    required: "Esse Campo é obrigatório",
-                  })}
-                  focusBorderColor="green.800"
+                  objectRule={{ required: "Esse Campo é obrigatório" }}
+                  showPassword={showPassword}
+                  setShowPassword={setShowPassword}
+                  register={register}
                 />
 
                 <FormErrorMessage>
