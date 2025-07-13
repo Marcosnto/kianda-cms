@@ -1,91 +1,56 @@
-import { BASE_API_URL } from "@/helpers/envs";
+import { sendEmail } from "@/api/email";
+import { postUserRegister } from "@/api/user";
+import AdminRegisterEmail from "@/helpers/emails/template/admin-register";
 import { RegisterProps } from "@/utils/types/forms";
-import { useToast } from "@chakra-ui/react";
-import { useCallback, useState } from "react";
-import { SubmitHandler, UseFormReset } from "react-hook-form";
+import { useCallback, useEffect, useState } from "react";
+import { SubmitHandler, UseFormGetValues, UseFormReset } from "react-hook-form";
 
 export default function useRegisterHook({
   reset,
   isValid,
+  getValues,
 }: {
   reset: UseFormReset<RegisterProps>;
   isValid: boolean;
+  getValues: UseFormGetValues<RegisterProps>;
 }) {
-  const toast = useToast();
-  const token = localStorage.getItem("token");
   const [showPassword, setShowPassword] = useState(false);
 
-  const post = useCallback(
-    (data: RegisterProps) => {
-      fetch(BASE_API_URL + "/user" || "", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          fullName: data.fullName,
-          email: data.email,
-          password: data.password,
-          role: data.role,
-          acceptTerms: false,
-        }),
-      }).then((response) => {
-        if (response.ok) {
-          fetch("/api/send-email", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              senderEmail: "teste@kiandadiversidade.com",
-              senderName: "Kianda",
-              recepients: [{ email: data.email, name: data.fullName }],
-              template: "admin-register",
-              subject: "Cadastro realizado com sucesso!",
-            }),
-          }).then(() => {
-            toast({
-              title: `Usuário cadastro com sucesso`,
-              position: "top",
-              status: "success",
-              isClosable: true,
-            });
-            reset();
-          });
-        } else if (response.status === 403) {
-          toast({
-            title: `Esse email já está possui cadastro`,
-            position: "top",
-            status: "warning",
-            isClosable: true,
-          });
-        } else {
-          toast({
-            title: `Ocorreu um erro no servidor`,
-            position: "top",
-            status: "error",
-            isClosable: true,
-          });
-        }
+  const {
+    postUserRegisterFn,
+    isPostUserRegisterSucess,
+    isPostUserRegisterPending,
+    hasPostUserRegisterError,
+  } = postUserRegister();
+
+  const { sendEmailFn, isSendingEmail } = sendEmail();
+
+  useEffect(() => {
+    if (isPostUserRegisterSucess) {
+      sendEmailFn({
+        emailsPool: getValues("email"),
+        body: AdminRegisterEmail({ name: getValues("fullName") }),
+        emailSubject: "Seu cadastro no Kianda foi realizado!",
       });
-    },
-    [reset, toast],
-  );
+
+      if (!isSendingEmail) reset();
+    }
+  }, [isPostUserRegisterSucess]);
 
   const onSubmit: SubmitHandler<RegisterProps> = useCallback(
     (data) => {
       if (isValid) {
-        post(data);
+        postUserRegisterFn(data);
       }
     },
-    [isValid, post],
+    [isValid, postUserRegisterFn],
   );
 
   return {
-    post,
     onSubmit,
     showPassword,
     setShowPassword,
+    isPostUserRegisterPending,
+    hasPostUserRegisterError,
   };
 }

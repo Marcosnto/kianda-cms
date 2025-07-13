@@ -1,35 +1,58 @@
-import { postUser } from "@/api/user";
+import { postUserAutoRegister } from "@/api/user";
 import { PRIVACY_POLICY, USE_TERMS } from "@/helpers/envs";
 import { useRouter } from "@/utils/libs/routerFacade";
 import { useBoolean, useToast } from "@chakra-ui/react";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { sendEmail } from "@/api/email";
+import AutoRegisterEmail from "@/helpers/emails/template/auto-register-email";
 
 export default function useAutoRegister() {
   const [modalStatus, setModalStatus] = useBoolean();
   const [showPassword, setShowPassword] = useState(false);
-  const { postUserFn, isPostUserSucess, isPostUserPending, hasPostUserError } =
-    postUser();
+  const [userData, setUserData] = useState({
+    fullName: "",
+    email: "",
+  });
+  const {
+    postUserAutoRegisterFn,
+    isPostUserAutoRegisterSucess,
+    isPostUserAutoRegisterPending,
+    hasPostUserAutoRegisterError,
+  } = postUserAutoRegister();
+
+  const { sendEmailFn, isSendingEmail } = sendEmail();
+
   const toast = useToast();
   const navigate = useRouter();
   const privacyPolicyLink = PRIVACY_POLICY;
   const useTermsLink = USE_TERMS;
 
-  if (isPostUserPending) {
+  if (isPostUserAutoRegisterPending) {
     console.log("carregando post user...");
   }
 
-  if (hasPostUserError) {
-    toast({
-      title: `Ocorreu um erro ao registrar!`,
-      position: "top",
-      status: "error",
-      isClosable: true,
-    });
-  }
+  useEffect(() => {
+    if (hasPostUserAutoRegisterError) {
+      console.error("Erro ao registrar usuário:", hasPostUserAutoRegisterError);
+      toast({
+        title: `Ocorreu um erro ao registrar!`,
+        position: "top",
+        status: "error",
+        isClosable: true,
+      });
+    }
+  }, [hasPostUserAutoRegisterError, toast]);
 
-  if (isPostUserSucess && !modalStatus) {
-    setModalStatus.on();
-  }
+  useEffect(() => {
+    if (isPostUserAutoRegisterSucess) {
+      setModalStatus.on();
+      sendEmailFn({
+        emailsPool: userData.email,
+        body: AutoRegisterEmail({ name: userData.fullName }),
+        emailSubject: "Cadastro realizado com sucesso!",
+      });
+    }
+  }, [isPostUserAutoRegisterSucess, setModalStatus]);
 
   const onModalClose = useCallback(() => {
     setModalStatus.off();
@@ -40,10 +63,12 @@ export default function useAutoRegister() {
     privacyPolicyLink,
     useTermsLink,
     modalStatus,
-    post: postUserFn,
+    post: postUserAutoRegisterFn,
     onModalClose,
     navigate,
     showPassword,
     setShowPassword,
+    setUserData,
+    isSendingEmail,
   };
 }

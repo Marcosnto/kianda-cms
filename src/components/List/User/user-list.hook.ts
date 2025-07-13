@@ -2,13 +2,17 @@ import useStore from "@/store";
 import getStatusBadge from "@/utils/getStatusBadge";
 import { RegisterProps } from "@/utils/types/forms";
 import { useDisclosure } from "@chakra-ui/react";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { updateUserStatus, useGetUsers } from "@/api/user";
 import { useParams } from "react-router-dom";
+import { sendEmail } from "@/api/email";
+import UpdatedUser from "@/helpers/emails/template/updated-register";
+import { UserProps } from "@/utils/types/user";
 
-const userList = () => {
+const useUserList = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [isToSendEmail, setIsToSendEmail] = useState<boolean>(false);
   const { type: userType } = useParams();
   const { currentSelectedUser } = useStore();
   let pageTitle = "";
@@ -17,7 +21,6 @@ const userList = () => {
     case "patient":
       pageTitle = "Pacientes";
       break;
-
     case "blog_editor":
       pageTitle = "Editores";
       break;
@@ -43,7 +46,9 @@ const userList = () => {
     userType,
   );
 
-  const { updateUserStatusMutation, isUpdateUserPeding } = updateUserStatus();
+  const { updateUserStatusMutation, isUpdateUserPeding, isUpdateUserSuccess } =
+    updateUserStatus();
+  const { sendEmailFn, isSendingEmail } = sendEmail();
 
   const {
     control: statusOptionsFormControl,
@@ -54,39 +59,53 @@ const userList = () => {
       errors: statusOptionsFormErrors,
       isSubmitting: statusOptionsFormIsSubmitting,
     },
-  } = useForm<Partial<RegisterProps>>({
+  } = useForm<Partial<RegisterProps> & { isToSendEmail?: boolean }>({
     defaultValues: {
       registerStatus: "",
+      isToSendEmail: false,
     },
   });
 
-  const statusOptionsFormOnSubmit: SubmitHandler<Partial<RegisterProps>> =
-    useCallback(
-      (data) => {
-        updateUserStatusMutation({
-          id: currentSelectedUser?.id,
-          // fullName: currentSelectedUser?.fullName,
-          // email: currentSelectedUser?.email,
-          registerStatus: data.registerStatus,
-          sendEmail: true,
-        });
+  useEffect(() => {
+    if (isUpdateUserSuccess) {
+      if (isToSendEmail) {
+        const { fullName, email, registerStatus } =
+          currentSelectedUser as UserProps;
 
-        if (!isUpdateUserPeding) {
-          statusOptionsFormReset();
-          onCloseUpdateRegisterModal();
-        }
-      },
-      [
-        // currentSelectedUser?.email,
-        // currentSelectedUser?.fullName,
-        currentSelectedUser?.id,
-        // isSendingEmail,
-        isUpdateUserPeding,
-        onCloseUpdateRegisterModal,
-        statusOptionsFormReset,
-        updateUserStatusMutation,
-      ],
-    );
+        const emailData = {
+          emailsPool: email,
+          body: UpdatedUser({
+            name: fullName,
+            status: registerStatus || "",
+          }),
+          emailSubject: `Atualização de cadastro`,
+        };
+        sendEmailFn(emailData);
+      }
+
+      statusOptionsFormReset();
+      onCloseUpdateRegisterModal();
+    }
+  }, [isUpdateUserSuccess, isToSendEmail, sendEmailFn]);
+
+  const statusOptionsFormOnSubmit: SubmitHandler<
+    Partial<RegisterProps> & { isToSendEmail?: boolean }
+  > = useCallback(
+    (data) => {
+      setIsToSendEmail(data.isToSendEmail || false);
+      updateUserStatusMutation({
+        id: currentSelectedUser?.id,
+        registerStatus: data.registerStatus,
+      });
+    },
+    [
+      currentSelectedUser?.id,
+      isUpdateUserPeding,
+      onCloseUpdateRegisterModal,
+      statusOptionsFormReset,
+      updateUserStatusMutation,
+    ],
+  );
 
   const onOpenModalUpdateRegister = useCallback(
     (modalInfo: {
@@ -124,7 +143,6 @@ const userList = () => {
     statusOptionsFormErrors,
     statusOptionsFormIsSubmitting,
     isUpdateUserPeding,
-    // isSendingEmail,
     statusOptionsFormOnSubmit,
     isOpenUpdateRegisterModal,
     onOpenUpdateRegisterModal,
@@ -135,7 +153,9 @@ const userList = () => {
     setCurrentPage,
     getTableStatusBadge,
     pageTitle,
+    isToSendEmail,
+    isSendingEmail,
   };
 };
 
-export default userList;
+export default useUserList;

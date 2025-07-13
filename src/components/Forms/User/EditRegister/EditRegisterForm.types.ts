@@ -18,13 +18,12 @@ export type EditRegisterFormTypes = {
   control: Control<Partial<RegisterProps>, any>;
   errors: FieldErrors<RegisterProps>;
   isSubmitting: boolean;
-  sendEmail?: boolean;
-  setSendEmail?: Dispatch<SetStateAction<boolean>>;
+  isToSendEmail: boolean;
+  setIsToSendEmail: Dispatch<SetStateAction<boolean>>;
   disabledRoleChange?: boolean;
   canChangeRole?: boolean;
 };
 
 export type UpdateRegister = Partial<RegisterProps> & {
   id?: number | string | undefined;
-  sendEmail: boolean;
 };

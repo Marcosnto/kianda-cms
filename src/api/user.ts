@@ -10,12 +10,12 @@ import { UserProps } from "@/utils/types/user";
 import setNumberOfPages from "@/utils/setNumberOfPages";
 import { RegisterProps } from "@/utils/types/forms";
 
-export const postUser = () => {
+export const postUserAutoRegister = () => {
   const {
-    mutate: postUserFn,
-    isPending: isPostUserPending,
-    isError: hasPostUserError,
-    isSuccess: isPostUserSucess,
+    mutate: postUserAutoRegisterFn,
+    isPending: isPostUserAutoRegisterPending,
+    isError: hasPostUserAutoRegisterError,
+    isSuccess: isPostUserAutoRegisterSucess,
   } = useMutation({
     mutationFn: (data: RegisterProps) =>
       axiosInstance.post(`${BASE_API_URL}/user-register`, {
@@ -32,7 +32,55 @@ export const postUser = () => {
       }),
   });
 
-  return { postUserFn, isPostUserSucess, isPostUserPending, hasPostUserError };
+  return {
+    postUserAutoRegisterFn,
+    isPostUserAutoRegisterSucess,
+    isPostUserAutoRegisterPending,
+    hasPostUserAutoRegisterError,
+  };
+};
+
+export const postUserRegister = () => {
+  const toast = useToast();
+
+  const {
+    mutate: postUserRegisterFn,
+    isPending: isPostUserRegisterPending,
+    isError: hasPostUserRegisterError,
+    isSuccess: isPostUserRegisterSucess,
+  } = useMutation({
+    mutationFn: (data: RegisterProps) =>
+      axiosInstance.post(`${BASE_API_URL}/user`, {
+        fullName: data.fullName,
+        email: data.email,
+        password: data.password,
+        role: data.role,
+        acceptTerms: false,
+      }),
+    onSuccess: () => {
+      toast({
+        title: `Usuário cadastrado com sucesso`,
+        position: "top",
+        status: "success",
+        isClosable: true,
+      });
+    },
+    onError: () => {
+      toast({
+        title: `Ocorreu um erro ao cadastrar o usuário`,
+        position: "top",
+        status: "error",
+        isClosable: true,
+      });
+    },
+  });
+
+  return {
+    postUserRegisterFn,
+    isPostUserRegisterSucess,
+    isPostUserRegisterPending,
+    hasPostUserRegisterError,
+  };
 };
 
 export const fetchUsers = () => {
@@ -134,52 +182,43 @@ export const updateUserRegister = () => {
 
 export const updateUserStatus = () => {
   const queryClient = useQueryClient();
-  const token = localStorage.getItem("token");
   const toast = useToast();
 
-  const { updateUserRegisterMutation, updateUserRegisterLoading } =
-    updateUserRegister();
-
-  const { mutate: updateUserStatusMutation, isPending: isUpdateUserPeding } =
-    useMutation({
-      mutationFn: ({ id, registerStatus }: UpdateRegister) =>
-        fetch(BASE_API_URL + "/user/update-status" || "", {
-          method: "PUT",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            id,
-            registerStatus,
-          }),
+  const {
+    mutate: updateUserStatusMutation,
+    isPending: isUpdateUserPeding,
+    isSuccess: isUpdateUserSuccess,
+  } = useMutation({
+    mutationFn: ({ id, registerStatus }: UpdateRegister) =>
+      axiosInstance.put(
+        `/user/update-status/`,
+        JSON.stringify({
+          id,
+          registerStatus,
         }),
-      onSuccess: (response) => {
-        if (response.ok) {
-          queryClient.invalidateQueries({ queryKey: ["userList"] });
-
-          toast({
-            title: `Atualização feita com sucesso!`,
-            position: "top",
-            status: "success",
-            isClosable: true,
-          });
-        } else {
-          toast({
-            title: `Ocorreu um erro no servidor`,
-            position: "top",
-            status: "error",
-            isClosable: true,
-          });
-        }
-      },
-    });
+      ),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["userList"] });
+      toast({
+        title: `Atualização de usuário feita com sucesso!`,
+        position: "top",
+        status: "success",
+        isClosable: true,
+      });
+    },
+    onError: () => {
+      toast({
+        title: `Ocorreu um erro ao atualizar o status do usuário!`,
+        position: "top",
+        status: "error",
+        isClosable: true,
+      });
+    },
+  });
 
   return {
     updateUserStatusMutation,
-    updateUserRegisterMutation,
+    isUpdateUserSuccess,
     isUpdateUserPeding,
-    // isSendingEmail,
-    updateUserRegisterLoading,
   };
 };

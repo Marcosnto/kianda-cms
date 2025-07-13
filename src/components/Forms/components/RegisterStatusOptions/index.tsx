@@ -1,5 +1,6 @@
 import { RegisterProps } from "@/utils/types/forms";
 import {
+  Checkbox,
   FormControl,
   FormErrorMessage,
   FormLabel,
@@ -21,9 +22,10 @@ type RegisterStatusOptionsTypes = {
   errors: FieldErrors<RegisterProps>;
   register?: UseFormRegister<Partial<RegisterProps>>;
   currentValues?: Partial<RegisterProps>;
-  control?: Control<Partial<RegisterProps>, any>;
+  control?: Control<Partial<RegisterProps> & { isToSendEmail?: boolean }>;
   hasLabel?: boolean;
   isRequired?: boolean;
+  isToSendEmail: boolean;
   disabledRoleChange?: boolean;
   canChangeRole?: boolean;
 };
@@ -33,6 +35,7 @@ export default function RegisterStatusOptions({
   control,
   register,
   currentValues,
+  isToSendEmail,
   hasLabel = false,
   isRequired = false,
   canChangeRole = false,
@@ -43,7 +46,7 @@ export default function RegisterStatusOptions({
       <FormControl isInvalid={isRequired ? !!errors.registerStatus : false}>
         {hasLabel ? (
           <FormLabel htmlFor="registerStatus">
-            Status do Cadastro <RequiredInput />
+            Status de Cadastro <RequiredInput />
           </FormLabel>
         ) : null}
         <Controller
@@ -63,6 +66,24 @@ export default function RegisterStatusOptions({
         <FormErrorMessage>
           {errors.registerStatus && errors.registerStatus.message}
         </FormErrorMessage>
+      </FormControl>
+
+      <FormControl>
+        <Controller
+          name="isToSendEmail"
+          control={control}
+          render={({ field }) => (
+            <Checkbox
+              defaultChecked={isToSendEmail}
+              onChange={(e) => {
+                field.onChange(e.target.checked);
+              }}
+              colorScheme="green"
+            >
+              Enviar email informando atualização do cadastro
+            </Checkbox>
+          )}
+        />
       </FormControl>
 
       {canChangeRole && (

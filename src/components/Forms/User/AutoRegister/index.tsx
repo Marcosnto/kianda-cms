@@ -12,8 +12,7 @@ import {
   Stack,
   Link as ChakraLink,
 } from "@chakra-ui/react";
-import { useCallback } from "react";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { Controller, set, SubmitHandler, useForm } from "react-hook-form";
 import useAutoRegister from "./auto-register.hook";
 import { RegisterProps } from "@/utils/types/forms";
 import SpinnerLoad from "@/components/SpinnerLoad";
@@ -26,6 +25,15 @@ import PasswordInput from "@/components/PasswordInput";
 
 function UserAutoRegister() {
   const {
+    register,
+    getValues,
+    handleSubmit,
+    watch,
+    control,
+    formState: { errors, isSubmitting, isValid, touchedFields },
+  } = useForm<RegisterProps>();
+
+  const {
     privacyPolicyLink,
     useTermsLink,
     modalStatus,
@@ -34,25 +42,19 @@ function UserAutoRegister() {
     navigate,
     showPassword,
     setShowPassword,
+    setUserData,
+    isSendingEmail,
   } = useAutoRegister();
 
-  const {
-    register,
-    getValues,
-    handleSubmit,
-    watch,
-    control,
-    formState: { errors, isSubmitting, isValid },
-  } = useForm<RegisterProps>();
-
-  const onSubmit: SubmitHandler<RegisterProps> = useCallback(
-    (data) => {
-      if (isValid) {
-        post(data);
-      }
-    },
-    [isValid, post],
-  );
+  const onSubmit: SubmitHandler<RegisterProps> = (data) => {
+    if (isValid) {
+      setUserData({
+        fullName: data.fullName,
+        email: data.email,
+      });
+      post(data);
+    }
+  };
 
   const watched = watch(["gender", "disabledPerson"]);
 
@@ -373,6 +375,7 @@ function UserAutoRegister() {
                 variant="solid"
                 type="submit"
                 width="100%"
+                isDisabled={!isValid || !touchedFields}
                 isLoading={isSubmitting}
               >
                 Confirmar
@@ -381,6 +384,7 @@ function UserAutoRegister() {
                 colorScheme="green"
                 variant="outline"
                 width="100%"
+                isDisabled={isSubmitting}
                 onClick={() => navigate("/")}
               >
                 Cancelar
@@ -397,6 +401,7 @@ function UserAutoRegister() {
         content="Seu cadastro foi realizado com sucesso e foi enviado para aprovação. Você será notificado por email assim que o seu status for atualizado."
         btnConfirmLabel="Confirmar"
         hasBtnCancel={false}
+        isLoading={isSendingEmail}
       />
     </>
   );

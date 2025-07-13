@@ -26,10 +26,12 @@ function UserRegister() {
     formState: { errors, isSubmitting, isValid },
   } = useForm<RegisterProps>();
 
-  const { onSubmit, showPassword, setShowPassword } = useRegisterHook({
-    reset,
-    isValid,
-  });
+  const { onSubmit, showPassword, setShowPassword, isPostUserRegisterPending } =
+    useRegisterHook({
+      reset,
+      isValid,
+      getValues,
+    });
 
   return (
     <>
@@ -188,14 +190,15 @@ function UserRegister() {
           </Stack>
         </Flex>
         <Flex flexDir="row" gap="5" justifyContent="space-around">
-          <Button colorScheme="green" variant="outline">
-            Voltar
+          <Button colorScheme="green" variant="outline" onClick={() => reset()}>
+            Limpar
           </Button>
           <Button
             colorScheme="green"
             variant="solid"
             type="submit"
-            isLoading={isSubmitting}
+            isDisabled={isSubmitting}
+            isLoading={isPostUserRegisterPending}
           >
             Salvar
           </Button>

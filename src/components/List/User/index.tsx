@@ -1,6 +1,6 @@
 import { Td, Text, Tr } from "@chakra-ui/react";
 
-import userList from "./user-list.hook";
+import useUserList from "./user-list.hook";
 import SpinnerLoad from "@/components/SpinnerLoad";
 import { apiError, noDataToShow } from "@/helpers/messages";
 import { UserProps } from "@/utils/types/user";
@@ -34,7 +34,9 @@ export default function UsersList() {
     setCurrentPage,
     getTableStatusBadge,
     pageTitle,
-  } = userList();
+    isToSendEmail,
+    isSendingEmail,
+  } = useUserList();
 
   if (isLoading) {
     return <SpinnerLoad />;
@@ -65,6 +67,7 @@ export default function UsersList() {
         <RegisterStatusOptions
           errors={statusOptionsFormErrors}
           control={statusOptionsFormControl}
+          isToSendEmail={isToSendEmail}
         />
       </form>
     );
@@ -109,7 +112,11 @@ export default function UsersList() {
             isOpen={isOpenUpdateRegisterModal}
             onClose={onCloseUpdateRegisterModal}
             content={<ContentUpdateRegistration />}
-            isLoading={statusOptionsFormIsSubmitting || isUpdateUserPeding}
+            isLoading={
+              statusOptionsFormIsSubmitting ||
+              isUpdateUserPeding ||
+              isSendingEmail
+            }
             onConfirm={statusOptionsFormHandleSubmit(statusOptionsFormOnSubmit)}
           />
           <GenericModal

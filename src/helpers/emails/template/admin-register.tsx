@@ -1,15 +1,8 @@
 import { Html } from "@react-email/html";
+import { render } from "@react-email/render";
 
-import { RecipientType } from "../hooks/useSendEmailToUser";
-
-export default function AdminRegisterEmail({
-  recepients,
-}: {
-  recepients: RecipientType[];
-}) {
-  const { name } = recepients[0];
-
-  return (
+export default function AdminRegisterEmail({ name }: { name: string }) {
+  const renderedEmail = render(
     <Html lang="pt-BR">
       <h2>Boas vindas, {name}! </h2>
       <p>
@@ -18,6 +11,8 @@ export default function AdminRegisterEmail({
         <br />
         <div style={{ textAlign: "center", width: "100%" }}>12345</div>
       </p>
-    </Html>
+    </Html>,
   );
+
+  return renderedEmail;
 }

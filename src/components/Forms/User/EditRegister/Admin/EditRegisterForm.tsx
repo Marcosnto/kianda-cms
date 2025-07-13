@@ -7,7 +7,6 @@ import {
   Input,
   Stack,
 } from "@chakra-ui/react";
-import { Checkbox } from "@chakra-ui/react";
 
 import { EditRegisterFormTypes } from "../EditRegisterForm.types";
 import ComponentTitle from "@/components/Title";
@@ -21,13 +20,12 @@ export function EditRegisterForm({
   errors,
   isSubmitting,
   currentValues,
-  sendEmail,
+  isToSendEmail,
   disabledRoleChange,
   canChangeRole,
   register,
   onSubmit,
   handleSubmit,
-  //setSendEmail,
 }: EditRegisterFormTypes) {
   const navigate = useRouter();
   return (
@@ -44,15 +42,8 @@ export function EditRegisterForm({
             isRequired
             canChangeRole={canChangeRole}
             disabledRoleChange={disabledRoleChange}
+            isToSendEmail={isToSendEmail}
           />
-
-          <Checkbox
-            isChecked={sendEmail}
-            // onChange={(e) => setSendEmail!(e.target.checked)}
-            colorScheme="green"
-          >
-            Enviar email
-          </Checkbox>
 
           <Stack spacing={8} direction="row">
             <FormControl isInvalid={!!errors.fullName}>
