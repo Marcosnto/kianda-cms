@@ -114,8 +114,10 @@ export default function BlogPost({
                 placeholder="Selecione uma coluna"
                 colorScheme="green"
               >
-                <option value="option1">Coluna 1</option>
-                <option value="option2">Coluna 2</option>
+                <option value="option1">Saúde</option>
+                <option value="option2">Educação</option>
+                <option value="option3">Cultura e Sociedade</option>
+                <option value="option4">Diversidade e Inclusão</option>
               </Select>
 
               <FormErrorMessage>
