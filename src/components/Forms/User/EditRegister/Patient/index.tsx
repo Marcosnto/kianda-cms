@@ -57,6 +57,7 @@ function UserEditRegister() {
       onSubmit={onSubmit}
       register={register}
       handleSubmit={handleSubmit}
+      isToSendEmail={false}
     />
   );
 }

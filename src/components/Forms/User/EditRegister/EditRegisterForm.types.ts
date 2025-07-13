@@ -1,4 +1,3 @@
-import { Dispatch, SetStateAction } from "react";
 import {
   Control,
   FieldErrors,
@@ -19,7 +18,6 @@ export type EditRegisterFormTypes = {
   errors: FieldErrors<RegisterProps>;
   isSubmitting: boolean;
   isToSendEmail: boolean;
-  setIsToSendEmail: Dispatch<SetStateAction<boolean>>;
   disabledRoleChange?: boolean;
   canChangeRole?: boolean;
 };

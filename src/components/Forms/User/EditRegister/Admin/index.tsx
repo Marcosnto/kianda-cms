@@ -18,7 +18,6 @@ function EditRegister() {
     currentValues,
     control,
     isToSendEmail,
-    setIsToSendEmail,
     isSendingEmail,
     reset,
     handleSubmit,
@@ -67,7 +66,6 @@ function EditRegister() {
       register={register}
       handleSubmit={handleSubmit}
       isToSendEmail={isToSendEmail}
-      setIsToSendEmail={setIsToSendEmail}
       disabledRoleChange={disabledRoleChange}
       canChangeRole={canChangeRole}
     />

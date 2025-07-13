@@ -12,7 +12,7 @@ import {
   Stack,
   Link as ChakraLink,
 } from "@chakra-ui/react";
-import { Controller, set, SubmitHandler, useForm } from "react-hook-form";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import useAutoRegister from "./auto-register.hook";
 import { RegisterProps } from "@/utils/types/forms";
 import SpinnerLoad from "@/components/SpinnerLoad";
