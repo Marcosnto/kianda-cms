@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { getArticle, handlePostArticle } from "@/api/blog";
 
 import { EditBlogPostForm } from "./EditBlogPostForm";
-import SpinnerLoad from "@/components/SpinnerLoad";
+import SpinnerLoad from "@/ui/SpinnerLoad";
 import { apiError } from "@/helpers/messages";
 
 import { Article } from "@/utils/types/blog";

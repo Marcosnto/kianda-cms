@@ -1,7 +1,7 @@
 import ActionsButtons from "@/components/Forms/components/ActionsButton/ActionsButtons";
-import SpinnerLoad from "@/components/SpinnerLoad";
-import TableList from "@/components/Table";
-import ComponentTitle from "@/components/Title";
+import SpinnerLoad from "@/ui/SpinnerLoad";
+import TableList from "@/ui/Table";
+import ComponentTitle from "@/ui/Title";
 import getStatusBadge from "@/utils/getStatusBadge";
 import { apiError } from "@/helpers/messages";
 import {

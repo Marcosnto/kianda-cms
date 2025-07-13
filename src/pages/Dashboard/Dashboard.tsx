@@ -1,6 +1,6 @@
 import { Grid, GridItem } from "@chakra-ui/react";
 
-import Content from "../../components/Content";
+import Content from "../../ui/Content";
 import DashboardHeader from "../../components/DashboardHeader";
 import Menu from "../../components/Menu";
 

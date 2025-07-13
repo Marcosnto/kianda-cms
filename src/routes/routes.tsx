@@ -15,7 +15,7 @@ import EditRegister from "@/components/Forms/User/EditRegister/Admin";
 import EditBlogPost from "@/components/Forms/Blog/Edit";
 import TerapheuticContract from "@/components/Forms/User/TerapheuticContract";
 import UserEditRegister from "@/components/Forms/User/EditRegister/Patient";
-import Schedule from "@/components/Schedule";
+import Schedule from "@/ui/Schedule";
 import DefaultDashboardComponent from "@/pages/Dashboard/components/DefaultDashboardComponent";
 import NewsLetterList from "@/components/List/NewsLetter";
 

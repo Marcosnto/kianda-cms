@@ -1,7 +1,7 @@
 import { Table, TableContainer, Tbody, Th, Thead, Tr } from "@chakra-ui/react";
 
 import { noDataToShow } from "../../helpers/messages";
-import Pagination from "../Pagination";
+import Pagination from "../../ui/Pagination";
 import { TableHeadersProps, TableListProps } from "./table.types";
 
 export default function TableList({

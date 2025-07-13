@@ -13,7 +13,7 @@ import Partner from "./Partner";
 import SecondEmergencyContact from "./SecondEmergencyContact";
 
 import useTerapheuticContractForm from "./terapheutic-contract.hook";
-import SpinnerLoad from "@/components/SpinnerLoad";
+import SpinnerLoad from "@/ui/SpinnerLoad";
 import { apiError } from "@/helpers/messages";
 import { useEffect } from "react";
 

@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 
 import { EditRegisterFormTypes } from "../EditRegisterForm.types";
-import ComponentTitle from "@/components/Title";
+import ComponentTitle from "@/ui/Title";
 import RegisterStatusOptions from "../../../components/RegisterStatusOptions";
 import RequiredInput from "../../../components/RequiredInput";
 import { useRouter } from "@/utils/libs/routerFacade";

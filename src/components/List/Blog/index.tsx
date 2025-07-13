@@ -1,4 +1,4 @@
-import SpinnerLoad from "@/components/SpinnerLoad";
+import SpinnerLoad from "@/ui/SpinnerLoad";
 import { Box, Button, Td, Text, Tr } from "@chakra-ui/react";
 import { useState } from "react";
 
@@ -7,13 +7,13 @@ import { Article } from "./blog-list.types";
 import getStatusBadge from "@/utils/getStatusBadge";
 import ActionsButtons from "@/components/Forms/components/ActionsButton/ActionsButtons";
 import { blogListOptions, blogTableHeaders } from "@/helpers/tableConfigs";
-import ComponentTitle from "@/components/Title";
-import TableList from "@/components/Table";
-import FeedbackAPI from "@/components/FeedbackAPI";
+import ComponentTitle from "@/ui/Title";
+import TableList from "@/ui/Table";
+import FeedbackAPI from "@/ui/FeedbackAPI";
 import { getArticlesById } from "@/api/blog";
 import { useNavigate } from "react-router-dom";
 import { MdOutlinePostAdd } from "react-icons/md";
-import { GenericModal } from "@/components/GenericModal";
+import { GenericModal } from "@/ui/GenericModal";
 
 import useBlogList from "./blog-list.hook";
 

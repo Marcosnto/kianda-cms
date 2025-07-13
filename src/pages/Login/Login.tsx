@@ -12,12 +12,12 @@ import {
 
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import AlertStatus from "../../components/AlertStatus";
+import AlertStatus from "../../ui/AlertStatus";
 import RequiredInput from "../../components/Forms/components/RequiredInput";
-import LogoImage from "../../components/LogoImage";
+import LogoImage from "../../ui/LogoImage";
 import useLogin from "./login.hook";
 import { LoginProps } from "./types";
-import PasswordInput from "@/components/PasswordInput";
+import PasswordInput from "@/ui/PasswordInput";
 
 export default function Login() {
   const {

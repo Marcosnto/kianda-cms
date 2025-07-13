@@ -15,13 +15,13 @@ import {
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import useAutoRegister from "./auto-register.hook";
 import { RegisterProps } from "@/utils/types/forms";
-import SpinnerLoad from "@/components/SpinnerLoad";
-import ComponentTitle from "@/components/Title";
+import SpinnerLoad from "@/ui/SpinnerLoad";
+import ComponentTitle from "@/ui/Title";
 import RequiredInput from "../../components/RequiredInput";
-import { GenericModal } from "@/components/GenericModal";
+import { GenericModal } from "@/ui/GenericModal";
 import pronounsTypes from "@/utils/mocks/inputOptions/pronounsTypes";
 import { Link } from "@/utils/libs/routerFacade";
-import PasswordInput from "@/components/PasswordInput";
+import PasswordInput from "@/ui/PasswordInput";
 
 function UserAutoRegister() {
   const {

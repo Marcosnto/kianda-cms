@@ -1,8 +1,8 @@
 import { getNewsletterList } from "@/api/email";
-import SpinnerLoad from "@/components/SpinnerLoad";
-import TableList from "@/components/Table";
+import SpinnerLoad from "@/ui/SpinnerLoad";
+import TableList from "@/ui/Table";
 import { apiError } from "@/helpers/messages";
-import ComponentTitle from "@/components/Title";
+import ComponentTitle from "@/ui/Title";
 import { newsletterTableHeards } from "@/helpers/tableConfigs";
 import { Td, Tr } from "@chakra-ui/react";
 

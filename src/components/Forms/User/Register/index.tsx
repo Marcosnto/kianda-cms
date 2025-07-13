@@ -12,10 +12,10 @@ import { useForm } from "react-hook-form";
 
 import useRegisterHook from "./register.hook";
 import { RegisterProps } from "@/utils/types/forms";
-import ComponentTitle from "@/components/Title";
+import ComponentTitle from "@/ui/Title";
 import RequiredInput from "../../components/RequiredInput";
 import registerTypes from "@/utils/mocks/inputOptions/register-types";
-import PasswordInput from "@/components/PasswordInput";
+import PasswordInput from "@/ui/PasswordInput";
 
 function UserRegister() {
   const {

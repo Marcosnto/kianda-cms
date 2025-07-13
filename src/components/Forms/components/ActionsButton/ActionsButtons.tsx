@@ -1,4 +1,4 @@
-import { TableOptionsType } from "@/components/Table/table.types";
+import { TableOptionsType } from "@/ui/Table/table.types";
 import useStore from "@/store";
 import { useRouter } from "@/utils/libs/routerFacade";
 

@@ -1,4 +1,4 @@
-import ComponentTitle from "@/components/Title";
+import ComponentTitle from "@/ui/Title";
 import {
   Box,
   Button,
