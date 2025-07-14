@@ -6,8 +6,8 @@ import ComponentTitle from "@/ui/Title";
 import { newsletterTableHeards } from "@/helpers/tableOptionsConfigs";
 import { Box, Button, Td, Tr } from "@chakra-ui/react";
 
-import { RiMailSendLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
+import { BiMailSend } from "react-icons/bi";
 
 export default function NewsLetterList() {
   const { newsletterList, isLoading, error } = getNewsletterList();
@@ -43,7 +43,7 @@ export default function NewsLetterList() {
             navigate("../write-newsletter-email", { relative: "path" })
           }
         >
-          <RiMailSendLine size={20} /> Enviar email
+          <BiMailSend size={20} /> Enviar Newsletter
         </Button>
       </Box>
       <TableList

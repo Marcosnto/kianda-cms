@@ -3,12 +3,12 @@ import { Icon } from "@chakra-ui/react";
 import { IconType } from "react-icons";
 import {
   IoBodyOutline,
-  IoBookOutline,
+  // IoBookOutline,
   IoCalendarNumberOutline,
   IoCreateOutline,
   IoDocumentTextOutline,
   IoFolderOutline,
-  IoPeopleOutline,
+  // IoPeopleOutline,
   IoWalletOutline,
   IoPeopleSharp,
   IoNewspaperOutline,
@@ -83,7 +83,7 @@ export const admin: UserOptionsProps = {
     {
       key: "admin-02",
       icon: getIcon(IoNewspaperOutline),
-      displayName: "Newsletter - Assinantes",
+      displayName: "Newsletter",
       path: "admin/newsletter",
     },
   ],
