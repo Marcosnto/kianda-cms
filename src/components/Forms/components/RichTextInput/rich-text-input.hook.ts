@@ -232,6 +232,8 @@ function useRichTextInput(quillRef: React.MutableRefObject<null>) {
     videoUrl,
     setVideoUrl,
     insertVideo,
+    setUploadedImages,
+    uploadedImagesRef,
   };
 }
 

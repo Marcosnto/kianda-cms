@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Noop } from "react-hook-form";
 import ReactQuill from "react-quill";
 
@@ -25,9 +25,15 @@ interface RichTextInputType {
   onChange: (...event: any[]) => void;
   onBlur: Noop;
   value: string;
+  resetImages?: boolean;
 }
 
-const RichTextInput = ({ onChange, onBlur, value }: RichTextInputType) => {
+const RichTextInput = ({
+  onChange,
+  onBlur,
+  value,
+  resetImages,
+}: RichTextInputType) => {
   const quillRef = useRef(null);
   const {
     modules,
@@ -37,7 +43,18 @@ const RichTextInput = ({ onChange, onBlur, value }: RichTextInputType) => {
     videoUrl,
     setVideoUrl,
     insertVideo,
+    setUploadedImages,
+    uploadedImagesRef,
   } = useRichTextInput(quillRef);
+
+  useEffect(() => {
+    // Reset uploaded images when resetImages prop changes
+    // This is useful when you want to clear the images after a form submission or reset
+    if (resetImages) {
+      setUploadedImages([]);
+      uploadedImagesRef.current = [];
+    }
+  }, [resetImages]);
 
   return (
     <>

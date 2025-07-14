@@ -189,6 +189,7 @@ export default function BlogPost({
                   onChange={onChange}
                   onBlur={onBlur}
                   value={value}
+                  resetImages={resetForm}
                 />
               )}
             />
