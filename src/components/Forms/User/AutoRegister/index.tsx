@@ -19,7 +19,7 @@ import SpinnerLoad from "@/ui/SpinnerLoad";
 import ComponentTitle from "@/ui/Title";
 import RequiredInput from "../../components/RequiredInput";
 import { GenericModal } from "@/ui/GenericModal";
-import pronounsTypes from "@/utils/mocks/inputOptions/pronounsTypes";
+import pronounsTypes from "@/helpers/mocks/inputOptions/pronounsTypes";
 import { Link } from "@/utils/libs/routerFacade";
 import PasswordInput from "@/ui/PasswordInput";
 

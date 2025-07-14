@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import getMenuOptions from "./utils/menuOptionsPermitions";
+import getMenuOptions from "../../helpers/menuOptionsPermitions";
 import { OptionsProps } from "./MenuOptions";
 
 export type UserOptionsProps = {

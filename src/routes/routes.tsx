@@ -18,6 +18,7 @@ import UserEditRegister from "@/components/Forms/User/EditRegister/Patient";
 import Schedule from "@/ui/Schedule";
 import DefaultDashboardComponent from "@/pages/Dashboard/components/DefaultDashboardComponent";
 import NewsLetterList from "@/components/List/NewsLetter";
+import NewsLetter from "@/components/Forms/NewsLetter";
 
 const router = createBrowserRouter([
   {
@@ -118,6 +119,10 @@ const router = createBrowserRouter([
               {
                 path: "newsletter",
                 element: <NewsLetterList />,
+              },
+              {
+                path: "write-newsletter-email",
+                element: <NewsLetter />,
               },
             ],
           },

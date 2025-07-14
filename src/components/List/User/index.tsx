@@ -9,7 +9,10 @@ import RegisterStatusOptions from "@/components/Forms/components/RegisterStatusO
 import ComponentTitle from "@/ui/Title";
 import TableList from "@/ui/Table";
 import { GenericModal } from "@/ui/GenericModal";
-import { userListOptions, userTableHeaders } from "@/helpers/tableConfigs";
+import {
+  userListOptions,
+  userTableHeaders,
+} from "@/helpers/tableOptionsConfigs";
 import FeedbackAPI from "@/ui/FeedbackAPI";
 
 export default function UsersList() {

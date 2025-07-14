@@ -14,7 +14,7 @@ import useRegisterHook from "./register.hook";
 import { RegisterProps } from "@/utils/types/forms";
 import ComponentTitle from "@/ui/Title";
 import RequiredInput from "../../components/RequiredInput";
-import registerTypes from "@/utils/mocks/inputOptions/register-types";
+import registerTypes from "@/helpers/mocks/inputOptions/register-types";
 import PasswordInput from "@/ui/PasswordInput";
 
 function UserRegister() {

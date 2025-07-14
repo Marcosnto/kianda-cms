@@ -6,7 +6,10 @@ import { apiError, noDataToShow } from "@/helpers/messages";
 import { Article } from "./blog-list.types";
 import getStatusBadge from "@/utils/getStatusBadge";
 import ActionsButtons from "@/components/Forms/components/ActionsButton/ActionsButtons";
-import { blogListOptions, blogTableHeaders } from "@/helpers/tableConfigs";
+import {
+  blogListOptions,
+  blogTableHeaders,
+} from "@/helpers/tableOptionsConfigs";
 import ComponentTitle from "@/ui/Title";
 import TableList from "@/ui/Table";
 import FeedbackAPI from "@/ui/FeedbackAPI";

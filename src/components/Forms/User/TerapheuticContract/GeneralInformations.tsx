@@ -14,9 +14,9 @@ import {
 } from "@chakra-ui/react";
 import RequiredInput from "../../components/RequiredInput";
 import { FormReactHooksProps } from "@/utils/types/forms";
-import schoolingTypes from "@/utils/mocks/inputOptions/schoolingTypes";
-import pronounsTypes from "@/utils/mocks/inputOptions/pronounsTypes";
-import civilStatus from "@/utils/mocks/inputOptions/civilStatus";
+import schoolingTypes from "@/helpers/mocks/inputOptions/schoolingTypes";
+import pronounsTypes from "@/helpers/mocks/inputOptions/pronounsTypes";
+import civilStatus from "@/helpers/mocks/inputOptions/civilStatus";
 import { Controller } from "react-hook-form";
 
 export default function GeneralInformations({

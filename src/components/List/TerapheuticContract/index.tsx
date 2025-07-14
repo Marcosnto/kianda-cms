@@ -7,7 +7,7 @@ import { apiError } from "@/helpers/messages";
 import {
   terapheuticContractListOptions,
   terapheuticContractTableHeaders,
-} from "@/helpers/tableConfigs";
+} from "@/helpers/tableOptionsConfigs";
 
 import { Td, Tr } from "@chakra-ui/react";
 import { useState } from "react";

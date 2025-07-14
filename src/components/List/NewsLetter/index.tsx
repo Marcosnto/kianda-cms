@@ -3,11 +3,15 @@ import SpinnerLoad from "@/ui/SpinnerLoad";
 import TableList from "@/ui/Table";
 import { apiError } from "@/helpers/messages";
 import ComponentTitle from "@/ui/Title";
-import { newsletterTableHeards } from "@/helpers/tableConfigs";
-import { Td, Tr } from "@chakra-ui/react";
+import { newsletterTableHeards } from "@/helpers/tableOptionsConfigs";
+import { Box, Button, Td, Tr } from "@chakra-ui/react";
+
+import { RiMailSendLine } from "react-icons/ri";
+import { useNavigate } from "react-router-dom";
 
 export default function NewsLetterList() {
   const { newsletterList, isLoading, error } = getNewsletterList();
+  const navigate = useNavigate();
 
   if (isLoading) {
     return <SpinnerLoad />;
@@ -22,14 +26,6 @@ export default function NewsLetterList() {
       <Tr key={id}>
         <Td>{id}</Td>
         <Td>{email}</Td>
-
-        {/* <Td>
-        <ButtonsActions
-          user={user}
-          tableOptions={userListOptions}
-          modalsOptions={modalsStateControl}
-        />
-      </Td> */}
       </Tr>
     ),
   );
@@ -37,6 +33,19 @@ export default function NewsLetterList() {
   return (
     <>
       <ComponentTitle title="Assinantes da Newsletter" type="h1" />
+      <Box pb={5} display="flex" justifyContent="end">
+        <Button
+          gap={2}
+          size="sm"
+          variant="outline"
+          colorScheme="green"
+          onClick={() =>
+            navigate("../write-newsletter-email", { relative: "path" })
+          }
+        >
+          <RiMailSendLine size={20} /> Enviar email
+        </Button>
+      </Box>
       <TableList
         headers={newsletterTableHeards}
         totalPages={1}

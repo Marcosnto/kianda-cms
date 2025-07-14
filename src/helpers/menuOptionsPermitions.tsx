@@ -41,26 +41,26 @@ export default function getMenuOptions(role: string | undefined) {
 
 export const admin: UserOptionsProps = {
   type: "admin",
-  users: [
-    {
-      key: "user-admin-02",
-      icon: getIcon(IoPeopleOutline),
-      displayName: "Lista de Pacientes",
-      path: "psi/users-list/patient",
-    },
-    {
-      key: "user-admin-03",
-      icon: getIcon(IoBookOutline),
-      displayName: "Contratos Terapêuticos",
-      path: "psi/terapheutic-contracts",
-    },
-    // {
-    //   key: "user-admin-04",
-    //   icon: getIcon(IoCalendarOutline),
-    //   displayName: "Calendário",
-    //   path: "psi/schedule",
-    // },
-  ],
+  // users: [
+  //   {
+  //     key: "user-admin-02",
+  //     icon: getIcon(IoPeopleOutline),
+  //     displayName: "Lista de Pacientes",
+  //     path: "psi/users-list/patient",
+  //   },
+  //   {
+  //     key: "user-admin-03",
+  //     icon: getIcon(IoBookOutline),
+  //     displayName: "Contratos Terapêuticos",
+  //     path: "psi/terapheutic-contracts",
+  //   },
+  //   // {
+  //   //   key: "user-admin-04",
+  //   //   icon: getIcon(IoCalendarOutline),
+  //   //   displayName: "Calendário",
+  //   //   path: "psi/schedule",
+  //   // },
+  // ],
   blog: [
     {
       key: "blog-admin-01",
@@ -80,6 +80,12 @@ export const admin: UserOptionsProps = {
       displayName: "Lista de Editores",
       path: "admin/users-list/blog_editor",
     },
+    {
+      key: "admin-02",
+      icon: getIcon(IoNewspaperOutline),
+      displayName: "Newsletter - Assinantes",
+      path: "admin/newsletter",
+    },
   ],
   admin: [
     {
@@ -93,12 +99,6 @@ export const admin: UserOptionsProps = {
       icon: getIcon(IoPeopleSharp),
       displayName: "Lista de Usuários",
       path: "admin/users-list/all",
-    },
-    {
-      key: "admin-02",
-      icon: getIcon(IoNewspaperOutline),
-      displayName: "Newsletter - Assinantes",
-      path: "admin/newsletter",
     },
   ],
 };

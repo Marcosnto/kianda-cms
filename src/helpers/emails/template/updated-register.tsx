@@ -1,4 +1,4 @@
-import { getRegisterStatus } from "@/helpers/registerStatus";
+import { getRegisterStatus } from "@/utils/registerStatus";
 import { Html } from "@react-email/html";
 import { render } from "@react-email/render";
 
