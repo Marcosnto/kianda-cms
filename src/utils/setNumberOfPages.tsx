@@ -4,7 +4,7 @@ export default function setNumberOfPages(
   totalPageFromResponse: AxiosHeaderValue | null,
 ) {
   if (totalPageFromResponse) {
-    const totalPages = Math.ceil(+totalPageFromResponse / 10);
+    const totalPages = Math.ceil(+totalPageFromResponse / 5);
     return totalPages;
   }
 }
