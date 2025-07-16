@@ -62,6 +62,48 @@ export function handlePostArticle(articleID: string | undefined) {
   };
 }
 
+export function handlePutArticle(articleID: string | undefined) {
+  const toast = useToast();
+
+  const {
+    mutate: putArticleFn,
+    isError: isPutArticleError,
+    isSuccess: isPutArticleSuccess,
+    isPending: isPutArticlePending,
+  } = useMutation({
+    mutationFn: (formData: FormData) =>
+      axiosInstance.post(`${BASE_API_URL}/article/${articleID}`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }),
+    onSuccess: (response) => {
+      if (response.status === 200) {
+        toast({
+          title: `Artigo atualizado com sucesso`,
+          position: "top",
+          status: "success",
+          isClosable: true,
+        });
+      } else {
+        toast({
+          title: `Ocorreu um erro ao atualizar o artigo`,
+          position: "top",
+          status: "error",
+          isClosable: true,
+        });
+      }
+    },
+  });
+
+  return {
+    putArticleFn,
+    isPutArticleError,
+    isPutArticlePending,
+    isPutArticleSuccess,
+  };
+}
+
 export function handleUpdateArticleStatus() {
   const queryClient = useQueryClient();
   const toast = useToast();

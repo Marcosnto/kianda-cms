@@ -5,7 +5,7 @@ export type Article = {
   description: string;
   content: string;
   status: string;
-  image: any;
+  image: File[] | string;
   slug?: string;
   imageDescription: string;
   imageSub: string;

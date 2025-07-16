@@ -6,12 +6,7 @@ export type Article = {
   subtitle: string;
   content: string;
   status: string;
-  image?: {
-    id: string | number;
-    url: string;
-    file_name: string;
-    type: string;
-  };
+  image?: File[] | string;
   slug?: string;
   imageDescription: string;
   imageSub: string;

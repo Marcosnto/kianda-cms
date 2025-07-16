@@ -137,9 +137,9 @@ export default function BlogPost({
               focusBorderColor="green.800"
             />
 
-            {/* <FormErrorMessage>
+            <FormErrorMessage>
               {errors.image && errors.image.message}
-            </FormErrorMessage> */}
+            </FormErrorMessage>
           </FormControl>
 
           <FormControl isInvalid={!!errors.imageDescription} isRequired>
