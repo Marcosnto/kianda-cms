@@ -7,6 +7,7 @@ import {
 
 export type RegisterProps = {
   fullName: string;
+  avatar?: File[] | string;
   email: string;
   emailCheck: string;
   password: string;

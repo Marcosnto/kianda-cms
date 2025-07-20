@@ -11,6 +11,7 @@ import {
 
 export type EditRegisterFormTypes = {
   userName?: string;
+  avatar?: string;
   currentValues: Partial<RegisterProps>;
   register: UseFormRegister<Partial<RegisterProps>>;
   onSubmit: SubmitHandler<Partial<RegisterProps>>;

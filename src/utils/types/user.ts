@@ -1,6 +1,7 @@
 export type UserProps = {
   id: number;
   fullName: string;
+  avatar?: string;
   email: string;
   bornDate?: string | Date;
   rg?: string;

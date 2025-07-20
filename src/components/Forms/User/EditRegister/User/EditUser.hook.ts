@@ -52,14 +52,22 @@ export default function useEditUser() {
   const onSubmit: SubmitHandler<Partial<RegisterProps>> = useCallback(
     (data: Partial<RegisterProps> & { isToSendEmail?: boolean }) => {
       if (isValid) {
+        const formData = new FormData();
+        formData.append("id", String(loggedUser.id));
+        formData.append("fullName", data.fullName || "");
+        formData.append("email", data.email || "");
+        formData.append("bornDate", data.bornDate?.toString() || "");
+        formData.append("gender", data.gender || "");
+        formData.append("otherGender", data.otherGender || "");
+        formData.append("pronouns", data.pronouns || "");
+
+        if (data.avatar && data.avatar[0] instanceof File) {
+          formData.append("avatar", data.avatar[0]);
+        }
+
         updateUserRegisterMutation({
-          id: loggedUser.id,
-          fullName: data.fullName,
-          email: data.email,
-          bornDate: data.bornDate,
-          gender: data.gender,
-          otherGender: data.otherGender,
-          pronouns: data.pronouns,
+          userData: formData,
+          id: String(loggedUser.id),
         });
       }
     },

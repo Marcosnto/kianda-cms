@@ -1,9 +1,11 @@
 import {
+  Box,
   Button,
   Flex,
   FormControl,
   FormErrorMessage,
   FormLabel,
+  Image,
   Input,
   Radio,
   RadioGroup,
@@ -19,6 +21,7 @@ import pronounsTypes from "@/helpers/mocks/inputOptions/pronounsTypes";
 import { Controller } from "react-hook-form";
 
 export function EditUserRegisterForm({
+  avatar,
   errors,
   isSubmitting,
   register,
@@ -35,8 +38,32 @@ export function EditUserRegisterForm({
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
         <ComponentTitle title={"Dados cadastrais"} type="h1" />
-
+        <Box
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          mb="10"
+          flexDir="column"
+          gap="5"
+        >
+          <Image
+            borderRadius="full"
+            boxSize="150px"
+            objectFit="cover"
+            src={avatar}
+            alt="DM"
+          />
+        </Box>
         <Flex flexDir="column" gap="5" mb="10">
+          <FormControl>
+            <FormLabel htmlFor="avatar">Foto de perfil</FormLabel>
+            <Input
+              id="avatar"
+              type="file"
+              {...register("avatar")}
+              focusBorderColor="green.800"
+            />
+          </FormControl>
           <Stack spacing={8} direction="row">
             <FormControl isInvalid={!!errors.fullName}>
               <FormLabel htmlFor="fullName">

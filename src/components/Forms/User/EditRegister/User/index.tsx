@@ -34,6 +34,7 @@ function UserEditRegister() {
         gender: data.gender,
         otherGender: data.otherGender,
         pronouns: data.pronouns,
+        avatar: data.avatar,
       });
     }
   }, [data, reset]);
@@ -49,6 +50,7 @@ function UserEditRegister() {
   return (
     <EditUserRegisterForm
       control={control}
+      avatar={data?.avatar || ""}
       watch={watch}
       errors={formErros}
       getValues={getValues}

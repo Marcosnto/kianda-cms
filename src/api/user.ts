@@ -11,6 +11,7 @@ import {
   LoggedUserType,
   UpdateRegister,
 } from "@/components/Forms/User/EditRegister/types/EditRegisterForm.types";
+import { UseFormReset } from "react-hook-form";
 
 export const postUserAutoRegister = () => {
   const {
@@ -132,8 +133,8 @@ export function useGetUsers(currentPage: number, type: string | undefined) {
 }
 
 export const updateUserRegister = () => {
+  //This function is being used in the edit user by admin and when the user edit your own register
   const queryClient = useQueryClient();
-  const token = localStorage.getItem("token");
   const toast = useToast();
 
   const {
@@ -142,35 +143,36 @@ export const updateUserRegister = () => {
     isError: hasUpdateUserRegisterError,
     isSuccess: isUpdateUserRegisterSucess,
   } = useMutation({
-    mutationFn: ({ id, ...props }: UpdateRegister) =>
-      fetch(BASE_API_URL + `/user/update/${id}` || "", {
-        method: "POST",
+    mutationFn: ({
+      userData,
+      id,
+    }: {
+      userData: FormData | Partial<RegisterProps>;
+      id: string;
+      resetForm?: UseFormReset<Partial<RegisterProps>>;
+    }) =>
+      axiosInstance.post(`${BASE_API_URL}/user/update/${id}`, userData, {
         headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
+          "Content-Type": "multipart/form-data",
         },
-        body: JSON.stringify({
-          id,
-          ...props,
-        }),
       }),
-    onSuccess: (response) => {
-      if (response.ok) {
-        queryClient.invalidateQueries({ queryKey: ["userList"] });
-        toast({
-          title: `Alteração realizada com sucesso`,
-          position: "top",
-          status: "success",
-          isClosable: true,
-        });
-      } else {
-        toast({
-          title: `Ocorreu um erro ao atualizar os dados`,
-          position: "top",
-          status: "error",
-          isClosable: true,
-        });
-      }
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["userList"] });
+      queryClient.invalidateQueries({ queryKey: ["editUser"] });
+      toast({
+        title: `Alteração realizada com sucesso`,
+        position: "top",
+        status: "success",
+        isClosable: true,
+      });
+    },
+    onError: () => {
+      toast({
+        title: `Ocorreu um erro ao atualizar o usuário`,
+        position: "top",
+        status: "error",
+        isClosable: true,
+      });
     },
   });
 

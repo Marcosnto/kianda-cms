@@ -52,10 +52,7 @@ export default function useEditRegisterForm() {
     if (isUpdateUserRegisterSucess || isUpdateUserSuccess) {
       const { fullName, registerStatus, email } =
         currentSelectedUser as UserProps;
-      console.log("currentSelectedUser", currentSelectedUser);
       if (isToSendEmail && fullName && registerStatus && email) {
-        console.log("currentSelectedUser 2", currentSelectedUser);
-
         const emailData = {
           emailsPool: email,
           body: UpdatedUser({ name: fullName, status: registerStatus }),
@@ -80,14 +77,19 @@ export default function useEditRegisterForm() {
 
   const onSubmit: SubmitHandler<Partial<RegisterProps>> = useCallback(
     (data: Partial<RegisterProps> & { isToSendEmail?: boolean }) => {
-      if (isValid) {
+      if (isValid && currentSelectedUser && currentSelectedUser.id) {
         setIsToSendEmail(data.isToSendEmail || false);
-        updateUserRegisterMutation({
-          id: currentSelectedUser?.id,
+
+        const userData: Partial<RegisterProps> = {
           fullName: data.fullName,
           email: data.email,
           registerStatus: data.registerStatus,
           role: data.role,
+        };
+
+        updateUserRegisterMutation({
+          userData: userData,
+          id: String(currentSelectedUser.id),
         });
       }
     },
