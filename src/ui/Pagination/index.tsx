@@ -33,7 +33,33 @@ function Pagination({
 
   return (
     <Flex gap={2} justifyContent="center" mt="5">
+      <Button
+        border="solid 1px #35481E"
+        color="green.700"
+        w="6"
+        _hover={{ bg: "green.600", rounded: "8px", color: "white" }}
+        key={`back-page`}
+        variant={"solid"}
+        onClick={() => {
+          setCurrentPage(currentPage - 1);
+        }}
+      >
+        {"<"}
+      </Button>
       {[...Array(totalPages)].map((_, index) => paginationButton(index + 1))}
+      <Button
+        border="solid 1px #35481E"
+        color="green.700"
+        w="6"
+        _hover={{ bg: "green.600", rounded: "8px", color: "white" }}
+        key={`next-page`}
+        variant={"solid"}
+        onClick={() => {
+          setCurrentPage(currentPage + 1);
+        }}
+      >
+        {">"}
+      </Button>
     </Flex>
   );
 }

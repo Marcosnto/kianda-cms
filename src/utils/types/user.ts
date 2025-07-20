@@ -7,6 +7,7 @@ export type UserProps = {
   cpf?: string;
   gender?: string;
   otherGender?: string;
+  pronouns?: string;
   registerStatus?: string;
   disabledPerson?: string;
   disabledPersonDescription?: string;

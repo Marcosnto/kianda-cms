@@ -30,7 +30,7 @@ function UserAutoRegister() {
     handleSubmit,
     watch,
     control,
-    formState: { errors, isSubmitting, isValid, touchedFields },
+    formState: { errors, isSubmitting, isValid },
   } = useForm<RegisterProps>();
 
   const {
@@ -375,7 +375,7 @@ function UserAutoRegister() {
                 variant="solid"
                 type="submit"
                 width="100%"
-                isDisabled={!isValid || !touchedFields}
+                isDisabled={!isValid}
                 isLoading={isSubmitting}
               >
                 Confirmar

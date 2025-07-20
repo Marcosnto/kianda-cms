@@ -6,12 +6,7 @@ import { UserProps } from "@/utils/types/user";
 import { fetchUsers, updateUserRegister, updateUserStatus } from "@/api/user";
 import { sendEmail } from "@/api/email";
 import UpdatedUser from "@/helpers/emails/template/updated-register";
-
-export type LoggedUserType = {
-  id: number;
-  role: string;
-  name: string;
-};
+import { LoggedUserType } from "../types/EditRegisterForm.types";
 
 export default function useEditRegisterForm() {
   const [isToSendEmail, setIsToSendEmail] = useState(false);
@@ -31,6 +26,23 @@ export default function useEditRegisterForm() {
     updateUserRegisterLoading,
     isUpdateUserRegisterSucess,
   } = updateUserRegister();
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    getValues,
+    control,
+    watch,
+    formState: { errors: formErros, isSubmitting: formSubmitting, isValid },
+  } = useForm<Partial<RegisterProps> & { isToSendEmail?: boolean }>({
+    defaultValues: {
+      registerStatus: "",
+      isToSendEmail: false,
+    },
+  });
+
+  const currentValues = getValues();
 
   const { sendEmailFn, isSendingEmail } = sendEmail();
 
@@ -66,26 +78,9 @@ export default function useEditRegisterForm() {
     }
   }, [fetchData]);
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    getValues,
-    control,
-    formState: { errors: formErros, isSubmitting: formSubmitting, isValid },
-  } = useForm<Partial<RegisterProps> & { isToSendEmail?: boolean }>({
-    defaultValues: {
-      registerStatus: "",
-      isToSendEmail: false,
-    },
-  });
-
-  const currentValues = getValues();
-
   const onSubmit: SubmitHandler<Partial<RegisterProps>> = useCallback(
     (data: Partial<RegisterProps> & { isToSendEmail?: boolean }) => {
       if (isValid) {
-        console.log("data", data);
         setIsToSendEmail(data.isToSendEmail || false);
         updateUserRegisterMutation({
           id: currentSelectedUser?.id,
@@ -108,6 +103,8 @@ export default function useEditRegisterForm() {
     formErros,
     formSubmitting,
     control,
+    watch,
+    getValues,
     currentValues,
     disabledRoleChange,
     updateUserRegisterLoading,

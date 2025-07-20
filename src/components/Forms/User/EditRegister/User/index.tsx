@@ -1,39 +1,39 @@
 import { useEffect } from "react";
 
-import useEditRegisterForm from "../EditRegisterForm.hook";
 import SpinnerLoad from "@/ui/SpinnerLoad";
 import { apiError } from "@/helpers/messages";
-import { UserEditRegisterForm } from "./UserEditRegisterForm";
+import { EditUserRegisterForm } from "./EditUserRegisterForm";
+import useEditUser from "./EditUser.hook";
 
 function UserEditRegister() {
   const {
     data,
     isLoading,
-    isUpdateUserPeding,
     error,
     formErros,
     formSubmitting,
     onSubmit,
     register,
+    getValues,
     currentValues,
     control,
     reset,
+    watch,
     handleSubmit,
     updateUserRegisterLoading,
-  } = useEditRegisterForm();
+  } = useEditUser();
 
   useEffect(() => {
     if (data) {
+      console.log("initial data", data);
       reset({
         fullName: data.fullName,
         email: data.email,
+        emailCheck: data.email,
         bornDate: data.bornDate,
         gender: data.gender,
         otherGender: data.otherGender,
-        disabledPerson: data.disabledPerson,
-        disabledPersonDescription: data.disabledPersonDescription,
-        registerStatus: data.registerStatus,
-        role: data.role,
+        pronouns: data.pronouns,
       });
     }
   }, [data, reset]);
@@ -47,12 +47,12 @@ function UserEditRegister() {
   }
 
   return (
-    <UserEditRegisterForm
+    <EditUserRegisterForm
       control={control}
+      watch={watch}
       errors={formErros}
-      isSubmitting={
-        isUpdateUserPeding || formSubmitting || updateUserRegisterLoading
-      }
+      getValues={getValues}
+      isSubmitting={formSubmitting || updateUserRegisterLoading}
       currentValues={currentValues}
       onSubmit={onSubmit}
       register={register}

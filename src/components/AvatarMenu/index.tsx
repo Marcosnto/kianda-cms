@@ -1,4 +1,4 @@
-import { ArrowForwardIcon } from "@chakra-ui/icons";
+import { AddIcon, ArrowForwardIcon } from "@chakra-ui/icons";
 import { Avatar, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { MouseEventHandler } from "react";
 import useAvatarMenu from "./avatar-menu.hook";
@@ -40,12 +40,11 @@ export default function AvatarMenu() {
           variant="outline"
         />
         <MenuList sx={{ color: "black", padding: "2" }}>
-          {/* TODO: Página de perfil para info e redefinir senha  */}
-          {/* {MenuItemComponent({ icon: <AddIcon />, content: "Ver Perfil" })}
           {MenuItemComponent({
-            icon: <LockIcon />,
-            content: "Redefinir Senha",
-          })} */}
+            icon: <AddIcon />,
+            content: "Ver Perfil",
+            onClick: () => navigate("profile", { relative: "path" }),
+          })}
           {MenuItemComponent({
             icon: <ArrowForwardIcon />,
             content: "Sair",

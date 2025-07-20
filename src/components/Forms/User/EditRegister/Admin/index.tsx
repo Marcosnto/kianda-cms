@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 import { EditRegisterForm } from "./EditRegisterForm";
-import useEditRegisterForm from "../EditRegisterForm.hook";
+import useEditRegisterForm from "./EditRegisterForm.hook";
 import SpinnerLoad from "@/ui/SpinnerLoad";
 import { apiError } from "@/helpers/messages";
 

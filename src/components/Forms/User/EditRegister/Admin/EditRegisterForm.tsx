@@ -8,7 +8,7 @@ import {
   Stack,
 } from "@chakra-ui/react";
 
-import { EditRegisterFormTypes } from "../EditRegisterForm.types";
+import { EditRegisterFormTypes } from "../types/EditRegisterForm.types";
 import ComponentTitle from "@/ui/Title";
 import RegisterStatusOptions from "../../../components/RegisterStatusOptions";
 import RequiredInput from "../../../components/RequiredInput";

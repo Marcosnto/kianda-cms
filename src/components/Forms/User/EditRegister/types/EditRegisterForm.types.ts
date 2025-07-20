@@ -1,12 +1,13 @@
+import { RegisterProps } from "@/utils/types/forms";
 import {
   Control,
   FieldErrors,
   SubmitHandler,
+  UseFormGetValues,
   UseFormHandleSubmit,
   UseFormRegister,
+  UseFormWatch,
 } from "react-hook-form";
-
-import { RegisterProps } from "../../../../utils/types/forms";
 
 export type EditRegisterFormTypes = {
   userName?: string;
@@ -15,6 +16,8 @@ export type EditRegisterFormTypes = {
   onSubmit: SubmitHandler<Partial<RegisterProps>>;
   handleSubmit: UseFormHandleSubmit<Partial<RegisterProps>>;
   control: Control<Partial<RegisterProps>, any>;
+  getValues?: UseFormGetValues<Partial<RegisterProps>>;
+  watch?: UseFormWatch<Partial<RegisterProps>>;
   errors: FieldErrors<RegisterProps>;
   isSubmitting: boolean;
   isToSendEmail: boolean;
@@ -24,4 +27,10 @@ export type EditRegisterFormTypes = {
 
 export type UpdateRegister = Partial<RegisterProps> & {
   id?: number | string | undefined;
+};
+
+export type LoggedUserType = {
+  id: number;
+  role: string;
+  name: string;
 };

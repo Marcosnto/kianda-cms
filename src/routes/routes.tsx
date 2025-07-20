@@ -14,11 +14,12 @@ import { AuthGuard } from "./AuthGuard";
 import EditRegister from "@/components/Forms/User/EditRegister/Admin";
 import EditBlogPost from "@/components/Forms/Blog/Edit";
 import TerapheuticContract from "@/components/Forms/User/TerapheuticContract";
-import UserEditRegister from "@/components/Forms/User/EditRegister/Patient";
+import UserEditRegister from "@/components/Forms/User/EditRegister/User";
 import Schedule from "@/ui/Schedule";
 import DefaultDashboardComponent from "@/pages/Dashboard/components/DefaultDashboardComponent";
 import NewsLetterList from "@/components/List/NewsLetter";
 import NewsLetter from "@/components/Forms/NewsLetter";
+import Profile from "@/components/Forms/User/Profile";
 
 const router = createBrowserRouter([
   {
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
           {
             path: "",
             element: <DefaultDashboardComponent />,
+          },
+          {
+            path: "profile",
+            element: <Profile />,
           },
           {
             path: "psi",

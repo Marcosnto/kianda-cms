@@ -1,14 +1,16 @@
 import useStore from "@/store";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { LoggedUserType } from "@/components/Forms/User/EditRegister/EditRegisterForm.hook";
 import { axiosInstance } from "@/api/axiosInstance";
 import { useToast } from "@chakra-ui/react";
 import { BASE_API_URL } from "@/helpers/envs";
-import { UpdateRegister } from "@/components/Forms/User/EditRegister/EditRegisterForm.types";
 import { useEffect, useState } from "react";
 import { UserProps } from "@/utils/types/user";
 import setNumberOfPages from "@/utils/setNumberOfPages";
 import { RegisterProps } from "@/utils/types/forms";
+import {
+  LoggedUserType,
+  UpdateRegister,
+} from "@/components/Forms/User/EditRegister/types/EditRegisterForm.types";
 
 export const postUserAutoRegister = () => {
   const {
@@ -142,7 +144,7 @@ export const updateUserRegister = () => {
   } = useMutation({
     mutationFn: ({ id, ...props }: UpdateRegister) =>
       fetch(BASE_API_URL + `/user/update/${id}` || "", {
-        method: "PUT",
+        method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
