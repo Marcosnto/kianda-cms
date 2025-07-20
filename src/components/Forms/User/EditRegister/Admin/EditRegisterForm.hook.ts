@@ -1,22 +1,22 @@
-import useStore from "@/store";
+import useStore from "@/store/store";
 import { RegisterProps } from "@/utils/types/forms";
 import { useCallback, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { UserProps } from "@/utils/types/user";
-import { fetchUsers, updateUserRegister, updateUserStatus } from "@/api/user";
+import { fetchUser, updateUserRegister, updateUserStatus } from "@/api/user";
 import { sendEmail } from "@/api/email";
 import UpdatedUser from "@/helpers/emails/template/updated-register";
-import { LoggedUserType } from "../types/EditRegisterForm.types";
+import useUserStore from "@/store/userStore";
 
 export default function useEditRegisterForm() {
   const [isToSendEmail, setIsToSendEmail] = useState(false);
   const [data, setData] = useState<UserProps>();
   const { currentSelectedUser } = useStore();
-  const loggedUser: LoggedUserType = JSON.parse(
-    localStorage.getItem("user") || "",
-  );
-  const canChangeRole = loggedUser.role == "admin";
-  const disabledRoleChange = currentSelectedUser?.id == loggedUser.id;
+  const { loggedUser } = useUserStore();
+
+  const canChangeRole = loggedUser && loggedUser.role == "admin";
+  const disabledRoleChange =
+    loggedUser && currentSelectedUser?.id == loggedUser.id;
 
   const { updateUserStatusMutation, isUpdateUserPeding, isUpdateUserSuccess } =
     updateUserStatus();
@@ -46,7 +46,7 @@ export default function useEditRegisterForm() {
 
   const { sendEmailFn, isSendingEmail } = sendEmail();
 
-  const { fetchData, isLoading, error } = fetchUsers();
+  const { fetchData, isLoading, error } = fetchUser(false);
 
   useEffect(() => {
     if (isUpdateUserRegisterSucess || isUpdateUserSuccess) {

@@ -1,9 +1,10 @@
-import useStore from "@/store";
+import useStore from "@/store/store";
 import { RegisterProps } from "@/utils/types/forms";
 import { useCallback, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { UserProps } from "@/utils/types/user";
-import { fetchUsers, updateUserRegister } from "@/api/user";
+import { fetchUser, updateUserRegister } from "@/api/user";
+import useUserStore from "@/store/userStore";
 
 export type LoggedUserType = {
   id: number;
@@ -14,9 +15,7 @@ export type LoggedUserType = {
 export default function useEditUser() {
   const [data, setData] = useState<UserProps>();
   const { currentSelectedUser } = useStore();
-  const loggedUser: LoggedUserType = JSON.parse(
-    localStorage.getItem("user") || "",
-  );
+  const { loggedUser } = useUserStore();
 
   const {
     updateUserRegisterMutation,
@@ -41,7 +40,7 @@ export default function useEditUser() {
 
   const currentValues = getValues();
 
-  const { fetchData, isLoading, error } = fetchUsers();
+  const { fetchData, isLoading, error } = fetchUser(true);
 
   useEffect(() => {
     if (fetchData) {
@@ -53,7 +52,7 @@ export default function useEditUser() {
     (data: Partial<RegisterProps> & { isToSendEmail?: boolean }) => {
       if (isValid) {
         const formData = new FormData();
-        formData.append("id", String(loggedUser.id));
+        formData.append("id", String(loggedUser!.id));
         formData.append("fullName", data.fullName || "");
         formData.append("email", data.email || "");
         formData.append("bornDate", data.bornDate?.toString() || "");
@@ -67,7 +66,7 @@ export default function useEditUser() {
 
         updateUserRegisterMutation({
           userData: formData,
-          id: String(loggedUser.id),
+          id: String(loggedUser!.id),
         });
       }
     },

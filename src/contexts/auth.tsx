@@ -1,4 +1,6 @@
 import { handleValidateAuth } from "@/api/auth";
+import { fetchProfile } from "@/api/user";
+import useUserStore from "@/store/userStore";
 import SpinnerLoad from "@/ui/SpinnerLoad";
 import { useToast } from "@chakra-ui/react";
 import { useQueryClient } from "@tanstack/react-query";
@@ -14,7 +16,14 @@ const AuthContext = createContext<AuthContextTypes>({});
 
 function AuthProvider({ children }: { children: React.ReactNode }) {
   const queryClient = useQueryClient();
+  const { setLoggedUser } = useUserStore();
   const toast = useToast();
+  const {
+    profileData,
+    isFechSuccess,
+    isFetchProfileLoading,
+    fetchProfileError,
+  } = fetchProfile();
   const [signedIn, setSignedIn] = useState<boolean>(() => {
     const storageAccessToken = localStorage.getItem("token");
 
@@ -53,11 +62,34 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isValidateAuthError]);
 
+  useEffect(() => {
+    if (fetchProfileError) {
+      toast({
+        title: `Ocorreu um erro ao buscar o Perfil!`,
+        position: "top",
+        status: "error",
+        isClosable: true,
+      });
+
+      signout();
+    }
+  }, [fetchProfileError]);
+
+  useEffect(() => {
+    if (isFechSuccess && profileData) {
+      setLoggedUser(profileData);
+    }
+  }, [isFechSuccess]);
+
   return (
     <AuthContext.Provider
       value={{ isAuth: signedIn && isValidateAuthSuccess, signin, signout }}
     >
-      {isValidateAuthLoading ? <SpinnerLoad size="xl" /> : children}
+      {isValidateAuthLoading || isFetchProfileLoading ? (
+        <SpinnerLoad size="xl" />
+      ) : (
+        children
+      )}
     </AuthContext.Provider>
   );
 }

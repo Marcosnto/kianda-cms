@@ -2,6 +2,7 @@ import { AddIcon, ArrowForwardIcon } from "@chakra-ui/icons";
 import { Avatar, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { MouseEventHandler } from "react";
 import useAvatarMenu from "./avatar-menu.hook";
+import useUserStore from "@/store/userStore";
 
 type AvatarMenuProps = {
   icon: React.ReactElement;
@@ -24,6 +25,7 @@ function MenuItemComponent({ icon, content, onClick }: AvatarMenuProps) {
 
 export default function AvatarMenu() {
   const { currentUser, logout, navigate } = useAvatarMenu();
+  const { loggedUser } = useUserStore();
 
   return (
     <span data-testid="menuAvatar">
@@ -34,7 +36,7 @@ export default function AvatarMenu() {
           icon={
             <Avatar
               name={currentUser?.user_display_name}
-              src="https://store.playstation.com/store/api/chihiro/00_09_000/container/BR/pt/19/UP2477-CUSA06694_00-AV00000000000039/image?w=320&h=320&bg_color=000000&opacity=100&_version=00_09_000"
+              src={loggedUser?.avatar}
             />
           }
           variant="outline"

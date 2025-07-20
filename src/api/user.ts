@@ -1,4 +1,4 @@
-import useStore from "@/store";
+import useStore from "@/store/store";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { axiosInstance } from "@/api/axiosInstance";
 import { useToast } from "@chakra-ui/react";
@@ -7,11 +7,9 @@ import { useEffect, useState } from "react";
 import { UserProps } from "@/utils/types/user";
 import setNumberOfPages from "@/utils/setNumberOfPages";
 import { RegisterProps } from "@/utils/types/forms";
-import {
-  LoggedUserType,
-  UpdateRegister,
-} from "@/components/Forms/User/EditRegister/types/EditRegisterForm.types";
+import { UpdateRegister } from "@/components/Forms/User/EditRegister/types/EditRegisterForm.types";
 import { UseFormReset } from "react-hook-form";
+import useUserStore, { UserProfileProps } from "@/store/userStore";
 
 export const postUserAutoRegister = () => {
   const {
@@ -86,15 +84,33 @@ export const postUserRegister = () => {
   };
 };
 
-export const fetchUsers = () => {
-  const loggedUser: LoggedUserType = JSON.parse(
-    localStorage.getItem("user") || "",
-  );
+export const fetchProfile = () => {
+  const {
+    data,
+    isSuccess: isFechSuccess,
+    isLoading: isFetchProfileLoading,
+    isError: fetchProfileError,
+  } = useQuery({
+    queryKey: ["userProfile"],
+    queryFn: () => axiosInstance.get<UserProfileProps>(`/profile`),
+  });
+
+  return {
+    profileData: data?.data,
+    isFechSuccess,
+    isFetchProfileLoading,
+    fetchProfileError,
+  };
+};
+
+export const fetchUser = (isCurrentUser: boolean) => {
+  const { loggedUser } = useUserStore();
   const { currentSelectedUser } = useStore();
+
   //TODO: Refactor this
-  const currentSelectedID = currentSelectedUser?.id
-    ? currentSelectedUser?.id
-    : loggedUser.id;
+  const currentSelectedID = isCurrentUser
+    ? loggedUser?.id
+    : currentSelectedUser?.id;
 
   const {
     data: fetchData,
@@ -103,6 +119,7 @@ export const fetchUsers = () => {
   } = useQuery({
     queryKey: ["editUser"],
     queryFn: () => axiosInstance.get(`/user/${currentSelectedID}`),
+    enabled: !!currentSelectedID,
   });
 
   return { fetchData, isLoading, error };
@@ -159,6 +176,7 @@ export const updateUserRegister = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["userList"] });
       queryClient.invalidateQueries({ queryKey: ["editUser"] });
+      queryClient.invalidateQueries({ queryKey: ["userProfile"] });
       toast({
         title: `Alteração realizada com sucesso`,
         position: "top",

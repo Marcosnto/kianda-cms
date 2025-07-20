@@ -1,6 +1,7 @@
 import { useLocation } from "react-router-dom";
 import getMenuOptions from "../../helpers/menuOptionsPermitions";
 import { OptionsProps } from "./MenuOptions";
+import useUserStore from "@/store/userStore";
 
 export type UserOptionsProps = {
   type: string;
@@ -11,14 +12,11 @@ export type UserOptionsProps = {
 
 const useMenu = () => {
   const { pathname } = useLocation();
-
-  const user = localStorage?.getItem("user");
+  const { loggedUser } = useUserStore();
   let menuOptions;
 
-  //TODO: Improve this way to get the options
-  if (window && user) {
-    const userData = JSON.parse(user);
-    menuOptions = getMenuOptions(userData.role);
+  if (window && loggedUser) {
+    menuOptions = getMenuOptions(loggedUser.role);
   }
 
   return {

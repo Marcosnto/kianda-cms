@@ -4,6 +4,7 @@ import { useContext, useState } from "react";
 import { axiosInstance } from "./axiosInstance";
 import { JWT_AUTH, JWT_VALIDATE } from "@/helpers/envs";
 import { LoginProps, ResponseProps } from "@/pages/Login/types";
+import useUserStore from "@/store/userStore";
 
 export const useAuth = () => {
   const authContext = useContext(AuthContext);
@@ -17,6 +18,7 @@ export const useAuth = () => {
 
 export const useHandleLogin = () => {
   const { signin } = useContext(AuthContext);
+  const userStore = useUserStore();
   const [registerStatus, setRegisterStatus] = useState<
     String | number | undefined
   >();
@@ -40,7 +42,7 @@ export const useHandleLogin = () => {
           role: data.role,
           name: data.user_display_name,
         };
-        localStorage.setItem("user", JSON.stringify(user));
+        userStore.setLoggedUser(user);
         signin?.(data.token);
       }
     },

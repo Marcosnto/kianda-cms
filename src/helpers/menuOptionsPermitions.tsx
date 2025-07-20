@@ -1,4 +1,5 @@
 import { UserOptionsProps } from "@/components/Menu/menu.hook";
+import useUserStore from "@/store/userStore";
 import { Icon } from "@chakra-ui/react";
 import { IconType } from "react-icons";
 import {
@@ -19,12 +20,14 @@ function getIcon(iconName: IconType) {
   return <Icon as={iconName} w="5" h="5" />;
 }
 
-function getID() {
-  const user = localStorage.getItem("user");
-  const { id } = user ? JSON.parse(user) : "";
+//TODO: this function needs to be refactor
+// function getID() {
+//   const { loggedUser } = useUserStore();
 
-  return id;
-}
+//   if (loggedUser) return loggedUser.id;
+
+//   return undefined;
+// }
 
 export default function getMenuOptions(role: string | undefined) {
   switch (role) {
@@ -112,12 +115,12 @@ export const patient: UserOptionsProps = {
       displayName: "Dados Pessoais",
       path: "psi/edit-register",
     },
-    {
-      key: "user-patitent-02",
-      icon: getIcon(IoBodyOutline),
-      displayName: "Contrato Terapêutico",
-      path: `psi/terapheutic-contracts/${getID()}`,
-    },
+    // {
+    //   key: "user-patitent-02",
+    //   icon: getIcon(IoBodyOutline),
+    //   displayName: "Contrato Terapêutico",
+    //   path: `psi/terapheutic-contracts/${getID()}`,
+    // },
     {
       key: "user-patitent-03",
       icon: getIcon(IoCalendarNumberOutline),

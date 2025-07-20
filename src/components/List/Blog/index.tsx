@@ -21,11 +21,12 @@ import { GenericModal } from "@/ui/GenericModal";
 import useBlogList from "./blog-list.hook";
 
 import ArticleStatusOptions from "@/components/List/Blog/components/ArticleStatus";
+import useUserStore from "@/store/userStore";
 
 export default function PostsList() {
   const [currentPage, setCurrentPage] = useState<number>(0);
   //@ts-ignore
-  const user = JSON.parse(localStorage.getItem("user"));
+  const { loggedUser } = useUserStore();
   const navigate = useNavigate();
   const {
     isOpenUpdateArticleModal,
@@ -45,7 +46,7 @@ export default function PostsList() {
 
   const { blogPosts, error, isLoading, totalPages } = getArticlesById(
     currentPage,
-    user.id,
+    String(loggedUser!.id),
   );
 
   if (isLoading) {

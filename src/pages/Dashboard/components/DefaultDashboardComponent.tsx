@@ -1,7 +1,8 @@
+import useUserStore from "@/store/userStore";
 import { Center, Text } from "@chakra-ui/react";
 
 export default function DefaultDashboardComponent() {
-  const loggedUser = JSON.parse(localStorage.getItem("user") || "");
+  const { loggedUser } = useUserStore();
   const userRole = !!loggedUser?.role;
 
   return (

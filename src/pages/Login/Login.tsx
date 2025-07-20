@@ -16,7 +16,6 @@ import AlertStatus from "../../ui/AlertStatus";
 import RequiredInput from "../../components/Forms/components/RequiredInput";
 import LogoImage from "../../ui/LogoImage";
 import useLogin from "./login.hook";
-import { LoginProps } from "./types";
 import PasswordInput from "@/ui/PasswordInput";
 
 export default function Login() {
@@ -26,20 +25,13 @@ export default function Login() {
     isSucessLogin,
     registerStatus,
     navigate,
-    loginFn,
+    onSubmit,
     showPassword,
     setShowPassword,
-  } = useLogin();
-
-  const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm<LoginProps>();
-
-  const onSubmit: SubmitHandler<LoginProps> = (data) => {
-    loginFn(data);
-  };
+    errors,
+  } = useLogin();
 
   if (isSucessLogin && registerStatus === 1) {
     setTimeout(() => navigate("/dashboard"), 100);

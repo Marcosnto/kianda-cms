@@ -1,4 +1,4 @@
-import useStore from "@/store";
+import useStore from "@/store/store";
 import getStatusBadge from "@/utils/getStatusBadge";
 import { RegisterProps } from "@/utils/types/forms";
 import { useDisclosure } from "@chakra-ui/react";

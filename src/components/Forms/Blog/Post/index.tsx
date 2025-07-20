@@ -4,6 +4,7 @@ import { useState } from "react";
 import BlogPost from "./BlogPost";
 import { Article } from "@/utils/types/blog";
 import { BASE_API_URL } from "@/helpers/envs";
+import useUserStore from "@/store/userStore";
 
 interface BlogPostType extends Omit<Article, "image"> {
   image: File[];
@@ -12,13 +13,13 @@ interface BlogPostType extends Omit<Article, "image"> {
 export default function Post() {
   const toast = useToast();
   const [resetForm, setResetForm] = useState(false);
+  const { loggedUser } = useUserStore();
   const token = localStorage.getItem("token");
 
   function post(data: BlogPostType) {
-    const user = localStorage.getItem("user");
-
     const formData = new FormData();
-    formData.append("userData", JSON.stringify(user));
+    //TODO: understand if this userData makes sense, it's not used in API
+    formData.append("userData", JSON.stringify(loggedUser));
     formData.append("postInfo", JSON.stringify(data));
     formData.append("image", data.image[0]);
 

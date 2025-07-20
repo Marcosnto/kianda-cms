@@ -1,5 +1,5 @@
 import { TableOptionsType } from "@/ui/Table/table.types";
-import useStore from "@/store";
+import useStore from "@/store/store";
 import { useRouter } from "@/utils/libs/routerFacade";
 
 import { UserProps } from "@/utils/types/user";
