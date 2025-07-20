@@ -93,6 +93,7 @@ export const fetchProfile = () => {
   } = useQuery({
     queryKey: ["userProfile"],
     queryFn: () => axiosInstance.get<UserProfileProps>(`/profile`),
+    retry: 1,
   });
 
   return {

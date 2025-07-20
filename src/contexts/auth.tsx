@@ -18,12 +18,7 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
   const queryClient = useQueryClient();
   const { setLoggedUser } = useUserStore();
   const toast = useToast();
-  const {
-    profileData,
-    isFechSuccess,
-    isFetchProfileLoading,
-    fetchProfileError,
-  } = fetchProfile();
+
   const [signedIn, setSignedIn] = useState<boolean>(() => {
     const storageAccessToken = localStorage.getItem("token");
 
@@ -32,6 +27,8 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const { isValidateAuthLoading, isValidateAuthError, isValidateAuthSuccess } =
     handleValidateAuth(signedIn);
+
+  const { profileData, isFechSuccess, isFetchProfileLoading } = fetchProfile();
 
   const signin = useCallback((accessToken: string) => {
     localStorage.setItem("token", accessToken);
@@ -62,24 +59,23 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isValidateAuthError]);
 
-  useEffect(() => {
-    if (fetchProfileError) {
-      toast({
-        title: `Ocorreu um erro ao buscar o Perfil!`,
-        position: "top",
-        status: "error",
-        isClosable: true,
-      });
-
-      signout();
-    }
-  }, [fetchProfileError]);
+  //TODO: Understand why this is shown when made the singout
+  // useEffect(() => {
+  //   if (fetchProfileError) {
+  //     toast({
+  //       title: `Ocorreu um erro ao buscar o Perfil`,
+  //       position: "top",
+  //       status: "error",
+  //       isClosable: true,
+  //     });
+  //   }
+  // }, [fetchProfileError]);
 
   useEffect(() => {
     if (isFechSuccess && profileData) {
       setLoggedUser(profileData);
     }
-  }, [isFechSuccess]);
+  }, [isFechSuccess, isValidateAuthSuccess]);
 
   return (
     <AuthContext.Provider
