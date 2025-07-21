@@ -25,7 +25,6 @@ function UserEditRegister() {
 
   useEffect(() => {
     if (data) {
-      console.log("initial data", data);
       reset({
         fullName: data.fullName,
         email: data.email,

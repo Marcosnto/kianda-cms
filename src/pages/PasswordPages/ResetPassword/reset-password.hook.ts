@@ -41,10 +41,7 @@ export default function useResetPassword() {
   } = useForm<{ password: string; passwordCheck: string }>();
 
   const onSubmit: SubmitHandler<any> = ({ password }) => {
-    console.log("oii", id, token);
     if (id && token) {
-      console.log(id, token);
-
       postResetPasswordFn({ id, token, password });
     }
   };
