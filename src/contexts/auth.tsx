@@ -28,7 +28,8 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
   const { isValidateAuthLoading, isValidateAuthError, isValidateAuthSuccess } =
     handleValidateAuth(signedIn);
 
-  const { profileData, isFechSuccess, isFetchProfileLoading } = fetchProfile();
+  const { profileData, isFechSuccess, isFetchProfileLoading } =
+    fetchProfile(signedIn);
 
   const signin = useCallback((accessToken: string) => {
     localStorage.setItem("token", accessToken);

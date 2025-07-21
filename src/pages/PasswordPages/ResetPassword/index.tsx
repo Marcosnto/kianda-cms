@@ -35,7 +35,7 @@ const ResetPassword = () => {
           Redefinir Senha
         </Heading>
         <form
-          onSubmit={() => handleSubmit(onSubmit)}
+          onSubmit={handleSubmit(onSubmit)}
           style={{
             background: "#FFF",
             padding: "2rem",

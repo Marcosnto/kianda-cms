@@ -84,7 +84,7 @@ export const postUserRegister = () => {
   };
 };
 
-export const fetchProfile = () => {
+export const fetchProfile = (canFetch: boolean) => {
   const {
     data,
     isSuccess: isFechSuccess,
@@ -94,6 +94,7 @@ export const fetchProfile = () => {
     queryKey: ["userProfile"],
     queryFn: () => axiosInstance.get<UserProfileProps>(`/profile`),
     retry: 1,
+    enabled: canFetch,
   });
 
   return {

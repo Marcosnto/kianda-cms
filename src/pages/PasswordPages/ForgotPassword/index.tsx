@@ -12,6 +12,7 @@ import {
   Input,
 } from "@chakra-ui/react";
 import useForgotPassword from "./forgot-password.hook";
+import AlertStatus from "@/ui/AlertStatus";
 
 const ForgotPassword = () => {
   const {
@@ -19,6 +20,8 @@ const ForgotPassword = () => {
     register,
     handleSubmit,
     onSubmit,
+    isPostForgotPasswordPending,
+    hasPostForgotPasswordError,
     isValid,
     errors,
     isSubmitting,
@@ -32,7 +35,7 @@ const ForgotPassword = () => {
           Redefinição de Senha
         </Heading>
         <form
-          onSubmit={() => handleSubmit(onSubmit)}
+          onSubmit={handleSubmit(onSubmit)}
           style={{
             background: "#FFF",
             padding: "2rem",
@@ -42,8 +45,15 @@ const ForgotPassword = () => {
           }}
         >
           <Flex flexDir="column" gap="4" mb="5" alignItems="center">
+            {hasPostForgotPasswordError && (
+              <AlertStatus
+                type="error"
+                title="Ocorreu um erro!"
+                description="Entre em contato com o suporte"
+              />
+            )}
             <FormControl isInvalid={!!errors.email}>
-              <FormLabel htmlFor="password">
+              <FormLabel htmlFor="email">
                 Insira seu e-mail <RequiredInput />
               </FormLabel>
 
@@ -71,8 +81,8 @@ const ForgotPassword = () => {
               variant="solid"
               type="submit"
               width="100%"
-              isDisabled={!isValid}
-              isLoading={isSubmitting}
+              isDisabled={!isValid || isPostForgotPasswordPending}
+              isLoading={isSubmitting || isPostForgotPasswordPending}
             >
               Confirmar
             </Button>
@@ -83,7 +93,7 @@ const ForgotPassword = () => {
               isDisabled={isSubmitting}
               onClick={() => navigate("/")}
             >
-              Cancelar
+              Voltar
             </Button>
           </Flex>
         </form>
