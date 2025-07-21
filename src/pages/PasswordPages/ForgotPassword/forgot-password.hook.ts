@@ -19,7 +19,7 @@ export default function useForgotPassword() {
   } = handleForgotPassword();
 
   useEffect(() => {
-    navigate("/");
+    if (isPostForgotPasswordSucess) navigate("/");
   }, [isPostForgotPasswordSucess]);
 
   const onSubmit: SubmitHandler<{ email: string }> = ({ email }) =>

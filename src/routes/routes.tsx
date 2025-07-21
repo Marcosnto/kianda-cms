@@ -34,17 +34,17 @@ const router = createBrowserRouter([
         errorElement: <PageError404 />,
       },
       {
-        path: "/reset-password",
+        path: "reset-password",
         element: <ResetPassword />,
         errorElement: <PageError404 />,
       },
       {
-        path: "/forgot-password",
+        path: "forgot-password",
         element: <ForgotPassword />,
         errorElement: <PageError404 />,
       },
       {
-        path: "/login",
+        path: "login",
         element: <Login />,
         errorElement: <PageError404 />,
       },
