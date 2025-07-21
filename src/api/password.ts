@@ -1,7 +1,8 @@
 import { BASE_API_URL } from "@/helpers/envs";
 import { useToast } from "@chakra-ui/react";
 import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
+import { axiosInstance } from "./axiosInstance";
 
 export const handleForgotPassword = () => {
   const toast = useToast();
@@ -72,5 +73,56 @@ export const handleResetPassword = () => {
     isPostResetPasswordSucess,
     isPostResetPasswordPending,
     hasPostResetPasswordError,
+  };
+};
+
+export const handleChangePassword = () => {
+  const toast = useToast();
+
+  const {
+    mutate: postChangePasswordFn,
+    isPending: isPostChangePasswordPending,
+    isError: hasPostChangePasswordError,
+    isSuccess: isPostChangePasswordSucess,
+  } = useMutation({
+    mutationFn: ({
+      currentPassword,
+      newPassword,
+    }: {
+      currentPassword: string;
+      newPassword: string;
+    }) =>
+      axiosInstance.post(`${BASE_API_URL}/change-password`, {
+        currentPassword,
+        newPassword,
+      }),
+    onSuccess: () => {
+      toast({
+        title: `Senha alterada com sucesso!`,
+        position: "top",
+        status: "success",
+        isClosable: true,
+      });
+    },
+    onError: ({ response }: AxiosError) => {
+      //@ts-ignore
+      const { data } = response;
+      console.log("error", data);
+      if (data.message === "Senha atual incorreta") {
+        toast({
+          title: `Senha atual incorreta!`,
+          position: "top",
+          status: "error",
+          isClosable: true,
+        });
+      }
+    },
+  });
+
+  return {
+    postChangePasswordFn,
+    isPostChangePasswordSucess,
+    isPostChangePasswordPending,
+    hasPostChangePasswordError,
   };
 };

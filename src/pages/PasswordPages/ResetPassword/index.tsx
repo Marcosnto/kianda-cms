@@ -84,7 +84,7 @@ const ResetPassword = () => {
                   required: "Esse Campo é obrigatório",
                   validate: {
                     equalPasswords: (value: unknown) =>
-                      getValues("passwordCheck") === value ||
+                      getValues("password") === value ||
                       "Senhas devem ser iguais",
                   },
                 }}

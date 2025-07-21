@@ -1,5 +1,5 @@
 import UserEditRegister from "../EditRegister/User";
 
-export default function Profile() {
+export default function ResetPassword() {
   return <UserEditRegister />;
 }

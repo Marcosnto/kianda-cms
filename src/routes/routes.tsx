@@ -22,6 +22,7 @@ import NewsLetter from "@/components/Forms/NewsLetter";
 import Profile from "@/components/Forms/User/Profile";
 import ResetPassword from "@/pages/PasswordPages/ResetPassword";
 import ForgotPassword from "@/pages/PasswordPages/ForgotPassword";
+import ChangePassword from "@/components/Forms/User/Profile/change-password";
 
 const router = createBrowserRouter([
   {
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
           {
             path: "profile",
             element: <Profile />,
+          },
+          {
+            path: "change-password",
+            element: <ChangePassword />,
           },
           {
             path: "psi",
