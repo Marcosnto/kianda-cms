@@ -20,6 +20,8 @@ import DefaultDashboardComponent from "@/pages/Dashboard/components/DefaultDashb
 import NewsLetterList from "@/components/List/NewsLetter";
 import NewsLetter from "@/components/Forms/NewsLetter";
 import Profile from "@/components/Forms/User/Profile";
+import ResetPassword from "@/pages/PasswordPages/ResetPassword";
+import ForgotPassword from "@/pages/PasswordPages/ForgotPassword";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +30,16 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Login />,
+        errorElement: <PageError404 />,
+      },
+      {
+        path: "/reset-password",
+        element: <ResetPassword />,
+        errorElement: <PageError404 />,
+      },
+      {
+        path: "/forgot-password",
+        element: <ForgotPassword />,
         errorElement: <PageError404 />,
       },
       {

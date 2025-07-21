@@ -10,13 +10,12 @@ import {
   Input,
 } from "@chakra-ui/react";
 
-import { SubmitHandler, useForm } from "react-hook-form";
-
 import AlertStatus from "../../ui/AlertStatus";
 import RequiredInput from "../../components/Forms/components/RequiredInput";
 import LogoImage from "../../ui/LogoImage";
 import useLogin from "./login.hook";
 import PasswordInput from "@/ui/PasswordInput";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   const {
@@ -107,7 +106,6 @@ export default function Login() {
                 <FormLabel htmlFor="password">
                   Senha <RequiredInput />
                 </FormLabel>
-
                 <PasswordInput
                   id="password"
                   objectRule={{ required: "Esse Campo é obrigatório" }}
@@ -115,10 +113,12 @@ export default function Login() {
                   setShowPassword={setShowPassword}
                   register={register}
                 />
-
                 <FormErrorMessage>
                   {errors.password && errors.password.message}
                 </FormErrorMessage>
+                <Box fontSize="sm" mt="2" color="gray">
+                  <Link to={"/forgot-password"}>Esqueceu a senha?</Link>
+                </Box>
               </FormControl>
             </Flex>
             <Flex flexDir="column" gap="3">
