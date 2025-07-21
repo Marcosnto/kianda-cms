@@ -1,6 +1,5 @@
+import { UserProps } from "@/utils/types/user";
 import { create } from "zustand";
-
-import { UserProps } from "./utils/types/user";
 
 type Store = {
   lastPath?: string;

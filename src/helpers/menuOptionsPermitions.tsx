@@ -1,5 +1,4 @@
 import { UserOptionsProps } from "@/components/Menu/menu.hook";
-import useUserStore from "@/store/userStore";
 import { Icon } from "@chakra-ui/react";
 import { IconType } from "react-icons";
 import {
