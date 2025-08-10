@@ -18,7 +18,11 @@ export function getNewsletterList() {
 export function sendEmail() {
   const toast = useToast();
 
-  const { mutate: sendEmailFn, isPending: isSendingEmail } = useMutation({
+  const {
+    mutate: sendEmailFn,
+    isPending: isSendingEmail,
+    isSuccess: isSendEmailSuccess,
+  } = useMutation({
     mutationFn: ({
       emailsPool,
       body,
@@ -27,19 +31,21 @@ export function sendEmail() {
       body: string;
       emailsPool: string | string[];
       emailSubject: string;
+      setResetForm?: (value: boolean) => void;
     }) =>
       axiosInstance.post(`send-email`, {
         to: emailsPool,
         subject: emailSubject,
         html: body,
       }),
-    onSuccess: () => {
+    onSuccess: (_data, variables) => {
       toast({
         title: `Email enviado com sucesso!`,
         position: "top",
         status: "success",
         isClosable: true,
       });
+      variables.setResetForm && variables.setResetForm(true);
     },
     onError: () => {
       toast({
@@ -51,5 +57,5 @@ export function sendEmail() {
     },
   });
 
-  return { sendEmailFn, isSendingEmail };
+  return { sendEmailFn, isSendingEmail, isSendEmailSuccess };
 }

@@ -27,6 +27,7 @@ export default function NewsLetter() {
     isNewsLetterListLoading,
     getNewsLetterListErrors,
     isSendingEmail,
+    resetForm,
   } = useSendEmailNewsLetter();
 
   if (isNewsLetterListLoading) {
@@ -76,6 +77,7 @@ export default function NewsLetter() {
                   onChange={onChange}
                   onBlur={onBlur}
                   value={value}
+                  resetImages={resetForm}
                 />
               )}
             />

@@ -1,4 +1,5 @@
 import { getNewsletterList, sendEmail } from "@/api/email";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 type SubscriberType = {
@@ -27,7 +28,7 @@ export const useSendEmailNewsLetter = () => {
       title: "",
     },
   });
-
+  const [resetForm, setResetForm] = useState(false);
   const email = getValues("emailContent");
 
   const {
@@ -38,6 +39,13 @@ export const useSendEmailNewsLetter = () => {
 
   const { sendEmailFn, isSendingEmail } = sendEmail();
 
+  useEffect(() => {
+    if (resetForm) {
+      reset();
+      setResetForm(false);
+    }
+  }, [resetForm]);
+
   const onSubmit = (data: SendEmailData) => {
     const emailsPool = newsletterList?.map(
       (subscriber: SubscriberType) => subscriber.email,
@@ -46,8 +54,8 @@ export const useSendEmailNewsLetter = () => {
       emailsPool,
       body: data.emailContent,
       emailSubject: data.title,
+      setResetForm: setResetForm,
     });
-    reset();
   };
 
   return {
@@ -63,5 +71,6 @@ export const useSendEmailNewsLetter = () => {
     isNewsLetterListLoading,
     getNewsLetterListErrors,
     isSendingEmail,
+    resetForm,
   };
 };
