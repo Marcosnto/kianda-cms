@@ -57,7 +57,15 @@ const EmailHTML = ({ body }: { body: string | undefined }) => {
                       lineHeight: "1.5",
                       color: "#333",
                     }}
-                    dangerouslySetInnerHTML={{ __html: sanitizedBody }}
+                    dangerouslySetInnerHTML={{
+                      __html: `
+                        <style>
+                          p { margin: 0; padding: 0; max-width: 600px; }
+                          p img { max-width: 100%; height: auto; }
+                        </style>
+                        ${sanitizedBody}
+                      `,
+                    }}
                   />
                 </tr>
                 <Footer />
