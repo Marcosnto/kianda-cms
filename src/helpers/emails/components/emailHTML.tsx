@@ -2,6 +2,7 @@ import Footer from "./footer";
 import Header from "./header";
 import { Html } from "@react-email/html";
 import DOMPurify from "dompurify";
+import "./email.css";
 
 const EmailHTML = ({ body }: { body: string | undefined }) => {
   const sanitizedBody = body
@@ -51,7 +52,6 @@ const EmailHTML = ({ body }: { body: string | undefined }) => {
                   <td
                     id="email-body"
                     style={{
-                      maxWidth: "600px !important",
                       padding: "30px",
                       fontSize: "16px",
                       lineHeight: "1.5",
