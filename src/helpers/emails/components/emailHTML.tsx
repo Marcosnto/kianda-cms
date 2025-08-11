@@ -51,7 +51,7 @@ const EmailHTML = ({ body }: { body: string | undefined }) => {
                   <td
                     id="email-body"
                     style={{
-                      width: "100%",
+                      maxWidth: "600px !important",
                       padding: "30px",
                       fontSize: "16px",
                       lineHeight: "1.5",
