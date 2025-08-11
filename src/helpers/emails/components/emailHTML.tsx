@@ -39,7 +39,7 @@ const EmailHTML = ({ body }: { body: string | undefined }) => {
                 cellSpacing={0}
                 cellPadding={0}
                 border={0}
-                width="600"
+                width="600px"
                 style={{
                   backgroundColor: "#ffffff",
                   borderRadius: "8px",
@@ -47,11 +47,11 @@ const EmailHTML = ({ body }: { body: string | undefined }) => {
                 }}
               >
                 <Header />
-                <tr>
+                <tr style={{ maxWidth: "600px" }}>
                   <td
                     id="email-body"
                     style={{
-                      maxWidth: "600px",
+                      width: "100%",
                       padding: "30px",
                       fontSize: "16px",
                       lineHeight: "1.5",
