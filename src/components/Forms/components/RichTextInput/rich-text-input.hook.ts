@@ -8,7 +8,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 const SizeStyle = Quill.import("attributors/style/size");
 const BlockEmbed = Quill.import("blots/block/embed");
-const Font = Quill.import("formats/font");
+const FontStyle = Quill.import("attributors/style/font");
 const fontWhitelist = [
   "arial",
   "helvetica",
@@ -19,7 +19,7 @@ const fontWhitelist = [
   "roboto",
   "monospace",
 ];
-Font.whitelist = fontWhitelist;
+FontStyle.whitelist = fontWhitelist;
 
 class CustomHtml5Video extends BlockEmbed {
   static blotName = "html5video";
@@ -60,7 +60,7 @@ SizeStyle.whitelist = [
 ];
 
 Quill.register(SizeStyle, true);
-Quill.register(Font, true);
+Quill.register(FontStyle, true);
 Quill.register("formats/html5video", CustomHtml5Video);
 
 function useRichTextInput(quillRef: React.MutableRefObject<null>) {

@@ -1,5 +1,8 @@
-import { Html } from "@react-email/html";
+import { render } from "@react-email/render";
+import EmailHTML from "../components/emailHTML";
 
-export default function GenericEmail({ text }: { text?: string }) {
-  return <Html lang="pt-BR">{text}</Html>;
+export default async function GenericEmail(text: string) {
+  const html = await await render(<EmailHTML body={text} />);
+
+  return html;
 }

@@ -1,4 +1,5 @@
 import { getNewsletterList, sendEmail } from "@/api/email";
+import GenericEmail from "@/helpers/emails/template/generic-email";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -50,11 +51,30 @@ export const useSendEmailNewsLetter = () => {
     const emailsPool = newsletterList?.map(
       (subscriber: SubscriberType) => subscriber.email,
     );
-    sendEmailFn({
-      emailsPool,
-      body: data.emailContent,
-      emailSubject: data.title,
-      setResetForm: setResetForm,
+
+    if (!emailsPool || emailsPool.length === 0) {
+      console.error("No email addresses available to send.");
+      return;
+    }
+
+    const getEmailContent = async () => {
+      try {
+        const htmlContent = await GenericEmail(data.emailContent);
+
+        return htmlContent;
+      } catch (error) {
+        console.error("Error generating email content:", error);
+        return "";
+      }
+    };
+
+    getEmailContent().then((htmlContent) => {
+      sendEmailFn({
+        emailsPool,
+        body: htmlContent,
+        emailSubject: data.title,
+        setResetForm: setResetForm,
+      });
     });
   };
 
