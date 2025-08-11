@@ -1,8 +1,8 @@
-import { As, Center, Divider, Heading } from "@chakra-ui/react";
+import { Center, Divider, Heading } from "@chakra-ui/react";
 
 type ComponentTitleProps = {
   title: string;
-  type: As | undefined;
+  type: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
   size?: string;
 };
 
