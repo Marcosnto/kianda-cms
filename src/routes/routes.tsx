@@ -23,6 +23,8 @@ import Profile from "@/components/Forms/User/Profile";
 import ResetPassword from "@/pages/PasswordPages/ResetPassword";
 import ForgotPassword from "@/pages/PasswordPages/ForgotPassword";
 import ChangePassword from "@/components/Forms/User/Profile/change-password";
+import PrivacyPolicy from "@/pages/PrivacyPolice";
+import TermsOfUse from "@/pages/TermsOfUse";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +53,16 @@ const router = createBrowserRouter([
       {
         path: "register",
         element: <Register />,
+      },
+      {
+        path: "privacy-police",
+        element: <PrivacyPolicy />,
+        errorElement: <PageError404 />,
+      },
+      {
+        path: "terms-of-use",
+        element: <TermsOfUse />,
+        errorElement: <PageError404 />,
       },
     ],
   },

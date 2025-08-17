@@ -5,8 +5,8 @@ import LogoImage from "../ui/LogoImage";
 
 export default function Register() {
   return (
-    <Box background="green.900" h="100vh">
-      <Center flexDirection="column" pt="15" pb="15" gap="5" h="100vh">
+    <Box background="green.900" minH="100vh">
+      <Center flexDirection="column" pt="15" pb="15" gap="5" h="100%">
         <LogoImage pathRedirect="/login" />
         <UserAutoRegister />
       </Center>
