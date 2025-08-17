@@ -15,7 +15,7 @@ import { RegisterProps } from "@/utils/types/forms";
 import ComponentTitle from "@/ui/Title";
 import RequiredInput from "../../components/RequiredInput";
 import registerTypes from "@/helpers/mocks/inputOptions/register-types";
-import PasswordInput from "@/ui/PasswordInput";
+// import PasswordInput from "@/ui/PasswordInput";
 
 function UserRegister() {
   const {
@@ -26,12 +26,11 @@ function UserRegister() {
     formState: { errors, isSubmitting, isValid },
   } = useForm<RegisterProps>();
 
-  const { onSubmit, showPassword, setShowPassword, isPostUserRegisterPending } =
-    useRegisterHook({
-      reset,
-      isValid,
-      getValues,
-    });
+  const { onSubmit, isPostUserRegisterPending } = useRegisterHook({
+    reset,
+    isValid,
+    getValues,
+  });
 
   return (
     <>
@@ -137,7 +136,7 @@ function UserRegister() {
               </FormErrorMessage>
             </FormControl>
           </Stack>
-          <Stack spacing={8} direction="row">
+          {/* <Stack spacing={8} direction="row">
             <FormControl isInvalid={!!errors.password}>
               <FormLabel htmlFor="password">
                 Senha <RequiredInput />
@@ -187,7 +186,7 @@ function UserRegister() {
                 {errors.passwordCheck && errors.passwordCheck.message}
               </FormErrorMessage>
             </FormControl>
-          </Stack>
+          </Stack> */}
         </Flex>
         <Flex flexDir="row" gap="5" justifyContent="space-around">
           <Button colorScheme="green" variant="outline" onClick={() => reset()}>

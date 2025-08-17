@@ -1,5 +1,5 @@
 import { postUserAutoRegister } from "@/api/user";
-import { PRIVACY_POLICY, USE_TERMS } from "@/helpers/envs";
+import { PRIVACY_POLICY, TERMS_OF_USE } from "@/helpers/envs";
 import { useRouter } from "@/utils/libs/routerFacade";
 import { useBoolean, useToast } from "@chakra-ui/react";
 import { useCallback, useEffect, useState } from "react";
@@ -25,7 +25,9 @@ export default function useAutoRegister() {
   const toast = useToast();
   const navigate = useRouter();
   const privacyPolicyLink = PRIVACY_POLICY;
-  const useTermsLink = USE_TERMS;
+  const useTermsLink = TERMS_OF_USE;
+
+  console.log("privacyPolicyLink", privacyPolicyLink);
 
   if (isPostUserAutoRegisterPending) {
     console.log("carregando post user...");
