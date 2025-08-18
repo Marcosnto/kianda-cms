@@ -86,7 +86,7 @@ export default function useEditUser() {
     if (isDeleteUserRegisterSucess) {
       logout();
       removeLoggedUser();
-      navigate("/login");
+      navigate(0);
     }
   }, [isDeleteUserRegisterSucess, removeLoggedUser, navigate]);
 

@@ -11,7 +11,7 @@ export default function useAvatarMenu() {
   const logoutUser = () => {
     logout();
     removeLoggedUser();
-    navigate("/login");
+    navigate(0);
   };
 
   return {

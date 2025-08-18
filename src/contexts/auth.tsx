@@ -88,7 +88,6 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
         status: "error",
         isClosable: true,
       });
-      window.location.href = "/login";
     }
   }, [isFechSuccess, isValidateAuthSuccess, fetchProfileError]);
 
