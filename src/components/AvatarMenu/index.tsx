@@ -3,6 +3,7 @@ import { Avatar, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { MouseEventHandler } from "react";
 import useAvatarMenu from "./avatar-menu.hook";
 import useUserStore from "@/store/userStore";
+import defaultImage from "/assets/images/default_profile.jpg";
 
 type AvatarMenuProps = {
   icon: React.ReactElement;
@@ -24,7 +25,7 @@ function MenuItemComponent({ icon, content, onClick }: AvatarMenuProps) {
 }
 
 export default function AvatarMenu() {
-  const { currentUser, logout, navigate } = useAvatarMenu();
+  const { currentUser, logoutUser, navigate } = useAvatarMenu();
   const { loggedUser } = useUserStore();
 
   return (
@@ -36,7 +37,7 @@ export default function AvatarMenu() {
           icon={
             <Avatar
               name={currentUser?.user_display_name}
-              src={loggedUser?.avatar}
+              src={loggedUser?.avatar ? loggedUser?.avatar : defaultImage}
             />
           }
           variant="outline"
@@ -55,11 +56,7 @@ export default function AvatarMenu() {
           {MenuItemComponent({
             icon: <ArrowForwardIcon />,
             content: "Sair",
-            onClick: () => {
-              logout();
-              //TODO: Understand why the navite to / don't working
-              navigate(0);
-            },
+            onClick: () => logoutUser(),
           })}
         </MenuList>
       </Menu>

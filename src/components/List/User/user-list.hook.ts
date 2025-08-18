@@ -4,7 +4,7 @@ import { RegisterProps } from "@/utils/types/forms";
 import { useDisclosure } from "@chakra-ui/react";
 import { useCallback, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { updateUserStatus, useGetUsers } from "@/api/user";
+import { deleteUserRegister, updateUserStatus, useGetUsers } from "@/api/user";
 import { useParams } from "react-router-dom";
 import { sendEmail } from "@/api/email";
 import UpdatedUser from "@/helpers/emails/template/updated-register";
@@ -12,6 +12,7 @@ import { UserProps } from "@/utils/types/user";
 
 const useUserList = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [updatedUserStatus, setUpdatedUserStatus] = useState<string>("");
   const [isToSendEmail, setIsToSendEmail] = useState<boolean>(false);
   const { type: userType } = useParams();
   const { currentSelectedUser } = useStore();
@@ -41,6 +42,12 @@ const useUserList = () => {
     onClose: onCloseDeleteModal,
   } = useDisclosure();
 
+  const {
+    deleteUserRegisterFn,
+    isDeleteUserRegisterSucess,
+    isDeleteUserRegisterPending,
+  } = deleteUserRegister();
+
   const { users, error, isLoading, totalPages } = useGetUsers(
     currentPage,
     userType,
@@ -69,20 +76,18 @@ const useUserList = () => {
   useEffect(() => {
     if (isUpdateUserSuccess) {
       if (isToSendEmail) {
-        const { fullName, email, registerStatus } =
-          currentSelectedUser as UserProps;
-
+        const { fullName, email } = currentSelectedUser as UserProps;
         const emailData = {
           emailsPool: email,
           body: UpdatedUser({
             name: fullName,
-            status: registerStatus || "",
+            status: updatedUserStatus || "",
           }),
           emailSubject: `Atualização de cadastro`,
         };
         sendEmailFn(emailData);
       }
-
+      setIsToSendEmail(false);
       statusOptionsFormReset();
       onCloseUpdateRegisterModal();
     }
@@ -92,6 +97,7 @@ const useUserList = () => {
     Partial<RegisterProps> & { isToSendEmail?: boolean }
   > = useCallback(
     (data) => {
+      setUpdatedUserStatus(data.registerStatus || "");
       setIsToSendEmail(data.isToSendEmail || false);
       updateUserStatusMutation({
         id: currentSelectedUser?.id,
@@ -126,8 +132,14 @@ const useUserList = () => {
 
   const modalsStateControl = {
     "update-register-status": onOpenModalUpdateRegister,
-    "suspend-register": onOpenDeleteModal,
+    "delete-register": onOpenDeleteModal,
   };
+
+  useEffect(() => {
+    if (isDeleteUserRegisterSucess) {
+      onCloseDeleteModal();
+    }
+  }, [isDeleteUserRegisterSucess]);
 
   return {
     currentPage,
@@ -155,6 +167,9 @@ const useUserList = () => {
     pageTitle,
     isToSendEmail,
     isSendingEmail,
+    deleteUserRegisterFn,
+    isDeleteUserRegisterPending,
+    isDeleteUserRegisterSucess,
   };
 };
 

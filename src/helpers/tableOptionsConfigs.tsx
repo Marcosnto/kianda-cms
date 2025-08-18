@@ -2,6 +2,7 @@ import {
   IoEyeOutline,
   IoLockOpenOutline,
   IoTrashBinOutline,
+  IoTrashOutline,
 } from "react-icons/io5";
 
 import { RiDraftLine } from "react-icons/ri";
@@ -26,11 +27,11 @@ export const userListOptions = [
     isModal: true,
   },
   {
-    key: "suspend-register",
+    key: "delete-register",
     from: "user",
-    ariaLabel: "Suspender cadastro",
-    toolTipMessage: "Suspender cadastro",
-    icon: <IoTrashBinOutline />,
+    ariaLabel: "Deletar cadastro",
+    toolTipMessage: "Deletar cadastro",
+    icon: <IoTrashOutline />,
     isModal: true,
   },
 ];

@@ -39,6 +39,8 @@ export default function UsersList() {
     pageTitle,
     isToSendEmail,
     isSendingEmail,
+    deleteUserRegisterFn,
+    isDeleteUserRegisterPending,
   } = useUserList();
 
   if (isLoading) {
@@ -84,12 +86,12 @@ export default function UsersList() {
     return (
       <div>
         <Text>
-          Gostaria de arquivar o registro de{" "}
-          <Text as="b">{user?.fullName}</Text>?
+          Gostaria de deletar o registro de <Text as="b">{user?.fullName}</Text>
+          ?
           <br />
           Após isso o cadastro referente será{" "}
           <Text as="b" color="red">
-            suspenso
+            deletado permanentemente
           </Text>{" "}
           e não conseguirá mais acessar a plataforma.
         </Text>
@@ -123,12 +125,17 @@ export default function UsersList() {
             onConfirm={statusOptionsFormHandleSubmit(statusOptionsFormOnSubmit)}
           />
           <GenericModal
-            title="Arquivar Cadastro"
+            title="Deletar Cadastro"
             isOpen={isOpenDeleteModal}
             onClose={onCloseDeleteModal}
-            btnConfirmLabel="Suspender"
+            btnConfirmLabel="Deletar"
             colorSchemeConfirm="red"
+            isLoading={isDeleteUserRegisterPending}
             content={<ContentArchiveRegistration user={currentSelectedUser} />}
+            onConfirm={() => {
+              if (currentSelectedUser?.id)
+                deleteUserRegisterFn(currentSelectedUser.id);
+            }}
           />
         </>
       ) : (

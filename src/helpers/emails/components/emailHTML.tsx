@@ -2,7 +2,6 @@ import Footer from "./footer";
 import Header from "./header";
 import { Html } from "@react-email/html";
 import DOMPurify from "dompurify";
-import "./email.css";
 
 const EmailHTML = ({ body }: { body: string | undefined }) => {
   const sanitizedBody = body

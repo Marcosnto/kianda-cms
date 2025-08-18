@@ -24,6 +24,7 @@ export type EditRegisterFormTypes = {
   isToSendEmail: boolean;
   disabledRoleChange?: boolean;
   canChangeRole?: boolean;
+  setIsOpenDeleteModal?: (isOpen: boolean) => void;
 };
 
 export type UpdateRegister = Partial<RegisterProps> & {

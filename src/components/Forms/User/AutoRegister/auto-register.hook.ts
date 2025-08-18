@@ -16,7 +16,6 @@ export default function useAutoRegister() {
   const {
     postUserAutoRegisterFn,
     isPostUserAutoRegisterSucess,
-    isPostUserAutoRegisterPending,
     hasPostUserAutoRegisterError,
   } = postUserAutoRegister();
 
@@ -27,15 +26,8 @@ export default function useAutoRegister() {
   const privacyPolicyLink = PRIVACY_POLICY;
   const useTermsLink = TERMS_OF_USE;
 
-  console.log("privacyPolicyLink", privacyPolicyLink);
-
-  if (isPostUserAutoRegisterPending) {
-    console.log("carregando post user...");
-  }
-
   useEffect(() => {
     if (hasPostUserAutoRegisterError) {
-      console.error("Erro ao registrar usuário:", hasPostUserAutoRegisterError);
       toast({
         title: `Ocorreu um erro ao registrar!`,
         position: "top",

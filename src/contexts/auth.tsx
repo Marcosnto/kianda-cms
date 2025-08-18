@@ -28,8 +28,12 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
   const { isValidateAuthLoading, isValidateAuthError, isValidateAuthSuccess } =
     handleValidateAuth(signedIn);
 
-  const { profileData, isFechSuccess, isFetchProfileLoading } =
-    fetchProfile(signedIn);
+  const {
+    profileData,
+    isFechSuccess,
+    isFetchProfileLoading,
+    fetchProfileError,
+  } = fetchProfile(signedIn);
 
   const signin = useCallback((accessToken: string) => {
     localStorage.setItem("token", accessToken);
@@ -76,7 +80,17 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
     if (isFechSuccess && profileData) {
       setLoggedUser(profileData);
     }
-  }, [isFechSuccess, isValidateAuthSuccess]);
+
+    if (fetchProfileError) {
+      toast({
+        title: `Ocorreu um erro ao buscar o Perfil`,
+        position: "top",
+        status: "error",
+        isClosable: true,
+      });
+      window.location.href = "/login";
+    }
+  }, [isFechSuccess, isValidateAuthSuccess, fetchProfileError]);
 
   return (
     <AuthContext.Provider

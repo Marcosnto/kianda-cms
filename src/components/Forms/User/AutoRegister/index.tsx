@@ -346,7 +346,7 @@ function UserAutoRegister() {
                   Li e concordo os{" "}
                   <ChakraLink
                     as={Link}
-                    href={useTermsLink}
+                    to={useTermsLink}
                     isExternal
                     colorScheme="green"
                     textDecoration={"underline"}
@@ -356,7 +356,7 @@ function UserAutoRegister() {
                   e{" "}
                   <ChakraLink
                     as={Link}
-                    href={privacyPolicyLink}
+                    to={privacyPolicyLink}
                     isExternal
                     colorScheme="green"
                     textDecoration={"underline"}

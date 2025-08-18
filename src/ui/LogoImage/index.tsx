@@ -11,7 +11,7 @@ function LogoImage({ pathRedirect }: LogoImage) {
       <Avatar
         size="2xl"
         name="Logotipo: nome kianda escrito em amarelo fundo verde escuro"
-        src="/img/logo.png"
+        src="/assets/images/logo.png"
       />
     </Link>
   );

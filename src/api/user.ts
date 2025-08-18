@@ -246,3 +246,45 @@ export const updateUserStatus = () => {
     isUpdateUserPeding,
   };
 };
+
+export const deleteUserRegister = () => {
+  const toast = useToast();
+  const queryClient = useQueryClient();
+
+  queryClient.invalidateQueries({ queryKey: ["userList"] });
+  queryClient.invalidateQueries({ queryKey: ["editUser"] });
+  queryClient.invalidateQueries({ queryKey: ["userProfile"] });
+
+  const {
+    mutate: deleteUserRegisterFn,
+    isPending: isDeleteUserRegisterPending,
+    isError: hasDeleteUserRegisterError,
+    isSuccess: isDeleteUserRegisterSucess,
+  } = useMutation({
+    mutationFn: (id: string | number) =>
+      axiosInstance.delete(`${BASE_API_URL}/user/delete/${id}`),
+    onSuccess: () => {
+      toast({
+        title: `Usuário deletado com sucesso`,
+        position: "top",
+        status: "success",
+        isClosable: true,
+      });
+    },
+    onError: () => {
+      toast({
+        title: `Ocorreu um erro ao deletar usuário`,
+        position: "top",
+        status: "error",
+        isClosable: true,
+      });
+    },
+  });
+
+  return {
+    deleteUserRegisterFn,
+    isDeleteUserRegisterSucess,
+    isDeleteUserRegisterPending,
+    hasDeleteUserRegisterError,
+  };
+};

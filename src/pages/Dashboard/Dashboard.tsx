@@ -12,18 +12,19 @@ export default function Dashboard() {
     <>
       <Grid
         h="100vh"
+        w="100%"
         templateAreas={[
           `
-        "header header header"
-        "content content content"
-        "content content content"
-        "footer footer footer"
+        "header header"
+        "content content"
+        "content content"
+        "footer footer"
       `,
           `
-        "header header header"
-        "content content content"
-        "content content content"
-        "footer footer footer"
+        "header"
+        "content"
+        "content"
+        "footer"
       `,
           `
         "header header header"
@@ -34,12 +35,12 @@ export default function Dashboard() {
         ]}
         gridTemplateRows={"4rem auto auto 2rem"}
         gridTemplateColumns={[
-          "none",
-          "none",
+          "1fr",
+          "1fr",
           "27ch 2fr",
-          "27ch 2fr",
-          "27ch 2fr",
-          "27ch 2fr",
+          // "27ch 2fr",
+          // "27ch 2fr",
+          // "27ch 2fr",
         ]}
       >
         <GridItem area={"header"} background={"green.900"} color="#FFF">

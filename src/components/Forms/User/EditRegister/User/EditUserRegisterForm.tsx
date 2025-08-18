@@ -19,6 +19,7 @@ import RequiredInput from "../../../components/RequiredInput";
 import { useRouter } from "@/utils/libs/routerFacade";
 import pronounsTypes from "@/helpers/mocks/inputOptions/pronounsTypes";
 import { Controller } from "react-hook-form";
+import defaultImage from "/assets/images/default_profile.jpg";
 
 export function EditUserRegisterForm({
   avatar,
@@ -30,6 +31,7 @@ export function EditUserRegisterForm({
   getValues,
   control,
   watch,
+  setIsOpenDeleteModal,
 }: EditRegisterFormTypes) {
   const navigate = useRouter();
   const watched = watch!(["gender"]);
@@ -48,9 +50,13 @@ export function EditUserRegisterForm({
         >
           <Image
             borderRadius="full"
+            borderStyle="solid"
+            borderWidth="1px"
+            borderColor="gray.300"
+            boxShadow="sm"
             boxSize="150px"
             objectFit="cover"
-            src={avatar}
+            src={avatar ? avatar : defaultImage}
             alt="DM"
           />
         </Box>
@@ -252,6 +258,16 @@ export function EditUserRegisterForm({
           </Button>
         </Flex>
       </form>
+      <Box w="100%" mt="10">
+        <Button
+          w="100%"
+          colorScheme="red"
+          variant="outline"
+          onClick={() => setIsOpenDeleteModal?.(true)}
+        >
+          Apagar conta
+        </Button>
+      </Box>
     </>
   );
 }

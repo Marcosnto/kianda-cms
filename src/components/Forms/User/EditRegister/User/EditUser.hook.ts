@@ -3,8 +3,10 @@ import { RegisterProps } from "@/utils/types/forms";
 import { useCallback, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { UserProps } from "@/utils/types/user";
-import { fetchUser, updateUserRegister } from "@/api/user";
+import { deleteUserRegister, fetchUser, updateUserRegister } from "@/api/user";
 import useUserStore from "@/store/userStore";
+import logout from "@/utils/logout";
+import { useNavigate } from "react-router-dom";
 
 export type LoggedUserType = {
   id: number;
@@ -14,14 +16,21 @@ export type LoggedUserType = {
 
 export default function useEditUser() {
   const [data, setData] = useState<UserProps>();
+  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
   const { currentSelectedUser } = useStore();
   const { loggedUser } = useUserStore();
+  const navigate = useNavigate();
 
   const {
     updateUserRegisterMutation,
     updateUserRegisterLoading,
     isUpdateUserRegisterSucess,
   } = updateUserRegister();
+
+  const { deleteUserRegisterFn, isDeleteUserRegisterSucess } =
+    deleteUserRegister();
+
+  const { removeLoggedUser } = useUserStore();
 
   const {
     register,
@@ -73,6 +82,18 @@ export default function useEditUser() {
     [currentSelectedUser, isValid],
   );
 
+  useEffect(() => {
+    if (isDeleteUserRegisterSucess) {
+      logout();
+      removeLoggedUser();
+      navigate("/login");
+    }
+  }, [isDeleteUserRegisterSucess, removeLoggedUser, navigate]);
+
+  const deleteAccount = () => {
+    deleteUserRegisterFn(String(loggedUser!.id));
+  };
+
   return {
     data,
     isLoading,
@@ -89,5 +110,8 @@ export default function useEditUser() {
     onSubmit,
     updateUserRegisterLoading,
     isUpdateUserRegisterSucess,
+    isOpenDeleteModal,
+    setIsOpenDeleteModal,
+    deleteAccount,
   };
 }
